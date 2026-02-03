@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Pruebas API Noticias</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<h1>Pruebas API REST - Noticias</h1>
+
+<div class="container">
+
+    <fieldset>
+        <legend>A. Crear noticia (POST)</legend>
+        Título: <input id="titulo" value="Nueva Noticia"><br>
+        Descripción: <input id="descripcion" value="Descripción de la noticia"><br>
+        Ciudad: <input id="ciudad" value="Ciudad"><br>
+        Fecha: <input id="fecha" type="date"><br>
+        <button onclick="crearNoticia()">Crear</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>B. Obtener todas las noticias (GET)</legend>
+        <button onclick="getAllNoticias()">Obtener noticias</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>C. Obtener noticia por ID (GET)</legend>
+        ID: <input id="getId" type="number">
+        <button onclick="getNoticiaById()">Buscar</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>D. Actualizar noticia (PUT)</legend>
+        ID: <input id="updId" type="number"><br>
+        Título: <input id="updTitulo"><br>
+        Descripción: <input id="updDescripcion"><br>
+        Ciudad: <input id="updCiudad"><br>
+        Fecha: <input id="updFecha" type="date"><br>
+        <button onclick="updateNoticia()">Actualizar</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>E. Eliminar noticia (DELETE)</legend>
+        ID: <input id="delId" type="number">
+        <button onclick="deleteNoticia()">Eliminar</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>F. Últimas noticias (GET)</legend>
+        <button onclick="ultimasNoticias()">Obtener últimas noticias</button>
+    </fieldset>
+
+    <fieldset>
+        <legend>G. Noticias por ciudad (GET)</legend>
+        Ciudad: <input id="buscarCiudad">
+        <button onclick="noticiasPorCiudad()">Buscar</button>
+    </fieldset>
+
+    <!-- Roles -->
+    <fieldset>
+        <legend>Roles</legend>
+        <label for="roleName">Nombre del Rol:</label>
+        <input id="roleName" placeholder="Ej: Administrador">
+
+        <button onclick="crearRol()">Crear Rol</button>
+        <button onclick="getAllRoles()">Ver Todos</button>
+    </fieldset>
+
+     <!-- Perfiles -->
+    <fieldset>
+        <legend>Perfiles</legend>
+        <label for="profileName">Nombre del Perfil:</label>
+        <input id="profileName" placeholder="Ej: Editor">
+
+        <label for="profileRole">Rol asociado:</label>
+        <select id="profileRole">
+            <option value="">Seleccione un rol</option>
+        </select>
+
+        <button onclick="crearPerfil()">Crear Perfil</button>
+        <button onclick="getAllPerfiles()">Ver Todos</button>
+    </fieldset>
+</div>
+
+<h3>Resultado</h3>
+<pre id="resultado"></pre>
+<script src="app.js"></script>
+</body>
+</html>
