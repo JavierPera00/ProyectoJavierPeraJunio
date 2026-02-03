@@ -1,32 +1,15 @@
 package com.ProyectoJunio.servicio;
 
 import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.ProyectoJunio.model.Rol;
-import com.ProyectoJunio.repository.RolRepository;
 
-@Service
-public class RolService {
+public interface RolService {
 
-    @Autowired
-    private RolRepository rolRepository;
+    public List<Rol> findAll();
 
-    public List<Rol> findAll() {
-        return rolRepository.findAll();
-    }
+    public Rol findById(Long id);
 
-    public Rol findById(Long id) {
-        return rolRepository.findById(id).orElse(null);
-    }
+    public Rol save(Rol rol);
 
-    public Rol save(Rol rol) {
-        return rolRepository.save(rol);
-    }
-
-    public void delete(Long id) {
-        rolRepository.deleteById(id);
-    }
+    public void delete(Long id);
 }

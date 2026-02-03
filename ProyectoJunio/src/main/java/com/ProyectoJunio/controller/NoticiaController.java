@@ -25,7 +25,9 @@ public class NoticiaController {
 	    @GetMapping("/{id}")
 	    public ResponseEntity<Noticia> getById(@PathVariable Long id) {
 	        Noticia noticia = noticiaService.findById(id);
-	        if (noticia == null) return ResponseEntity.notFound().build();
+	        if (noticia == null) {
+	        	return ResponseEntity.notFound().build();
+	        }
 	        return ResponseEntity.ok(noticia);
 	    }
 
@@ -37,13 +39,13 @@ public class NoticiaController {
 	    @PutMapping("/{id}")
 	    public ResponseEntity<Noticia> update(@PathVariable Long id, @RequestBody Noticia noticia) {
 	        Noticia existing = noticiaService.findById(id);
-	        if (existing == null) return ResponseEntity.notFound().build();
-
+	        if (existing == null) {
+	        	return ResponseEntity.notFound().build();
+	        }
 	        existing.setTitulo(noticia.getTitulo());
 	        existing.setDescripcion(noticia.getDescripcion());
 	        existing.setCiudad(noticia.getCiudad());
 	        existing.setFechaPublicacion(noticia.getFechaPublicacion());
-
 	        return ResponseEntity.ok(noticiaService.save(existing));
 	    }
 
@@ -51,11 +53,10 @@ public class NoticiaController {
 	    public ResponseEntity<Void> delete(@PathVariable Long id) {
 	        Noticia existing = noticiaService.findById(id);
 	        if (existing == null) {
-	            return ResponseEntity.notFound().build(); // devuelve 404 si no existe
+	            return ResponseEntity.notFound().build(); 
 	        }
-
-	        noticiaService.delete(id); // elimina usando el service
-	        return ResponseEntity.noContent().build(); // devuelve 204 No Content
+	        noticiaService.delete(id); 
+	        return ResponseEntity.noContent().build(); 
 	    }
 
 	    @GetMapping("/ultimas")

@@ -19,22 +19,19 @@ public class Noticia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+    
     private String titulo;
-
+    
     @Column(length = 1000)
     private String descripcion;
-
     private String ciudad;
-
     private LocalDateTime fechaPublicacion;
-
+    
     @ManyToOne
     @JoinColumn(name = "usuario_id")
     private Usuario autor; 
 
     // Getters y Setters
-
     public Long getId() {
         return id;
     }
@@ -83,10 +80,11 @@ public class Noticia {
         this.autor = autor;
     }
 
-    // toString
+    // ToString
     @Override
     public String toString() {
         return "Noticia [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion
                 + ", ciudad=" + ciudad + ", fechaPublicacion=" + fechaPublicacion + "]";
     }
 }
+     

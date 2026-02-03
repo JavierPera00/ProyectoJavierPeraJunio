@@ -7,5 +7,5 @@ import com.ProyectoJunio.model.Perfil;
 
 @Repository
 public interface PerfilRepository extends JpaRepository<Perfil, Long> {
-    // Métodos personalizados opcionales
+
 }

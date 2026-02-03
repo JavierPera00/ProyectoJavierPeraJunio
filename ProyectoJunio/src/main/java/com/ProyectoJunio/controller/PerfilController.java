@@ -25,31 +25,35 @@ public class PerfilController {
     @Autowired
     private PerfilService perfilService;
 
- // GET todas las perfiles
+ // GET 
     @GetMapping
     public ResponseEntity<List<Perfil>> getAll() {
         return ResponseEntity.ok(perfilService.findAll());
     }
 
-    // GET perfil por ID
+    // GET 
     @GetMapping("/{id}")
     public ResponseEntity<Perfil> getById(@PathVariable Long id) {
         Perfil perfil = perfilService.findById(id);
-        if (perfil == null) return ResponseEntity.notFound().build();
+        if (perfil == null) {
+        	return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(perfil);
     }
 
-    // POST crear nuevo perfil
+    // POST 
     @PostMapping
     public ResponseEntity<Perfil> create(@RequestBody Perfil perfil) {
         return ResponseEntity.ok(perfilService.save(perfil));
     }
 
-    // PUT actualizar perfil
+    // PUT 
     @PutMapping("/{id}")
     public ResponseEntity<Perfil> update(@PathVariable Long id, @RequestBody Perfil perfil) {
         Perfil existing = perfilService.findById(id);
-        if (existing == null) return ResponseEntity.notFound().build();
+        if (existing == null) {
+        	return ResponseEntity.notFound().build();
+        }
 
         // Actualizamos los campos según tu modelo actual
         existing.setCorreo(perfil.getCorreo());
@@ -60,7 +64,7 @@ public class PerfilController {
         return ResponseEntity.ok(perfilService.save(existing));
     }
 
-    // DELETE eliminar perfil
+    // DELETE 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         perfilService.delete(id);

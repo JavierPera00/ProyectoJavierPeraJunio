@@ -26,7 +26,9 @@ public class UsuarioController {
     @GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable Long id) {
         Usuario usuario = usuarioService.findById(id);
-        if (usuario == null) return ResponseEntity.notFound().build();
+        if (usuario == null) {
+        	return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(usuario);
     }
 
@@ -38,7 +40,9 @@ public class UsuarioController {
     @PutMapping("/{id}")
     public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario usuario) {
         Usuario existing = usuarioService.findById(id);
-        if (existing == null) return ResponseEntity.notFound().build();
+        if (existing == null) {
+        	return ResponseEntity.notFound().build();
+        }
 
         existing.setUsername(usuario.getUsername());
         existing.setEmail(usuario.getEmail());

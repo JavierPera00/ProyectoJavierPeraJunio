@@ -7,5 +7,5 @@ import com.ProyectoJunio.model.Rol;
 
 @Repository
 public interface RolRepository extends JpaRepository<Rol, Long> {
-    // Métodos personalizados opcionales
+
 }

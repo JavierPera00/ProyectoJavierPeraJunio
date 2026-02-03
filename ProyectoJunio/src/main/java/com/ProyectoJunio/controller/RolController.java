@@ -33,7 +33,9 @@ public class RolController {
     @GetMapping("/{id}")
     public ResponseEntity<Rol> getById(@PathVariable Long id) {
         Rol rol = rolService.findById(id);
-        if (rol == null) return ResponseEntity.notFound().build();
+        if (rol == null) {
+        	return ResponseEntity.notFound().build();
+        }
         return ResponseEntity.ok(rol);
     }
 
@@ -45,11 +47,11 @@ public class RolController {
     @PutMapping("/{id}")
     public ResponseEntity<Rol> update(@PathVariable Long id, @RequestBody Rol rol) {
         Rol existing = rolService.findById(id);
-        if (existing == null) return ResponseEntity.notFound().build();
-
+        if (existing == null) {
+        	return ResponseEntity.notFound().build();
+        }
         existing.setNombre(rol.getNombre());
         existing.setUsuarios(rol.getUsuarios());
-
         return ResponseEntity.ok(rolService.save(existing));
     }
 
