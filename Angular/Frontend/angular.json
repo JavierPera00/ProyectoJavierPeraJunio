@@ -26,6 +26,9 @@
             ],
             "styles": [
               "src/styles.css"
+            ],
+            "scripts": [
+              "src/app/js/site.js"
             ]
           },
           "configurations": {
@@ -83,6 +86,9 @@
             ],
             "styles": [
               "src/styles.css"
+            ],
+            "scripts": [
+              "src/app/js/site.js"
             ]
           }
         }
