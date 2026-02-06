@@ -37,7 +37,5 @@ public class NoticiaServiceImpl implements NoticiaService {
         return noticiaRepository.findTop10ByOrderByFechaPublicacionDesc();
     }
 
-    public List<Noticia> noticiasPorCiudad(String ciudad) {
-        return noticiaRepository.findByCiudadIgnoreCase(ciudad);
-    }
+    
 }

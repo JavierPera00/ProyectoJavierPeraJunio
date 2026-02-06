@@ -5,14 +5,16 @@ import { Login } from './login/login';
 import { Home } from './home/home';
 import { Registro } from './registro/registro';
 import { Admin } from './admin/admin';
+import { Perfil } from './perfil/perfil';
 
 export const routes: Routes = [
   {path:"",component:Home},
   {path:"home",component:Home},
   {path:"noticias",component:Noticias},
-  {path:"mapa",component:Mapa}, 
+  {path:"mapa",component:Mapa},
+  {path:"perfil",component:Perfil}, 
   {path:"login",component:Login}, 
-  {path:"admin",component:Admin}, 
+  {path:"adminn",component:Admin}, 
   {path:"registro",component:Registro}, 
-  {path:"*",component:Home}
+  {path:"**",component:Home}
 ];

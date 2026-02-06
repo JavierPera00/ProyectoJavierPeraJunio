@@ -14,6 +14,5 @@ public interface NoticiaService {
    public void delete(Long id);
 	    
    public List<Noticia> ultimasNoticias();
-	    
-   public List<Noticia> noticiasPorCiudad(String ciudad);
+
 }

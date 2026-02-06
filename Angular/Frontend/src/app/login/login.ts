@@ -16,18 +16,20 @@ export class Login {
   constructor(private router: Router) {}
 
   async iniciarSesion(event: Event) {
-    event.preventDefault();
+    event.preventDefault(); // evita recargar la página
 
     if (!this.datosLogin.email || !this.datosLogin.password) {
       this.mensaje = 'Todos los campos son obligatorios';
       return;
     }
 
-    // CASO ADMIN
+    // ADMIN
     if (this.datosLogin.email.toLowerCase() === 'admin' && this.datosLogin.password === 'admin') {
       this.mensaje = 'Bienvenido Administrador';
+      // Guardar admin en localStorage
       localStorage.setItem('usuarioLogueado', JSON.stringify({ username: 'admin', roles: ['ADMIN'] }));
-      this.router.navigate(['/admin']);
+      console.log(this.datosLogin.email, this.datosLogin.password);
+      await this.router.navigateByUrl('/adminn');
       return;
     }
 
@@ -51,7 +53,7 @@ export class Login {
 
       this.mensaje = `¡Bienvenido ${usuario.username}!`;
       localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
-      this.router.navigate(['/home']);
+      await this.router.navigate(['/home']);
 
     } catch (err) {
       console.error(err);

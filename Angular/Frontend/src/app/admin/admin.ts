@@ -6,8 +6,9 @@ import { Noticias } from '../noticias/noticias';
 
 @Component({
   selector: 'app-admin',
-  imports: [FormsModule,CommonModule,RouterLink,DatePipe],
+  imports: [FormsModule,CommonModule],
   templateUrl: './admin.html',
+  providers: [DatePipe], 
   styleUrl: './admin.css',
 })
 export class Admin {
@@ -17,16 +18,19 @@ export class Admin {
   descripcion = '';
   ciudad = '';
 
-  // Lista de noticias cargadas desde backend
+  // Lista de noticias
   noticias: any[] = [];
+  
+  // Lista de usuarios (importante)
+  usuarios: any[] = [];
 
   mensaje = '';
 
-  constructor(private datePipe: DatePipe) {
+  constructor() {
     this.cargarNoticias();
+    this.cargarUsuarios(); // Asegúrate de llamarlo
   }
 
-  // Cargar noticias desde backend
   async cargarNoticias() {
     try {
       const res = await fetch('http://localhost:8080/api/noticias');
@@ -38,7 +42,17 @@ export class Admin {
     }
   }
 
-  // Crear noticia nueva
+  async cargarUsuarios() {
+    try {
+      const res = await fetch('http://localhost:8080/api/usuarios');
+      if (!res.ok) throw new Error('Error al obtener usuarios');
+      this.usuarios = await res.json();
+    } catch (error) {
+      console.error(error);
+      this.mensaje = 'No se pudieron cargar los usuarios.';
+    }
+  }
+
   async agregarNoticia() {
     if (!this.titulo || !this.descripcion || !this.ciudad) {
       this.mensaje = 'Todos los campos son obligatorios';
@@ -49,8 +63,8 @@ export class Admin {
       titulo: this.titulo,
       descripcion: this.descripcion,
       ciudad: this.ciudad,
-      fechaPublicacion: new Date().toISOString(), // fecha actual
-      autor: { id: 1 } // admin con id 1, ajusta según tu backend
+      fechaPublicacion: new Date().toISOString(),
+      autor: { id: 1 }
     };
 
     try {
@@ -66,7 +80,7 @@ export class Admin {
       }
 
       const noticiaAgregada = await res.json();
-      this.noticias.unshift(noticiaAgregada); // actualizar lista
+      this.noticias.unshift(noticiaAgregada);
       this.titulo = '';
       this.descripcion = '';
       this.ciudad = '';

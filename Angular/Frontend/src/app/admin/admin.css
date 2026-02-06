@@ -1,51 +1,104 @@
-/* Fondo y contenedor */
+/* Fondo general */
+.admin-body {
+  background-color: #f5f7fa;
+  min-height: 100vh;
+  padding: 2rem 1rem;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+}
+
+/* Contenedor */
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 2rem;
 }
 
-/* Título principal */
+/* Títulos */
 h2, h4 {
-  font-family: 'Gravitas One', serif;
-  color: yellow;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: #1a1a1a;
   text-align: center;
+  margin-bottom: 1rem;
 }
 
-/* Card para crear noticias */
 .card {
-  background-color: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  padding: 1.5rem;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Campos de formulario */
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
+}
+/* Cards de usuarios */
+.user-card {
+  border-radius: 12px;
+  background-color: #f9fafb;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.user-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+}
+
+.user-card .card-body h5 {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1f2937;
+}
+
+.user-card .card-body p {
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.4;
+}
+/* Inputs y textarea */
 .form-control, textarea {
-  border-radius: 0.4rem;
-  box-shadow: none;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-textarea:focus, input:focus {
-  border-color: #ffc107; /* Amarillo estilo bootstrap warning */
-  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+.form-control:focus, textarea:focus {
+  border-color: #3b82f6; /* Azul profesional */
+  box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+  outline: none;
 }
 
-/* Botón crear noticia */
+/* Botón */
 .btn-warning {
-  font-weight: bold;
+  background-color: #3b82f6;
+  color: #fff;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
   transition: all 0.2s ease;
+  border: none;
 }
 
 .btn-warning:hover {
+  background-color: #2563eb;
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
-/* Mensaje de éxito o error */
-.text-success, .text-danger {
-  font-weight: bold;
+/* Mensajes de éxito y error */
+.text-success {
+  color: #16a34a;
+  font-weight: 600;
+  text-align: center;
+}
+
+.text-danger {
+  color: #dc2626;
+  font-weight: 600;
   text-align: center;
 }
 
@@ -54,47 +107,61 @@ textarea:focus, input:focus {
   margin-top: 2rem;
 }
 
-/* Cards de noticias */
-.news-card {
+/* Card de noticias */
+.news-card, .card.h-100 {
+  background-color: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  border: none;
-  border-radius: 0.5rem;
 }
 
-.news-card:hover {
+.news-card:hover, .card.h-100:hover {
   transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.15);
 }
 
-/* Imagen de noticia */
-.news-card img {
-  border-top-left-radius: 0.5rem;
-  border-top-right-radius: 0.5rem;
-  height: 200px;
-  object-fit: cover;
-}
-
-/* Card body */
-.news-card .card-body h5 {
+/* Card body de noticias */
+.news-card .card-body h5, .card-body h5 {
   font-weight: 700;
-  color: #ff5722; /* Título naranja/amarillo */
+  font-size: 1.1rem;
+  color: #111827;
+  margin-bottom: 0.5rem;
 }
 
-.news-card .card-body p {
-  color: #333;
-  font-size: 0.9rem;
+.news-card .card-body p, .card-body p {
+  font-size: 0.95rem;
+  color: #4b5563;
+  line-height: 1.4;
 }
 
-/* Fecha en footer */
-.news-card .card-footer {
-  font-size: 0.8rem;
-  color: #666;
-  text-align: center;
+/* Fecha y ciudad */
+.card-body small {
+  display: block;
+  margin-top: 0.75rem;
+  color: #6b7280;
+  font-size: 0.85rem;
 }
 
-/* Responsive */
+.news-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.news-card img:hover {
+  transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
   .news-card img {
-    height: 150px;
+    height: 140px;
+  }
+
+  .btn-warning {
+    width: 100%;
   }
 }

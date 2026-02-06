@@ -13,6 +13,5 @@ public interface NoticiaRepository extends JpaRepository<Noticia, Long> {
 	// Noticias más recientes
     List<Noticia> findTop10ByOrderByFechaPublicacionDesc();
 
-    // Filtrar por ciudad
-    List<Noticia> findByCiudadIgnoreCase(String ciudad);
+ 
 }

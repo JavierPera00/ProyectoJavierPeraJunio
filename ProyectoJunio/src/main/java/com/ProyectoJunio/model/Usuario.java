@@ -39,6 +39,9 @@ public class Usuario {
     )
     private List<Rol> roles;
 
+    
+    
+    
     /*GET Y SET*/
 	public Long getId() {
 		return id;

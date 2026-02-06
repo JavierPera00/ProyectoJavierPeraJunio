@@ -44,7 +44,8 @@ public class NoticiaController {
 	        }
 	        existing.setTitulo(noticia.getTitulo());
 	        existing.setDescripcion(noticia.getDescripcion());
-	        existing.setCiudad(noticia.getCiudad());
+	        existing.setUrlImagen(noticia.getUrlImagen());
+	        existing.setUrlExterna(noticia.getUrlExterna());
 	        existing.setFechaPublicacion(noticia.getFechaPublicacion());
 	        return ResponseEntity.ok(noticiaService.save(existing));
 	    }
@@ -62,11 +63,6 @@ public class NoticiaController {
 	    @GetMapping("/ultimas")
 	    public ResponseEntity<List<Noticia>> getUltimas() {
 	        return ResponseEntity.ok(noticiaService.ultimasNoticias());
-	    }
-
-	    @GetMapping("/ciudad/{ciudad}")
-	    public ResponseEntity<List<Noticia>> getPorCiudad(@PathVariable String ciudad) {
-	        return ResponseEntity.ok(noticiaService.noticiasPorCiudad(ciudad));
-	    }
+	    }   
 }
 

@@ -1,16 +1,13 @@
 package com.ProyectoJunio.model;
 
-
 import java.time.LocalDateTime;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
 
 @Entity
 @Table(name = "noticias")
@@ -18,18 +15,19 @@ public class Noticia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id; 
-    private String titulo;
-    @Column(length = 1000)
-    private String descripcion;
-    private String ciudad;
-    private LocalDateTime fechaPublicacion;
-    
-    @ManyToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario autor; 
+    private Long id;
 
-    // Getters y Setters
+    private String titulo;
+
+    @Column(length = 2000)
+    private String descripcion;
+
+    private LocalDateTime fechaPublicacion;
+
+    private String urlImagen;   
+    private String urlExterna;  
+
+    // Get y Set
     public Long getId() {
         return id;
     }
@@ -54,14 +52,6 @@ public class Noticia {
         this.descripcion = descripcion;
     }
 
-    public String getCiudad() {
-        return ciudad;
-    }
-
-    public void setCiudad(String ciudad) {
-        this.ciudad = ciudad;
-    }
-
     public LocalDateTime getFechaPublicacion() {
         return fechaPublicacion;
     }
@@ -70,19 +60,27 @@ public class Noticia {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public Usuario getAutor() {
-        return autor;
+    public String getUrlImagen() {
+        return urlImagen;
     }
 
-    public void setAutor(Usuario autor) {
-        this.autor = autor;
+    public void setUrlImagen(String urlImagen) {
+        this.urlImagen = urlImagen;
+    }
+
+    public String getUrlExterna() {
+        return urlExterna;
+    }
+
+    public void setUrlExterna(String urlExterna) {
+        this.urlExterna = urlExterna;
     }
 
     // ToString
     @Override
     public String toString() {
         return "Noticia [id=" + id + ", titulo=" + titulo + ", descripcion=" + descripcion
-                + ", ciudad=" + ciudad + ", fechaPublicacion=" + fechaPublicacion + "]";
+                + ", fechaPublicacion=" + fechaPublicacion
+                + ", urlImagen=" + urlImagen + ", urlExterna=" + urlExterna + "]";
     }
 }
-     

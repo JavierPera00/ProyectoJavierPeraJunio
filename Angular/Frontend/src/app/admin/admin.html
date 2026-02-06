@@ -1,8 +1,8 @@
-
 <div class="admin-body container py-4">
-  <h2 class="mb-4">Panel de Administración - Noticias</h2>
 
-  <div class="card p-3 mb-4 shadow">
+  <h2>Panel de Administración</h2>
+  
+  <div class="card p-3 mb-5 shadow">
     <h4>Agregar Nueva Noticia</h4>
     <div class="mb-3">
       <input type="text" [(ngModel)]="titulo" class="form-control" placeholder="Título de la noticia">
@@ -13,18 +13,39 @@
     <div class="mb-3">
       <input type="text" [(ngModel)]="ciudad" class="form-control" placeholder="Ciudad">
     </div>
-    <button class="btn btn-warning" (click)="agregarNoticia()">Agregar Noticia</button>
+    <button class="btn btn-primary" (click)="agregarNoticia()">Agregar Noticia</button>
     <p class="mt-2 text-success">{{ mensaje }}</p>
   </div>
 
+
   <h4>Noticias Publicadas</h4>
-  <div class="row g-4">
+  <div class="row g-4 mb-5">
     <div class="col-md-6 col-lg-4" *ngFor="let noticia of noticias">
       <div class="card h-100 shadow">
         <div class="card-body">
           <h5 class="card-title">{{ noticia.titulo }}</h5>
           <p class="card-text">{{ noticia.descripcion }}</p>
-          <small class="text-muted">Ciudad: {{ noticia.ciudad }} - Publicada: {{ noticia.fechaPublicacion | date:'dd/MM/yyyy HH:mm' }}</small>
+          <small class="text-muted">
+            Ciudad: {{ noticia.ciudad }} - Publicada: {{ noticia.fechaPublicacion | date:'dd/MM/yyyy HH:mm' }}
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =======================
+       Sección: Perfiles de Usuario
+  ======================= -->
+  <h4>Usuarios Registrados</h4>
+  <div class="row g-4">
+    <div class="col-md-6 col-lg-4" *ngFor="let usuario of usuarios">
+      <div class="card h-100 shadow user-card">
+        <div class="card-body">
+          <h5 class="card-title">{{ usuario.username }}</h5>
+          <p class="card-text">
+            <strong>Email:</strong> {{ usuario.email }}<br>
+            <strong>Rol:</strong> {{ usuario.roles?.join(', ') || 'Usuario' }}
+          </p>
         </div>
       </div>
     </div>
