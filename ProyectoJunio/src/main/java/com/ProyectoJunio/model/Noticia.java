@@ -18,10 +18,8 @@ public class Noticia {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    
+    private Long id; 
     private String titulo;
-    
     @Column(length = 1000)
     private String descripcion;
     private String ciudad;

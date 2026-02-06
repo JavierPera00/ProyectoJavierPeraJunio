@@ -1,0 +1,100 @@
+/* Fondo y contenedor */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Título principal */
+h2, h4 {
+  font-family: 'Gravitas One', serif;
+  color: yellow;
+  text-align: center;
+}
+
+/* Card para crear noticias */
+.card {
+  background-color: #fff;
+  border-radius: 0.5rem;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  padding: 1.5rem;
+}
+
+/* Campos de formulario */
+.form-control, textarea {
+  border-radius: 0.4rem;
+  box-shadow: none;
+  border: 1px solid #ccc;
+}
+
+textarea:focus, input:focus {
+  border-color: #ffc107; /* Amarillo estilo bootstrap warning */
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+}
+
+/* Botón crear noticia */
+.btn-warning {
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+}
+
+/* Mensaje de éxito o error */
+.text-success, .text-danger {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Grid de noticias */
+.row {
+  margin-top: 2rem;
+}
+
+/* Cards de noticias */
+.news-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: none;
+  border-radius: 0.5rem;
+}
+
+.news-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* Imagen de noticia */
+.news-card img {
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Card body */
+.news-card .card-body h5 {
+  font-weight: 700;
+  color: #ff5722; /* Título naranja/amarillo */
+}
+
+.news-card .card-body p {
+  color: #333;
+  font-size: 0.9rem;
+}
+
+/* Fecha en footer */
+.news-card .card-footer {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .news-card img {
+    height: 150px;
+  }
+}

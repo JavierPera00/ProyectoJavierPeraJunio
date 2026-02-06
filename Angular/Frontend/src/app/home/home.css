@@ -1,0 +1,21 @@
+
+/*Color del li*/
+.lista-nav{
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    text-decoration: none;  
+}
+.lista-nav li a {
+  color: yellow;
+}
+h1 {
+    font-family: "Gravitas One", serif;
+    font-weight: 400;
+    font-style:italic;
+    color: yellow;
+    font-size: 3.5rem;
+}
+
+
+

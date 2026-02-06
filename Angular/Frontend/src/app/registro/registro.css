@@ -1,0 +1,26 @@
+.register-body {
+  background-image: url("/computer.jpg");
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.register-card {
+  max-width: 400px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.register-card h2 {
+  color: rgb(10, 10, 10);
+  font-family: 'Gravitas One', serif;
+}
+
+.register-card .btn {
+  font-weight: bold;
+}

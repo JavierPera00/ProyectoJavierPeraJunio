@@ -25,8 +25,8 @@ public class Usuario {
     private String username;
     private String email;
     private String password;
-    private LocalDate fechaRegistro;
-    private boolean activo;
+    private LocalDate fechaRegistro = LocalDate.now();;
+    private boolean activo = true; // activo por defecto;
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Perfil perfil;

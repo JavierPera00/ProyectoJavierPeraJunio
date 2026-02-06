@@ -1,211 +1,37 @@
-<!DOCTYPE html>
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CyberNews</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Gravitas+One&display=swap" rel="stylesheet">
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="app.css" />
-    <link rel="icon" type="image/png" href="favicon.png" />
-  </head>
-  <body class="">
-    <!--Nav-->
-    <nav class="navbar bg-dark" data-bs-theme="dark">
-      <div class="container-fluid text-warning">
-        <div class="row w-100 align-items-center g-2">
-          <div
-            class="col-auto d-flex align-items-center justify-content-center"
-          >
-            <a class="navbar-brand" href="#">
-              <img
-                src="/logo.png"
-                alt="CyberNews"
-                class="navbar-logo"
-              />
-            </a>
-          </div>
+<!-- Navbar -->
+<nav class="navbar bg-dark" data-bs-theme="dark">
+  <div class="container-fluid text-warning d-flex align-items-center">
+    <!-- Logo -->
+    <a [routerLink]="['/home']" class="navbar-brand">
+      <img src="/logo.png" alt="CyberNews" class="navbar-logo" />
+    </a>
 
-          <div class="col">
-            <div class="collapse navbar-collapse" id="navbarNavDropdown">
-              <ul class="navbar-nav">
-                <li class="nav-item">
-                  <a
-                    href="#"
-                    class="nav-link active text-warning"
-                    aria-current="page"
-                    data-page="home"
-                    >Home</a
-                  >
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-warning" data-page="login">Login</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-warning" data-page="mapa">Cursos</a>
-                </li>
-                <li class="nav-item">
-                  <a href="#" class="nav-link text-warning" data-page="noticias">Noticias</a>
-                </li>
-                <li class="nav-item">
-                  <form class="d-flex" role="search">
-                    <input
-                      class="form-control me-2"
-                      type="search"
-                      placeholder="Escribe"
-                      aria-label="Search"
-                    />
-                    <button class="btn btn-outline-success" type="submit">
-                      Buscar
-                    </button>
-                  </form>
-                </li>
-              </ul>
-            </div>
-          </div>
+    <!-- Menú -->
+    <div class="d-flex align-items-center ms-auto gap-3">
+      <ul class="lista-nav mb-0 d-flex align-items-center">
+        <li><a [routerLink]="['/login']">Login</a></li>
+        <li><a [routerLink]="['/noticias']">Noticias</a></li>
+        <li><a [routerLink]="['/cursos']">Cursos</a></li>
+      </ul>
 
-          <div class="col-auto d-flex align-items-center justify-content-end">
-            <a href="#" data-page="mapa" class="btn btn-warning d-flex align-items-center me-2">
-              <img src="/logo.png" alt="Mapa" class="btn-icon" />
-              Mapa
-            </a>
-
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <!--Home-->
-    <div id="main-content">
-      <section id="home">
-        <main>
-          <h1><strong>Cyber News</strong></h1>
-          <a href="#" data-page="mapa" class="btn btn-outline-warning">
-            Cursos Online
-          </a>
-        </main>
-        <div class="container py-5">
-          <div class="row g-4">
-            <div class="col-md-6 col-lg-4 fade-in">
-              <div class="card h-100 bg-white text-dark text-center shadow card-feature border-0 rounded-3">
-                <div class="card-body d-flex flex-column align-items-center p-3">
-                  <!-- icon -->
-                  <div class="mb-3">
-                    <img src="/user.gif" alt="Seguridad" width="72" height="72" class="d-block" />
-                  </div>
-                  <h3 class="card-title fw-bold mb-2">Seguridad</h3>
-                  <p class="card-text text-muted">Protegemos la información y la privacidad de nuestros usuarios mediante sistemas de seguridad avanzados y buenas prácticas digitales.</p>
-                  <div class="mt-auto">
-                    <button class="btn btn-outline-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalSeguridad">Ver más</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 fade-in">
-              <div class="card h-100 bg-white text-dark text-center shadow card-feature border-0 rounded-3">
-                <div class="card-body d-flex flex-column align-items-center p-3">
-                  <div class="mb-3">
-                    <img src="/handshake.gif" alt="Comunidad" width="72" height="72" class="d-block" />
-                  </div>
-                  <h3 class="card-title fw-bold mb-2">Comunidad</h3>
-                  <p class="card-text text-muted">Fomentamos una comunidad participativa donde los usuarios pueden interactuar, compartir ideas y colaborar en un entorno respetuoso y constructivo.</p>
-                  <div class="mt-auto">
-                    <button class="btn btn-outline-success btn-sm" data-bs-toggle="modal" data-bs-target="#modalComunidad">Descubrir comunidad</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-md-6 col-lg-4 mx-auto fade-in">
-              <div class="card h-100 bg-white text-dark text-center shadow card-feature border-0 rounded-3">
-                <div class="card-body d-flex flex-column align-items-center p-3">
-                  <div class="mb-3">
-                   <img src="/tech-support.gif" alt="Cercanía" width="72" height="72" class="d-block" />
-                  </div>
-                  <h3 class="card-title fw-bold mb-2">Cercanía</h3>
-                  <p class="card-text text-muted">Respondemos a las necesidades de nuestros usuarios y construimos relaciones basadas en la confianza y la transparencia.</p>
-                  <div class="mt-auto">
-                    <button class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#modalCercania">Conócenos</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-      <section id="mapa" class="hidden">
-        <!-- Contenido mapa.html -->
-        <main class="mapa-main py-5 mapa-body">
-          <h1 class="titulo-mapa">Mapa de Ciberataques</h1>
-          <div class="ratio ratio-16x9 mb-4">
-            <iframe src="https://cybermap.kaspersky.com/es" class="cybermap-iframe" title="Mapa de ciberataques de Kaspersky" allowfullscreen loading="lazy"></iframe>
-          </div>
-        </main>
-      </section>
+      <a [routerLink]="['/mapa']" class="btn btn-warning d-flex align-items-center">
+        <img src="/logo.png" alt="Mapa" class="btn-icon me-2" />
+        Mapa
+      </a>
     </div>
-
-    <!--Footer-->
-  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-dark text-white">
-    <div class="col-12 col-md-4 d-flex align-items-center ps-0 justify-content-center justify-content-md-start">
-
-    </div>
-    <div class="col-12 col-md-4 d-flex justify-content-center align-items-center">
-      <span class="mb-3 mb-md-0 text-white text-center w-100">© 2025 CyberNews</span>
-    </div>
-    <ul class="nav col-12 col-md-4 justify-content-center justify-content-md-end list-unstyled d-flex">
-      <!-- Instagram -->
-      <li class="ms-3">
-        <a class="text-white" href="#" aria-label="Instagram">
-          <svg class="bi" width="28" height="28" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24" style="vertical-align: middle;">
-            <path d="M12 2.163c3.204 0 3.584.012 4.849.07 1.366.062 2.633.35 3.608 1.325.975.975 1.263 2.242 1.325 3.608.058 1.265.07 1.645.07 4.849s-.012 3.584-.07 4.849c-.062 1.366-.35 2.633-1.325 3.608-.975.975-2.242 1.263-3.608 1.325-1.265.058-1.645.07-4.849.07s-3.584-.012-4.849-.07c-1.366-.062-2.633-.35-3.608-1.325-.975-.975-1.263-2.242-1.325-3.608C2.175 15.584 2.163 15.204 2.163 12s.012-3.584.07-4.849c.062-1.366.35-2.633 1.325-3.608.975-.975 2.242-1.263 3.608-1.325C8.416 2.175 8.796 2.163 12 2.163zm0 1.838c-3.157 0-3.518.011-4.756.068-1.105.049-1.702.222-2.1.368a2.708 2.708 0 0 0-1.01.657 2.708 2.708 0 0 0-.657 1.01c-.146.398-.32.995-.368 2.1-.057 1.238-.068 1.599-.068 4.756s.011 3.518.068 4.756c.049 1.105.222 1.702.368 2.1.147.372.342.685.657 1.01.325.325.638.51 1.01.657.398.146.995.32 2.1.368 1.238.057 1.599.068 4.756.068s3.518-.011 4.756-.068c1.105-.049 1.702-.222 2.1-.368a2.708 2.708 0 0 0 1.01-.657 2.708 2.708 0 0 0 .657-1.01c.146-.398.32-.995.368-2.1.057-1.238.068-1.599.068-4.756s-.011-3.518-.068-4.756c-.049-1.105-.222-1.702-.368-2.1a2.708 2.708 0 0 0-.657-1.01 2.708 2.708 0 0 0-1.01-.657c-.398-.146-.995-.32-2.1-.368-1.238-.057-1.599-.068-4.756-.068zm0 4.838a5 5 0 1 1 0 10 5 5 0 0 1 0-10zm0 1.8a3.2 3.2 0 1 0 0 6.4 3.2 3.2 0 0 0 0-6.4zm6.406-2.21a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0z"/>
-          </svg>
-        </a>
-      </li>
-
-      <!-- Facebook -->
-      <li class="ms-3">
-        <a class="text-white" href="#" aria-label="Facebook">
-          <svg class="bi" width="28" height="28" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24" style="vertical-align: middle;">
-            <path d="M22.675 0h-21.35C.594 0 0 .593 0 1.326v21.348C0 23.406.593 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.464.099 2.795.143v3.24l-1.918.001c-1.504 0-1.796.715-1.796 1.763v2.312h3.59l-.467 3.622h-3.123V24h6.116C23.406 24 24 23.406 24 22.674V1.326C24 .593 23.406 0 22.675 0z"/>
-          </svg>
-        </a>
-      </li>
-
-      <!-- GitHub -->
-      <li class="ms-3">
-        <a class="text-white" href="#" aria-label="GitHub">
-          <svg class="bi" width="28" height="28" fill="currentColor" aria-hidden="true" viewBox="0 0 24 24" style="vertical-align: middle;">
-            <path d="M12 0C5.372 0 0 5.373 0 12c0 5.303 3.438 9.8 8.205 11.387.6.111.82-.261.82-.579 0-.287-.01-1.044-.015-2.051-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.085 1.84 1.236 1.84 1.236 1.07 1.835 2.809 1.305 3.495.997.108-.774.419-1.305.762-1.605-2.665-.305-5.466-1.332-5.466-5.931 0-1.31.468-2.381 1.235-3.221-.123-.303-.535-1.527.117-3.176 0 0 1.008-.322 3.301 1.23a11.51 11.51 0 0 1 3.003-.404c1.019.005 2.045.138 3.003.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.649.241 2.873.119 3.176.77.84 1.233 1.911 1.233 3.221 0 4.609-2.804 5.624-5.476 5.921.431.372.815 1.104.815 2.222 0 1.604-.014 2.898-.014 3.293 0 .319.218.694.825.576C20.565 21.796 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-          </svg>
-        </a>
-      </li>
-    </ul>
-  </footer>
-
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-      crossorigin="anonymous"
-    ></script>
-    <script src="js/site.js"></script>
-  </body>
-</html>
+  </div>
+</nav>
+<!-- Contenido principal -->
+  <router-outlet></router-outlet>
+<!-- Footer -->
+<footer class="footer d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-dark text-white">
+  <p class="col-md-4 mb-0">© 2026 CyberNews</p>
+  <a [routerLink]="['/home']" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto">
+    <img src="/logo.png" alt="Logo CyberNews" class="footer-logo">
+  </a>
+  <ul class="nav col-md-4 justify-content-end">
+    <li class="nav-item"><a [routerLink]="['/home']" class="nav-link px-2 text-white">Home</a></li>
+    <li class="nav-item"><a [routerLink]="['/noticias']" class="nav-link px-2 text-white">Noticias</a></li>
+    <li class="nav-item"><a [routerLink]="['/cursos']" class="nav-link px-2 text-white">Cursos</a></li>
+  </ul>
+</footer>

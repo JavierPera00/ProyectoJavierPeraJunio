@@ -90,12 +90,7 @@ const waitForMain = setInterval(() => {
 }, 100);
 
 function showPage(pageId) {
-  // Ocultar todas las secciones
-  const sections = document.querySelectorAll('#main-content section');
-  sections.forEach(section => {
-    section.classList.remove('active');
-    section.classList.add('hidden');
-  });
+ 
 
   // Mostrar la sección seleccionada
   const activeSection = document.getElementById(pageId);
