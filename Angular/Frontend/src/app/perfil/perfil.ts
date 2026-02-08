@@ -9,7 +9,7 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './perfil.css',
 })
 export class Perfil {
-  
+
   usuario: any = {
       username: '',
       email: '',
@@ -58,8 +58,8 @@ export class Perfil {
   }
   cerrarSesion() {
     localStorage.removeItem('usuarioLogueado');
-    this.usuario = null; // Limpiar usuario en la vista
-    this.router.navigate(['/login']); // Redirigir a login
-  }
+    this.usuario = null;
+    this.router.navigate(['/login']);
 }
 
+}

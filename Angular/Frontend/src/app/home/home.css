@@ -4,7 +4,7 @@
     list-style: none;
     display: flex;
     gap: 1rem;
-    text-decoration: none;  
+    text-decoration: none;
 }
 .lista-nav li a {
   color: yellow;
@@ -17,5 +17,16 @@ h1 {
     font-size: 3.5rem;
 }
 
+h3 {
+    font-weight: 400;
+    font-style:italic;
+    color: rgb(255, 255, 255);
+    font-size: 3.5rem;
+}
 
+li {
+  color: yellow !important;      /* color amarillo */
+  font-size: 1rem !important;    /* tamaño de letra */
+  font-weight: bold !important;  /* negrita */
+}
 

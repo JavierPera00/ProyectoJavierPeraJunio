@@ -1,39 +1,145 @@
 <!-- Navbar -->
-<nav class="navbar bg-dark" data-bs-theme="dark">
-  <div class="container-fluid text-warning d-flex align-items-center">
+<nav class="navbar navbar-dark bg-dark">
+  <div class="container-fluid text-warning d-flex align-items-center justify-content-between">
+
     <!-- Logo -->
     <a [routerLink]="['/home']" class="navbar-brand">
       <img src="/logo.png" alt="CyberNews" class="navbar-logo" />
     </a>
 
-    <!-- Menú -->
-    <div class="d-flex align-items-center ms-auto gap-3">
-      <ul class="lista-nav mb-0 d-flex align-items-center">
-        <li><a [routerLink]="['/login']">Login</a></li>
-        <li><a [routerLink]="['/noticias']">Noticias</a></li>
-        <li><a [routerLink]="['/cursos']">Cursos</a></li>
-        <li><a [routerLink]="['/perfil']">Perfil</a></li>
-      </ul>
 
-      <a [routerLink]="['/mapa']" class="btn btn-warning d-flex align-items-center">
-        <img src="/logo.png" alt="Mapa" class="btn-icon me-2" />
-        Mapa
+
+    <!-- Botón Toggler + Icono Login -->
+    <div class="d-flex align-items-center">
+      <!-- Icono SVG Login -->
+      <a [routerLink]="['/login']" class="text-warning d-flex align-items-center me-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
+          <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
+        </svg>
       </a>
+      <!-- Botón Toggler -->
+      <button class="navbar-toggler me-2" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+        aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+
+    <!-- Menú colapsable -->
+    <div class="collapse navbar-collapse" id="mainNav">
+      <ul class="navbar-nav mb-2 mb-lg-0 d-flex justify-content-center">
+        <li class="nav-item me-5">
+          <a [routerLink]="['/noticias']" class="nav-link text-warning">Noticias</a>
+        </li>
+        <li class="nav-item me-5">
+          <a [routerLink]="['/cursos']" class="nav-link text-warning">Cursos</a>
+        </li>
+        <li class="nav-item">
+          <a [routerLink]="['/perfil']" class="nav-link text-warning">Perfil</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>
 <!-- Contenido principal -->
-  <router-outlet></router-outlet>
+<router-outlet></router-outlet>
+
 <!-- Footer -->
-<footer class="footer d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top bg-dark text-white">
-  <p class="col-md-4 mb-0">© 2026 CyberNews</p>
-  <a [routerLink]="['/home']" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto">
-    <img src="/logo.png" alt="Logo CyberNews" class="footer-logo">
-  </a>
-  <u class="nav col-md-4 justify-content-end">
-    <li class="nav-item"><a [routerLink]="['/home']" class="nav-link px-2 text-white">Home</a></li>
-    <li class="nav-item"><a [routerLink]="['/noticias']" class="nav-link px-2 text-white">Noticias</a></li>
-    <li class="nav-item"><a [routerLink]="['/cursos']" class="nav-link px-2 text-white">Cursos</a></li>
-    <li class="nav-item"><a [routerLink]="['/perfil']" class="nav-link px-2 text-white">Perfil</a></li>
-  </u>
+<footer class="py-5 bg-dark text-white">
+  <div class="container">
+    <div class="row">
+
+      <!-- Sección 1 -->
+      <div class="col-6 col-md-2 mb-3">
+        <h5>CyberNews</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a [routerLink]="['/home']" class="nav-link p-0 text-white-50">Home</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a [routerLink]="['/noticias']" class="nav-link p-0 text-white-50">Noticias</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a [routerLink]="['/cursos']" class="nav-link p-0 text-white-50">Cursos</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sección 2 -->
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Cuenta</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a [routerLink]="['/perfil']" class="nav-link p-0 text-white-50">Perfil</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a [routerLink]="['/login']" class="nav-link p-0 text-white-50">Login</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Sección 3 -->
+      <div class="col-6 col-md-2 mb-3">
+        <h5>Legal</h5>
+        <ul class="nav flex-column">
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white-50">Privacidad</a>
+          </li>
+          <li class="nav-item mb-2">
+            <a href="#" class="nav-link p-0 text-white-50">Términos</a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Logo / Info -->
+      <div class="col-md-5 offset-md-1 mb-3">
+        <div class="d-flex align-items-center mb-3">
+          <img src="/logo.png" alt="CyberNews" class="footer-logo me-3">
+          <h5 class="mb-0">CyberNews</h5>
+        </div>
+        <p class="text-white-50">
+          Noticias y cursos sobre ciberseguridad, tecnología y desarrollo.
+        </p>
+      </div>
+
+    </div>
+
+  <!-- Línea inferior -->
+    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top border-secondary">
+      <p class="mb-0 text-white-50">© 2026 CyberNews. Todos los derechos reservados.</p>
+
+      <ul class="list-unstyled d-flex mb-0">
+        <li class="ms-3">
+          <a class="text-white-50" href="#" aria-label="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="text-white-50" href="#" aria-label="Facebook">
+            <i class="bi bi-facebook"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="text-white-50" href="#" aria-label="Twitter">
+            <i class="bi bi-twitter"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="text-white-50" href="#" aria-label="LinkedIn">
+            <i class="bi bi-linkedin"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="text-white-50" href="#" aria-label="YouTube">
+            <i class="bi bi-youtube"></i>
+          </a>
+        </li>
+        <li class="ms-3">
+          <a class="text-white-50" href="#" aria-label="TikTok">
+            <i class="bi bi-tiktok"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
 </footer>

@@ -34,7 +34,7 @@ public class NoticiaServiceImpl implements NoticiaService {
     }
 
     public List<Noticia> ultimasNoticias() {
-        return noticiaRepository.findTop10ByOrderByFechaPublicacionDesc();
+        return noticiaRepository.findTop3ByOrderByFechaPublicacionDesc();
     }
 
     

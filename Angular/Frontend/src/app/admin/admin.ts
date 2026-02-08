@@ -3,34 +3,48 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Noticias } from '../noticias/noticias';
+import { NoticiaModel } from '../model/noticia.model';
 
 @Component({
   selector: 'app-admin',
   imports: [FormsModule,CommonModule],
   templateUrl: './admin.html',
-  providers: [DatePipe], 
+  providers: [DatePipe],
   styleUrl: './admin.css',
 })
 export class Admin {
-  
-// Formulario de nueva noticia
+
+  // AGREGAR NOTICIA
   titulo = '';
   descripcion = '';
-  ciudad = '';
+  urlExterna = '';
+  urlImagen = '';
 
-  // Lista de noticias
-  noticias: any[] = [];
-  
-  // Lista de usuarios (importante)
+  // EDITAR NOTICIA
+  noticiaSeleccionadaEditar: NoticiaModel | null = null;
+  editarTitulo = '';
+  editarDescripcion = '';
+  editarUrlExterna = '';
+  editarFechaPublicacion = '';
+  editarUrlImagen = '';
+
+  // ELIMINAR NOTICIA
+  noticiaSeleccionadaEliminar: NoticiaModel | null = null;
+
+  // LISTAS
+  noticias: NoticiaModel[] = [];
+  ultimasNoticias: NoticiaModel[] = [];
   usuarios: any[] = [];
 
   mensaje = '';
 
   constructor() {
     this.cargarNoticias();
-    this.cargarUsuarios(); // Asegúrate de llamarlo
+    this.cargarUsuarios();
+    this.cargarUltimasNoticias();
   }
 
+  // CARGAR DATOS
   async cargarNoticias() {
     try {
       const res = await fetch('http://localhost:8080/api/noticias');
@@ -53,41 +67,129 @@ export class Admin {
     }
   }
 
+  async cargarUltimasNoticias() {
+    try {
+      const res = await fetch('http://localhost:8080/api/noticias/ultimas');
+      if (!res.ok) throw new Error('Error al obtener últimas noticias');
+      this.ultimasNoticias = await res.json();
+    } catch (error) {
+      console.error(error);
+      this.mensaje = 'No se pudieron cargar las últimas noticias.';
+    }
+  }
+
+  mostrarUltimasNoticias() {
+    this.cargarUltimasNoticias();
+  }
+
+  // AGREGAR NOTICIA
   async agregarNoticia() {
-    if (!this.titulo || !this.descripcion || !this.ciudad) {
-      this.mensaje = 'Todos los campos son obligatorios';
+    if (!this.titulo || !this.descripcion) {
+      this.mensaje = 'Título y descripción son obligatorios';
       return;
     }
 
-    const nuevaNoticia = {
-      titulo: this.titulo,
-      descripcion: this.descripcion,
-      ciudad: this.ciudad,
-      fechaPublicacion: new Date().toISOString(),
-      autor: { id: 1 }
-    };
-
     try {
+      const nuevaNoticia = {
+        titulo: this.titulo,
+        descripcion: this.descripcion,
+        urlExterna: this.urlExterna,
+        urlImagen: this.urlImagen,
+        fechaPublicacion: new Date().toISOString()
+      };
+
       const res = await fetch('http://localhost:8080/api/noticias', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(nuevaNoticia),
+        body: JSON.stringify(nuevaNoticia)
       });
 
-      if (!res.ok) {
-        this.mensaje = 'Error al agregar la noticia';
-        return;
-      }
+      if (!res.ok) throw new Error('Error al agregar noticia');
 
-      const noticiaAgregada = await res.json();
+      const noticiaAgregada: NoticiaModel = await res.json();
       this.noticias.unshift(noticiaAgregada);
+
+      // Limpiar campos
       this.titulo = '';
       this.descripcion = '';
-      this.ciudad = '';
+      this.urlExterna = '';
+      this.urlImagen = '';
       this.mensaje = 'Noticia agregada con éxito!';
     } catch (error) {
       console.error(error);
-      this.mensaje = 'No se pudo conectar con el servidor.';
+      this.mensaje = 'No se pudo agregar la noticia.';
+    }
+  }
+
+  // SELECCIONAR PARA EDITAR
+ seleccionarParaEditar(noticia: NoticiaModel | null) {
+  if (!noticia) return;
+
+  this.noticiaSeleccionadaEditar = noticia;
+  this.editarTitulo = noticia.titulo;
+  this.editarDescripcion = noticia.descripcion;
+  this.editarUrlExterna = noticia.urlExterna;
+  this.editarFechaPublicacion = noticia.fechaPublicacion?.split('T')[0] || '';
+  this.editarUrlImagen = noticia.urlImagen || '';
+}
+
+
+  // EDITAR NOTICIA
+  async editarNoticia() {
+    if (!this.noticiaSeleccionadaEditar) return;
+
+      try {
+        const noticiaActualizada = {
+          ...this.noticiaSeleccionadaEditar,
+          titulo: this.editarTitulo,
+          descripcion: this.editarDescripcion,
+          urlExterna: this.editarUrlExterna,
+          urlImagen: this.editarUrlImagen,
+          fechaPublicacion: this.editarFechaPublicacion
+        };
+
+        const res = await fetch(`http://localhost:8080/api/noticias/${noticiaActualizada.id}`, {
+          method: 'PATCH',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(noticiaActualizada)
+        });
+
+        if (!res.ok) throw new Error('Error al editar noticia');
+
+        const noticiaFromServer: NoticiaModel = await res.json();
+        const index = this.noticias.findIndex(n => n.id === noticiaFromServer.id);
+        if (index >= 0) this.noticias[index] = noticiaFromServer;
+
+        // Actualiza la referencia para que el <select> lo detecte
+        this.noticiaSeleccionadaEditar = noticiaFromServer;
+
+        this.mensaje = 'Noticia editada con éxito!';
+      } catch (error) {
+        console.error(error);
+        this.mensaje = 'No se pudo editar la noticia.';
+      }
+  }
+
+  // ELIMINAR NOTICIA
+  async eliminarNoticia() {
+    if (!this.noticiaSeleccionadaEliminar) {
+      this.mensaje = 'Selecciona una noticia para eliminar';
+      return;
+    }
+
+    try {
+      const res = await fetch(`http://localhost:8080/api/noticias/${this.noticiaSeleccionadaEliminar.id}`, {
+        method: 'DELETE'
+      });
+
+      if (!res.ok) throw new Error('Error al eliminar noticia');
+
+      this.noticias = this.noticias.filter(n => n.id !== this.noticiaSeleccionadaEliminar!.id);
+      this.noticiaSeleccionadaEliminar = null;
+      this.mensaje = 'Noticia eliminada con éxito!';
+    } catch (error) {
+      console.error(error);
+      this.mensaje = 'No se pudo eliminar la noticia.';
     }
   }
 }

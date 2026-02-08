@@ -1,11 +1,23 @@
-
-<!--mapa-->
 <section id="mapa">
-    <!-- Contenido mapa.html -->
     <main class="mapa-main py-5 mapa-body">
-      <h1 class="titulo-mapa">Mapa de Ciberataques</h1>
         <div class="ratio ratio-16x9 mb-4">
-            <iframe src="https://cybermap.kaspersky.com/es" class="cybermap-iframe" title="Mapa de ciberataques de Kaspersky" allowfullscreen loading="lazy"></iframe>
+            <iframe
+                src="https://cybermap.kaspersky.com/es"
+                class="cybermap-iframe"
+                title="Mapa de ciberataques de Kaspersky"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
         </div>
+        <div class="iframe-container mb-4">
+            <iframe
+                src="https://threatmap.bitdefender.com/"
+                class="bitmap-iframe"
+                title="Mapa de ciberataques Bitdefender"
+                allowfullscreen
+                loading="lazy">
+            </iframe>
+        </div>
+      <button [routerLink]="['/home']" class="btn btn-warning">Volver</button>
     </main>
 </section>
