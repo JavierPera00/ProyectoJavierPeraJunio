@@ -153,7 +153,6 @@ export class Admin {
         const index = this.noticias.findIndex(n => n.id === noticiaFromServer.id);
         if (index >= 0) this.noticias[index] = noticiaFromServer;
 
-        // Actualiza la referencia para que el <select> lo detecte
         this.noticiaSeleccionadaEditar = noticiaFromServer;
 
         this.mensaje = 'Noticia editada con éxito!';
