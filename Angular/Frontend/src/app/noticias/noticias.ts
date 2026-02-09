@@ -13,7 +13,7 @@ export class Noticias implements OnInit{
 
   noticias: NoticiaModel[] = [];
 
-  private apiUrl = 'http://localhost:8080/api/noticias/ultimas';
+  private apiUrl = 'http://localhost:8080/api/noticias';
 
   constructor(private http: HttpClient) {}
 

@@ -82,7 +82,61 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n6.setUrlExterna("https://innovatecybersecurity.com/security-threat-advisory/top-10-cybersecurity-news-jan-26-2026-apac-energy-firm-hit-by-dire-wolf-ransomware-ai-led-espionage-campaign-uses-autonomous-agents-pwn2own-automotive-2026-uncovers-76-zero-day-flaws-and-more/");
         noticiaService.save(n6);
         
-     // --- Crear usuarios ---
+     // Noticia 7
+        Noticia n7 = new Noticia();
+        n7.setTitulo("Hackeo a proveedor cloud expone datos de miles de empresas");
+        n7.setDescripcion("Un ataque a un proveedor de servicios en la nube permitió a los atacantes acceder a copias de seguridad empresariales.");
+        n7.setFechaPublicacion(LocalDateTime.of(2026, 2, 7, 0, 0));
+        n7.setUrlImagen("");
+        n7.setUrlExterna("https://example.com/hackeo-proveedor-cloud");
+        noticiaService.save(n7);
+
+        // Noticia 8
+        Noticia n8 = new Noticia();
+        n8.setTitulo("Brecha de seguridad en plataforma educativa filtra datos de estudiantes");
+        n8.setDescripcion("Información personal y académica quedó expuesta tras un acceso no autorizado a los servidores de la plataforma.");
+        n8.setFechaPublicacion(LocalDateTime.of(2026, 2, 6, 0, 0));
+        n8.setUrlImagen("");
+        n8.setUrlExterna("https://example.com/brecha-plataforma-educativa");
+        noticiaService.save(n8);
+
+        // Noticia 9
+        Noticia n9 = new Noticia();
+        n9.setTitulo("Ataque a empresa de transporte compromete sistemas de reservas");
+        n9.setDescripcion("Los atacantes obtuvieron acceso interno y provocaron interrupciones en los servicios de venta y gestión de billetes.");
+        n9.setFechaPublicacion(LocalDateTime.of(2026, 2, 5, 0, 0));
+        n9.setUrlImagen("");
+        n9.setUrlExterna("https://example.com/hackeo-empresa-transporte");
+        noticiaService.save(n9);
+
+        // Noticia 10
+        Noticia n10 = new Noticia();
+        n10.setTitulo("Hackers roban credenciales de empleados mediante phishing interno");
+        n10.setDescripcion("Correos fraudulentos dirigidos a trabajadores permitieron el acceso a sistemas corporativos sensibles.");
+        n10.setFechaPublicacion(LocalDateTime.of(2026, 2, 4, 0, 0));
+        n10.setUrlImagen("");
+        n10.setUrlExterna("https://example.com/phishing-interno-empresa");
+        noticiaService.save(n10);
+
+        // Noticia 11
+        Noticia n11 = new Noticia();
+        n11.setTitulo("Filtración de datos afecta a usuarios de una popular red social");
+        n11.setDescripcion("Un fallo en una API permitió la extracción masiva de perfiles, correos electrónicos y datos de contacto.");
+        n11.setFechaPublicacion(LocalDateTime.of(2026, 2, 3, 0, 0));
+        n11.setUrlImagen("");
+        n11.setUrlExterna("https://example.com/filtracion-red-social");
+        noticiaService.save(n11);
+
+        // Noticia 12
+        Noticia n12 = new Noticia();
+        n12.setTitulo("Ataque informático bloquea sistemas municipales durante horas");
+        n12.setDescripcion("Varios servicios públicos quedaron inaccesibles tras un ataque que afectó a la infraestructura digital del ayuntamiento.");
+        n12.setFechaPublicacion(LocalDateTime.of(2026, 2, 2, 0, 0));
+        n12.setUrlImagen("");
+        n12.setUrlExterna("https://example.com/ataque-sistemas-municipales");
+        noticiaService.save(n12);
+
+        // --- Crear usuarios ---
         Usuario u1 = new Usuario();
         u1.setUsername("juan123");
         u1.setEmail("juan123@gmail.com");
