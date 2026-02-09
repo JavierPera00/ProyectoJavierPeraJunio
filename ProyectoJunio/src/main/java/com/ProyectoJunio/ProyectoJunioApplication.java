@@ -8,7 +8,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.ProyectoJunio.model.Noticia;
+import com.ProyectoJunio.model.Rol;
 import com.ProyectoJunio.model.Usuario;
+import com.ProyectoJunio.repository.RolRepository;
 import com.ProyectoJunio.servicio.NoticiaService;
 import com.ProyectoJunio.servicio.UsuarioService;
 
@@ -20,6 +22,9 @@ public class ProyectoJunioApplication implements CommandLineRunner {
     
     @Autowired
     private UsuarioService usuarioService;
+    
+    @Autowired
+    private RolRepository rolRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(ProyectoJunioApplication.class, args);
@@ -27,7 +32,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-	
+	   	
     	// Noticia 1
         Noticia n1 = new Noticia();
         n1.setTitulo("Notepad++ sufrió ataque dirigido de malware");
@@ -135,13 +140,29 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n12.setUrlImagen("");
         n12.setUrlExterna("https://example.com/ataque-sistemas-municipales");
         noticiaService.save(n12);
-
+        
         // --- Crear usuarios ---
+    	// Crear roles si no existen
+    	Rol rolUser = rolRepository.findByNombre(Rol.USER);
+    	if (rolUser == null) {
+    	    rolUser = new Rol();
+    	    rolUser.setNombre(Rol.USER);
+    	    rolRepository.save(rolUser);
+    	}
+
+    	Rol rolAdmin = rolRepository.findByNombre(Rol.ADMIN);
+    	if (rolAdmin == null) {
+    	    rolAdmin = new Rol();
+    	    rolAdmin.setNombre(Rol.ADMIN);
+    	    rolRepository.save(rolAdmin);
+    	}
+    	
         Usuario u1 = new Usuario();
         u1.setUsername("juan123");
         u1.setEmail("juan123@gmail.com");
         u1.setPassword("password1");
         u1.setActivo(true);
+        u1.setRol(rolUser);
         usuarioService.save(u1);
 
         Usuario u2 = new Usuario();
@@ -149,6 +170,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u2.setEmail("maria456@gmail.com");
         u2.setPassword("password2");
         u2.setActivo(true);
+        u2.setRol(rolUser);
         usuarioService.save(u2);
 
         Usuario u3 = new Usuario();
@@ -156,6 +178,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u3.setEmail("carlos789@gmail.com");
         u3.setPassword("password3");
         u3.setActivo(true);
+        u3.setRol(rolUser);
         usuarioService.save(u3);
 
         Usuario u4 = new Usuario();
@@ -163,6 +186,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u4.setEmail("ana321@gmail.com");
         u4.setPassword("password4");
         u4.setActivo(true);
+        u4.setRol(rolUser);
         usuarioService.save(u4);
 
         Usuario u5 = new Usuario();
@@ -170,6 +194,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u5.setEmail("luis654@gmail.com");
         u5.setPassword("password5");
         u5.setActivo(true);
+        u5.setRol(rolUser);
         usuarioService.save(u5);
 
         Usuario u6 = new Usuario();
@@ -177,6 +202,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u6.setEmail("sofia987@gmail.com");
         u6.setPassword("password6");
         u6.setActivo(true);
+        u6.setRol(rolUser);
         usuarioService.save(u6);
 
         Usuario u7 = new Usuario();
@@ -184,6 +210,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u7.setEmail("miguel111@gmail.com");
         u7.setPassword("password7");
         u7.setActivo(true);
+        u7.setRol(rolUser);
         usuarioService.save(u7);
 
         Usuario u8 = new Usuario();
@@ -191,6 +218,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u8.setEmail("laura222@gmail.com");
         u8.setPassword("password8");
         u8.setActivo(true);
+        u8.setRol(rolUser);
         usuarioService.save(u8);
 
         Usuario u9 = new Usuario();
@@ -198,6 +226,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u9.setEmail("pedro333@gmail.com");
         u9.setPassword("password9");
         u9.setActivo(true);
+        u9.setRol(rolUser);
         usuarioService.save(u9);
 
         Usuario u10 = new Usuario();
@@ -205,7 +234,16 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u10.setEmail("carla444@gmail.com");
         u10.setPassword("password10");
         u10.setActivo(true);
+        u10.setRol(rolUser);
         usuarioService.save(u10);
+        
+        Usuario u11 = new Usuario();
+        u11.setUsername("admin");
+        u11.setEmail("admin@gmail.com");
+        u11.setPassword("admin");
+        u11.setActivo(true);
+        u11.setRol(rolAdmin);
+        usuarioService.save(u11);
 	}
 
 }

@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -26,22 +27,25 @@ public class Usuario {
     private String email;
     private String password;
     private LocalDate fechaRegistro = LocalDate.now();;
-    private boolean activo = true; // activo por defecto;
+    private boolean activo = true; 
 
     @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
     private Perfil perfil;
 
-    @ManyToMany
-    @JoinTable(
-        name = "usuario_rol",
-        joinColumns = @JoinColumn(name = "usuario_id"),
-        inverseJoinColumns = @JoinColumn(name = "rol_id")
-    )
-    private List<Rol> roles;
+    @ManyToOne
+    @JoinColumn(name = "rol_id")
+    private Rol rol;
+    
 
-    
-    
-    
+    public Usuario() {
+    }
+    public Usuario(Long id, String username, String password, String email, Rol rol) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.rol = rol;
+    }
     /*GET Y SET*/
 	public Long getId() {
 		return id;
@@ -99,20 +103,19 @@ public class Usuario {
 		this.perfil = perfil;
 	}
 
-	public List<Rol> getRoles() {
-		return roles;
+	public Rol getRol() {
+	    return rol;
 	}
 
-	public void setRoles(List<Rol> roles) {
-		this.roles = roles;
+	public void setRol(Rol rol) {
+	    this.rol = rol;
 	}
-
     
     /* toString*/
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
-				+ ", fechaRegistro=" + fechaRegistro + ", activo=" + activo + ", perfil=" + perfil + "]";
+				+ ", fechaRegistro=" + fechaRegistro + ", activo=" + activo + "]";
 	}
 	
 }

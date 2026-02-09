@@ -27,5 +27,10 @@ public class UsuarioServiceImpl implements UsuarioService{
     public void delete(Long id) {
         usuarioRepository.deleteById(id);
     }
+    
+    public Usuario findByUsername(String name) {
+        return usuarioRepository.findByUsernameIgnoreCase(name);
+    }
+
 }
 	

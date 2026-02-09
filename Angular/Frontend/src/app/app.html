@@ -1,188 +1,116 @@
-<div class="d-flex">
-<!-- Sidebar con logo arriba centrado horizontalmente -->
-<div class="flex-shrink-0 bg-dark" style="width: 280px; min-height: 100vh;">
+<div class="d-flex" style="min-height: 100vh; position: relative;">
+  <!-- Sidebar -->
+  <div class="flex-shrink-0 bg-dark d-flex flex-column" style="width: 150px;">
+    <div class="d-flex justify-content-center py-4">
+      <a [routerLink]="['/home']" class="navbar-brand d-flex justify-content-center">
+        <img src="/logo.png" alt="CyberNews" width="150" height="90"/>
+      </a>
+    </div>
+    <nav class="nav flex-column text-warning px-2">
+      <a [routerLink]="['/home']" class="nav-link text-warning d-flex align-items-center">
+          <i class="bi bi-house me-1"></i> Home
+      </a>
+      <a [routerLink]="['/noticias']" class="nav-link text-warning d-flex align-items-center">
+        <i class="bi bi-newspaper me-1"></i> Noticias
+      </a>
+      <a [routerLink]="['/cursos']" class="nav-link text-warning d-flex align-items-center">
+        <i class="bi bi-journal-bookmark me-1"></i> Cursos
+      </a>
+    </nav>
+    <div class="flex-grow-1"></div>
+    </div>
 
-  <div class="d-flex justify-content-center py-4">
-    <!-- Logo a la izquierda -->
-    <a [routerLink]="['/home']" class="navbar-brand d-flex justify-content-center">
-      <img src="/logo.png" alt="CyberNews" width="150" height="90"/>
-    </a>
-  </div>
 
-</div>
-
-
-
-  <!-- Contenedor principal con navbar y contenido -->
-  <div class="flex-grow-1">
-
-    <!-- Navbar combinado estilo dark + sidebar links -->
+  <div class="flex-grow-1 d-flex flex-column" style="padding-bottom: 150px;"> <!-- espacio para el footer -->
+    
+    <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark px-3">
       <div class="container-fluid d-flex align-items-center justify-content-between">
-
-        <!-- Enlaces del centro -->
-        <ul class="navbar-nav d-flex flex-row mb-0">
-          <li class="nav-item me-4">
-            <a [routerLink]="['/home']" class="nav-link text-warning d-flex align-items-center">
-              <svg class="bi pe-none me-1" width="16" height="16" aria-hidden="true">
-                <use xlink:href="#home"></use>
-              </svg>
-              Home
-            </a>
-          </li>
-          <li class="nav-item me-4">
-            <a [routerLink]="['/noticias']" class="nav-link text-warning d-flex align-items-center">
-              <svg class="bi pe-none me-1" width="16" height="16" aria-hidden="true">
-                <use xlink:href="#speedometer2"></use>
-              </svg>
-              Noticias
-            </a>
-          </li>
-          <li class="nav-item me-4">
-            <a [routerLink]="['/cursos']" class="nav-link text-warning d-flex align-items-center">
-              <svg class="bi pe-none me-1" width="16" height="16" aria-hidden="true">
-                <use xlink:href="#table"></use>
-              </svg>
-              Cursos
-            </a>
-          </li>
-          <li class="nav-item me-4">
-            <a [routerLink]="['/perfil']" class="nav-link text-warning d-flex align-items-center">
-              <svg class="bi pe-none me-1" width="16" height="16" aria-hidden="true">
-                <use xlink:href="#people-circle"></use>
-              </svg>
-              Perfil
-            </a>
-          </li>
-        </ul>
-
-        <!-- Login + Dropdown perfil a la derecha -->
-        <div class="d-flex align-items-center">
-          <!-- Icono Login -->
-          <a [routerLink]="['/login']" class="text-warning d-flex align-items-center me-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-box-arrow-in-right" viewBox="0 0 16 16">
-              <path fill-rule="evenodd" d="M6 3.5a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-2a.5.5 0 0 0-1 0v2A1.5 1.5 0 0 0 6.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-8A1.5 1.5 0 0 0 5 3.5v2a.5.5 0 0 0 1 0z"/>
-              <path fill-rule="evenodd" d="M11.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H1.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z"/>
-            </svg>
-          </a>
-
-          <!-- Dropdown perfil -->
+        <!-- Dropdown perfil -->
+        <div class="d-flex align-items-center ms-auto">
           <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-warning text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-              <strong>mdo</strong>
+            <a href="#" class="d-flex align-items-center text-warning text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
+              <img src="https://github.com/mdo.png" width="32" height="32" class="rounded-circle me-2">
+              <strong>{{ usuarioNombre }}</strong>
             </a>
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
               <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
+              <li><a class="dropdown-item" [routerLink]="['/login']">Iniciar sesión</a></li>
+              <li><a class="dropdown-item d-flex align-items-center" [routerLink]="['/perfil']">
+                <i class="bi bi-people-circle me-2"></i> Perfil
+              </a></li>
               <li><hr class="dropdown-divider"></li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
+              <li>
+                <a class="dropdown-item" href="#" (click)="cerrarSesion()">
+                  Cerrar sesión
+                </a>
+              </li>
             </ul>
           </div>
         </div>
+
       </div>
     </nav>
 
-<!-- Contenido principal -->
-<router-outlet></router-outlet>
-
-<!-- Footer -->
-<footer class="py-5 bg-dark text-white">
-  <div class="container">
-    <div class="row">
-
-      <!-- Sección 1 -->
-      <div class="col-6 col-md-2 mb-3">
-        <h5>CyberNews</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a [routerLink]="['/home']" class="nav-link p-0 text-white-50">Home</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a [routerLink]="['/noticias']" class="nav-link p-0 text-white-50">Noticias</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a [routerLink]="['/cursos']" class="nav-link p-0 text-white-50">Cursos</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Sección 2 -->
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Cuenta</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a [routerLink]="['/perfil']" class="nav-link p-0 text-white-50">Perfil</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a [routerLink]="['/login']" class="nav-link p-0 text-white-50">Login</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Sección 3 -->
-      <div class="col-6 col-md-2 mb-3">
-        <h5>Legal</h5>
-        <ul class="nav flex-column">
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-white-50">Privacidad</a>
-          </li>
-          <li class="nav-item mb-2">
-            <a href="#" class="nav-link p-0 text-white-50">Términos</a>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Logo / Info -->
-      <div class="col-md-5 offset-md-1 mb-3">
-        <div class="d-flex align-items-center mb-3">
-          <img src="/logo.png" alt="CyberNews" class="footer-logo me-3">
-          <h5 class="mb-0">CyberNews</h5>
-        </div>
-        <p class="text-white-50">
-          Noticias y cursos sobre ciberseguridad, tecnología y desarrollo.
-        </p>
-      </div>
-
+    <!-- Contenido -->
+    <div class="flex-grow-1 overflow-auto">
+      <router-outlet></router-outlet>
     </div>
 
-  <!-- Línea inferior -->
-    <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top border-secondary">
-      <p class="mb-0 text-white-50">© 2026 CyberNews. Todos los derechos reservados.</p>
-
-      <ul class="list-unstyled d-flex mb-0">
-        <li class="ms-3">
-          <a class="text-white-50" href="#" aria-label="Instagram">
-            <i class="bi bi-instagram"></i>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-white-50" href="#" aria-label="Facebook">
-            <i class="bi bi-facebook"></i>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-white-50" href="#" aria-label="Twitter">
-            <i class="bi bi-twitter"></i>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-white-50" href="#" aria-label="LinkedIn">
-            <i class="bi bi-linkedin"></i>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-white-50" href="#" aria-label="YouTube">
-            <i class="bi bi-youtube"></i>
-          </a>
-        </li>
-        <li class="ms-3">
-          <a class="text-white-50" href="#" aria-label="TikTok">
-            <i class="bi bi-tiktok"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
   </div>
-</footer>
+
+
+  <footer class="bg-dark text-white" style="position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem 0;">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-6 col-md-2 mb-2">
+          <h6>CyberNews</h6>
+          <ul class="nav flex-column small">
+            <li class="nav-item"><a [routerLink]="['/home']" class="nav-link p-0 text-white-50">Home</a></li>
+            <li class="nav-item"><a [routerLink]="['/noticias']" class="nav-link p-0 text-white-50">Noticias</a></li>
+            <li class="nav-item"><a [routerLink]="['/cursos']" class="nav-link p-0 text-white-50">Cursos</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-2">
+          <h6>Cuenta</h6>
+          <ul class="nav flex-column small">
+            <li class="nav-item"><a [routerLink]="['/perfil']" class="nav-link p-0 text-white-50">Perfil</a></li>
+            <li class="nav-item"><a [routerLink]="['/login']" class="nav-link p-0 text-white-50">Login</a></li>
+          </ul>
+        </div>
+
+        <div class="col-6 col-md-2 mb-2">
+          <h6>Legal</h6>
+          <ul class="nav flex-column small">
+            <li class="nav-item"><a href="#" class="nav-link p-0 text-white-50">Privacidad</a></li>
+            <li class="nav-item"><a href="#" class="nav-link p-0 text-white-50">Términos</a></li>
+          </ul>
+        </div>
+
+        <div class="col-md-6 mb-2 d-flex flex-column align-items-md-end">
+          <div class="d-flex align-items-center mb-1">
+            <img src="/logo.png" alt="CyberNews" class="footer-logo me-2" style="height:24px;">
+            <span class="fw-bold">CyberNews</span>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top border-secondary small">
+        <span class="text-white-50">© 2026 CyberNews. Todos los derechos reservados.</span>
+        <ul class="list-unstyled d-flex mb-0">
+          <li class="ms-2"><a class="text-white-50" href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a></li>
+          <li class="ms-2"><a class="text-white-50" href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a></li>
+          <li class="ms-2"><a class="text-white-50" href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a></li>
+          <li class="ms-2"><a class="text-white-50" href="#" aria-label="LinkedIn"><i class="bi bi-linkedin"></i></a></li>
+          <li class="ms-2"><a class="text-white-50" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a></li>
+          <li class="ms-2"><a class="text-white-50" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a></li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+
+</div>
+  

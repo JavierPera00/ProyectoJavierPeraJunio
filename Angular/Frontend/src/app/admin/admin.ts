@@ -14,13 +14,13 @@ import { NoticiaModel } from '../model/noticia.model';
 })
 export class Admin {
 
-  // AGREGAR NOTICIA
+
   titulo = '';
   descripcion = '';
   urlExterna = '';
   urlImagen = '';
 
-  // EDITAR NOTICIA
+ 
   noticiaSeleccionadaEditar: NoticiaModel | null = null;
   editarTitulo = '';
   editarDescripcion = '';
@@ -28,10 +28,9 @@ export class Admin {
   editarFechaPublicacion = '';
   editarUrlImagen = '';
 
-  // ELIMINAR NOTICIA
   noticiaSeleccionadaEliminar: NoticiaModel | null = null;
 
-  // LISTAS
+
   noticias: NoticiaModel[] = [];
   ultimasNoticias: NoticiaModel[] = [];
   usuarios: any[] = [];
@@ -44,7 +43,6 @@ export class Admin {
     this.cargarUltimasNoticias();
   }
 
-  // CARGAR DATOS
   async cargarNoticias() {
     try {
       const res = await fetch('http://localhost:8080/api/noticias');
@@ -82,7 +80,6 @@ export class Admin {
     this.cargarUltimasNoticias();
   }
 
-  // AGREGAR NOTICIA
   async agregarNoticia() {
     if (!this.titulo || !this.descripcion) {
       this.mensaje = 'Título y descripción son obligatorios';
@@ -109,7 +106,6 @@ export class Admin {
       const noticiaAgregada: NoticiaModel = await res.json();
       this.noticias.unshift(noticiaAgregada);
 
-      // Limpiar campos
       this.titulo = '';
       this.descripcion = '';
       this.urlExterna = '';
@@ -121,7 +117,6 @@ export class Admin {
     }
   }
 
-  // SELECCIONAR PARA EDITAR
  seleccionarParaEditar(noticia: NoticiaModel | null) {
   if (!noticia) return;
 
@@ -133,8 +128,6 @@ export class Admin {
   this.editarUrlImagen = noticia.urlImagen || '';
 }
 
-
-  // EDITAR NOTICIA
   async editarNoticia() {
     if (!this.noticiaSeleccionadaEditar) return;
 
@@ -170,7 +163,6 @@ export class Admin {
       }
   }
 
-  // ELIMINAR NOTICIA
   async eliminarNoticia() {
     if (!this.noticiaSeleccionadaEliminar) {
       this.mensaje = 'Selecciona una noticia para eliminar';

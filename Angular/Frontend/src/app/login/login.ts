@@ -10,54 +10,56 @@ import { Router, RouterLink } from '@angular/router';
 })
 export class Login {
 
- datosLogin = { email: '', password: '' };
+  datosLogin = { username: '', password: '' };
   mensaje = '';
 
   constructor(private router: Router) {}
 
   async iniciarSesion(event: Event) {
-    event.preventDefault(); // evita recargar la página
+    event.preventDefault();
+    this.mensaje = '';
 
-    if (!this.datosLogin.email || !this.datosLogin.password) {
+    if (!this.datosLogin.username || !this.datosLogin.password) {
       this.mensaje = 'Todos los campos son obligatorios';
       return;
     }
 
-    // ADMIN
-    if (this.datosLogin.email.toLowerCase() === 'admin' && this.datosLogin.password === 'admin') {
-      this.mensaje = 'Bienvenido Administrador';
-      // Guardar admin en localStorage
-      localStorage.setItem('usuarioLogueado', JSON.stringify({ username: 'admin', roles: ['ADMIN'] }));
-      console.log(this.datosLogin.email, this.datosLogin.password);
-      await this.router.navigateByUrl('/adminn');
-      return;
-    }
-
-    // USUARIOS NORMALES
     try {
-      const res = await fetch('http://localhost:8080/api/usuarios');
-      if (!res.ok) throw new Error('Servidor no disponible');
+      const res = await fetch('http://localhost:8080/api/usuarios/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.datosLogin)
+      });
 
-      const usuarios = await res.json();
-      const usuario = usuarios.find((u: any) => u.email === this.datosLogin.email);
-
-      if (!usuario) {
-        this.mensaje = 'No tienes cuenta registrada.';
+      if (!res.ok) {
+        const errorMsg = await res.text();
+        this.mensaje = errorMsg || 'Error al iniciar sesión';
         return;
       }
 
-      if (usuario.password !== this.datosLogin.password) {
-        this.mensaje = 'Contraseña incorrecta.';
-        return;
+      const usuario = await res.json();
+
+      // Guardar usuario en localStorage
+      localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
+
+      // Actualizar App root usando signals
+      const appComp = (window as any).appRoot as any;
+      if (appComp?.actualizarUsuario) {
+        appComp.actualizarUsuario(usuario.username);
       }
 
       this.mensaje = `¡Bienvenido ${usuario.username}!`;
-      localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
-      await this.router.navigate(['/home']);
+
+      if (usuario.username === 'admin' && this.datosLogin.password === 'admin') {
+        await this.router.navigateByUrl('/adminn');
+      } else {
+        await this.router.navigate(['/home']);
+      }
 
     } catch (err) {
-      console.error(err);
+      console.error('Error al conectarse al servidor:', err);
       this.mensaje = 'Error al conectarse al servidor.';
+      localStorage.removeItem('usuarioLogueado');
     }
   }
 }

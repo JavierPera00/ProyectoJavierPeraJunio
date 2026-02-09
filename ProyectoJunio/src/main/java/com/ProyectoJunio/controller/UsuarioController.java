@@ -1,5 +1,7 @@
 package com.ProyectoJunio.controller;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +52,7 @@ public class UsuarioController {
         existing.setFechaRegistro(usuario.getFechaRegistro());
         existing.setActivo(usuario.isActivo());
         existing.setPerfil(usuario.getPerfil());
-        existing.setRoles(usuario.getRoles());
+        existing.setRol(usuario.getRol());
 
         return ResponseEntity.ok(usuarioService.save(existing));
     }
@@ -59,5 +61,26 @@ public class UsuarioController {
     public ResponseEntity<Void> delete(@PathVariable Long id) {
         usuarioService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody Usuario login) {
+        Usuario usuario = usuarioService.findByUsername(login.getUsername());
+        if (usuario == null) {
+            return ResponseEntity.status(401).body("Usuario no encontrado");
+        }
+
+        if (!usuario.getPassword().equals(login.getPassword())) {
+            return ResponseEntity.status(401).body("Contraseña incorrecta");
+        }
+
+        // Crear DTO simple
+        Map<String,Object> usuarioDTO = new HashMap<>();
+        usuarioDTO.put("id", usuario.getId());
+        usuarioDTO.put("username", usuario.getUsername());
+        usuarioDTO.put("email", usuario.getEmail());
+        usuarioDTO.put("activo", usuario.isActivo());
+        usuarioDTO.put("rol", usuario.getRol() != null ? usuario.getRol().getNombre() : null);
+
+        return ResponseEntity.ok(usuarioDTO);
     }
 }

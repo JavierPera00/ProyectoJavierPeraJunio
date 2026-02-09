@@ -56,10 +56,6 @@ export class Perfil {
       this.mensaje = 'Error al conectarse al servidor';
     }
   }
-  cerrarSesion() {
-    localStorage.removeItem('usuarioLogueado');
-    this.usuario = null;
-    this.router.navigate(['/login']);
-}
+ 
 
 }

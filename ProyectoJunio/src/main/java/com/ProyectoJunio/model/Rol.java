@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 
@@ -19,10 +20,12 @@ public class Rol {
 
     private String nombre;
 
-
-    @ManyToMany(mappedBy = "roles")
+    @OneToMany(mappedBy = "rol")
     private List<Usuario> usuarios;
 
+    // Constantes de rol
+    public static final String ADMIN = "ADMIN";
+    public static final String USER = "USER";
     
     // GETTERS Y SETTERS
 	public Long getId() {
@@ -50,9 +53,8 @@ public class Rol {
 	}
 
     // toString
-	
 	@Override
 	public String toString() {
-		return "Rol [id=" + id + ", nombre=" + nombre + ", descripcion=" + ", usuarios=" + usuarios + "]";
+		return "Rol [id=" + id + ", nombre=" + nombre + ", descripcion=" + "]";
 	}
 }
