@@ -1,29 +1,27 @@
-import { CommonModule } from '@angular/common';
+import { AsyncPipe, CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NoticiaModel } from '../model/noticia.model';
+import { NoticiasService } from '../services/noticiasService';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-noticias',
-  imports: [CommonModule, HttpClientModule],
+  imports: [CommonModule, AsyncPipe,HttpClientModule],
   templateUrl: './noticias.html',
   styleUrl: './noticias.css',
+  standalone: true
 })
-export class Noticias implements OnInit{
+export class Noticias implements OnInit {
 
-  noticias: NoticiaModel[] = [];
+  noticias!: Observable<NoticiaModel[]>;
 
-  private apiUrl = 'http://localhost:8080/api/noticias';
-
-  constructor(private http: HttpClient) {}
+  constructor(private servicio: NoticiasService) {}
 
   ngOnInit(): void {
-    this.cargarNoticias();
+    this.noticias = this.servicio.cargarNoticias();
+    console.log(this.noticias);
   }
-  cargarNoticias(): void {
-    this.http.get<NoticiaModel[]>(this.apiUrl).subscribe({
-      next: data => this.noticias = data,
-      error: err => console.error('Error cargando noticias', err)
-    });
-  }
+
+  
 }
