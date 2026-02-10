@@ -51,7 +51,6 @@ public class RolController {
         	return ResponseEntity.notFound().build();
         }
         existing.setNombre(rol.getNombre());
-        existing.setUsuarios(rol.getUsuarios());
         return ResponseEntity.ok(rolService.save(existing));
     }
 

@@ -7,83 +7,62 @@
     <div class="col-md-3">
       <div class="card p-3 shadow h-100">
         <h4>Agregar Nueva Noticia</h4>
+
         <div class="mb-2">
-          <input type="text" [(ngModel)]="titulo" class="form-control" placeholder="Título">
+          <input type="text" [(ngModel)]="titulo"
+                 class="form-control"
+                 placeholder="Título">
         </div>
+
         <div class="mb-2">
-          <textarea [(ngModel)]="descripcion" class="form-control" rows="2" placeholder="Descripción"></textarea>
+          <textarea [(ngModel)]="descripcion"
+                    class="form-control"
+                    rows="2"
+                    placeholder="Descripción"></textarea>
         </div>
+
         <div class="mb-2">
-          <input type="text" [(ngModel)]="urlExterna" class="form-control" placeholder="URL externa">
+          <input type="text" [(ngModel)]="urlExterna"
+                 class="form-control"
+                 placeholder="URL externa">
         </div>
+
         <div class="mb-2">
-          <input type="text" [(ngModel)]="urlImagen" class="form-control" placeholder="URL imagen">
+          <input type="text" [(ngModel)]="urlImagen"
+                 class="form-control"
+                 placeholder="URL imagen">
         </div>
-        <button class="btn btn-primary w-100" (click)="agregarNoticia()">Agregar Noticia</button>
+
+        <button class="btn btn-primary w-100"
+                (click)="agregarNoticia()">
+          Agregar Noticia
+        </button>
       </div>
     </div>
 
-    <!-- EDITAR NOTICIA -->
-    <div class="col-md-6">
-      <div class="card p-3 shadow h-100">
-        <h4>Editar Noticia</h4>
-        <select class="form-select mb-3" [(ngModel)]="noticiaSeleccionadaEditar"
-                (change)="seleccionarParaEditar(noticiaSeleccionadaEditar)">
-          <option *ngFor="let noticia of noticias" [ngValue]="noticia">{{ noticia.titulo }}</option>
-        </select>
-
-        <div *ngIf="noticiaSeleccionadaEditar">
-          <div class="mb-2">
-            <label>Título</label>
-            <input type="text" class="form-control" [(ngModel)]="editarTitulo">
-          </div>
-          <div class="mb-2">
-            <label>Descripción</label>
-            <textarea class="form-control" rows="3" [(ngModel)]="editarDescripcion"></textarea>
-          </div>
-          <div class="mb-2">
-            <label>Fecha de Publicación</label>
-            <input type="date" class="form-control" [(ngModel)]="editarFechaPublicacion">
-          </div>
-          <div class="mb-2">
-            <label>URL Externa</label>
-            <input type="text" class="form-control" [(ngModel)]="editarUrlExterna">
-          </div>
-          <div class="mb-2">
-            <label>URL Imagen</label>
-            <input type="text" class="form-control" [(ngModel)]="editarUrlImagen">
-          </div>
-          <button class="btn btn-warning w-100 mt-2" (click)="editarNoticia()">Guardar Cambios</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- ELIMINAR NOTICIA -->
-    <div class="col-md-3">
-      <div class="card p-3 shadow h-100">
-        <h4>Eliminar Noticia</h4>
-        <select class="form-select mb-2" [(ngModel)]="noticiaSeleccionadaEliminar">
-          <option *ngFor="let noticia of noticias" [ngValue]="noticia">{{ noticia.titulo }}</option>
-        </select>
-        <button class="btn btn-danger w-100" (click)="eliminarNoticia()">Eliminar</button>
-      </div>
-    </div>
-
-    <!-- ÚLTIMAS 3 NOTICIAS -->
-    <div class="col-md-3 mt-3">
+    <!-- ÚLTIMAS NOTICIAS -->
+    <div class="col-md-9">
       <div class="card p-3 shadow h-100">
         <h4>Últimas Noticias</h4>
-        <button class="btn btn-secondary w-100 mb-2" (click)="mostrarUltimasNoticias()">Cargar</button>
 
-        <ul class="list-group list-group-flush" *ngIf="ultimasNoticias.length > 0">
-          <li class="list-group-item" *ngFor="let noticia of ultimasNoticias">
+        <button class="btn btn-secondary w-100 mb-2"
+                (click)="mostrarUltimasNoticias()">
+          Cargar
+        </button>
+
+        <ul class="list-group list-group-flush"
+            *ngIf="ultimasNoticias$ | async as ultimas">
+          <li class="list-group-item"
+              *ngFor="let noticia of ultimas">
             <strong>{{ noticia.titulo }}</strong><br>
             <small>{{ noticia.fechaPublicacion | date:'dd/MM/yyyy' }}</small>
-            <a *ngIf="noticia.urlExterna" [href]="noticia.urlExterna" target="_blank">Ver</a>
           </li>
         </ul>
 
-        <p *ngIf="ultimasNoticias.length === 0" class="text-muted">No hay noticias cargadas.</p>
+        <p *ngIf="!(ultimasNoticias$ | async)?.length"
+           class="text-muted">
+          No hay noticias cargadas.
+        </p>
       </div>
     </div>
 
@@ -92,36 +71,101 @@
   <!-- NOTICIAS PUBLICADAS -->
   <h4>Noticias Publicadas</h4>
   <div class="row g-4 mb-5">
-    <div class="col-md-6 col-lg-4" *ngFor="let noticia of noticias">
+    <div class="col-md-6 col-lg-4"
+        *ngFor="let noticia of (noticias$ | async)">
       <div class="card h-100 shadow">
-        <img *ngIf="noticia.urlImagen" [src]="noticia.urlImagen" class="card-img-top" alt="Imagen noticia">
+        <img *ngIf="noticia.urlImagen"
+            [src]="noticia.urlImagen"
+            class="card-img-top"
+            alt="Imagen noticia">
+
         <div class="card-body">
           <h5 class="card-title">{{ noticia.titulo }}</h5>
           <p class="card-text">{{ noticia.descripcion }}</p>
-          <a *ngIf="noticia.urlExterna" [href]="noticia.urlExterna" target="_blank">Ver más</a>
+
+          <a *ngIf="noticia.urlExterna"
+            [href]="noticia.urlExterna"
+            target="_blank">
+            Ver más
+          </a>
+
           <small class="text-muted d-block mt-2">
             Publicada: {{ noticia.fechaPublicacion | date:'dd/MM/yyyy HH:mm' }}
           </small>
+
+          <!-- BOTÓN ELIMINAR -->
+          <button class="btn btn-danger btn-sm mt-2 w-100"
+                  (click)="eliminarNoticia(noticia.id)">
+            Eliminar
+          </button>
         </div>
       </div>
     </div>
   </div>
+  <!-- ================= CURSOS ================= -->
+  <h4 class="mt-5">Gestión de Cursos</h4>
+    <div class="row g-2 mb-5">
 
+      <!-- AGREGAR / EDITAR CURSO -->
+      <div class="col-md-12">
+        <div class="col-md-3"></div>
+          <div class="card p-3 shadow h-100">
+            <h5>Agregar / Editar Curso</h5>
+
+            <input type="text" [(ngModel)]="cursoTitulo" placeholder="Título" class="form-control mb-2">
+            <textarea [(ngModel)]="cursoDescripcion" placeholder="Descripción" class="form-control mb-2" rows="2"></textarea>
+            <input type="text" [(ngModel)]="cursoDuracion" placeholder="Duración" class="form-control mb-2">
+            <input type="text" [(ngModel)]="cursoImagenUrl" placeholder="URL Imagen" class="form-control mb-2">
+            <input type="text" [(ngModel)]="cursoUrl" placeholder="URL Curso" class="form-control mb-2">
+
+            <button class="btn btn-primary w-100 mb-2" (click)="agregarCurso()" *ngIf="!cursoEditarId">Agregar Curso</button>
+            <button class="btn btn-warning w-100 mb-2" (click)="editarCurso()" *ngIf="cursoEditarId">Actualizar Curso</button>
+            <button class="btn btn-secondary w-100" (click)="limpiarFormularioCurso()" *ngIf="cursoEditarId">Cancelar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- LISTA DE CURSOS -->
+      <div class="row g-3">
+        <div class="col-sm-6 col-lg-3" *ngFor="let curso of cursos$ | async">
+          <div class="card h-100 shadow">
+            <img [src]="curso.imagenUrl" class="card-img-top" alt="{{curso.titulo}}">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ curso.titulo }}</h5>
+              <p class="card-text">{{ curso.descripcion }}</p>
+              <small class="text-muted">{{ curso.duracion }}</small>
+
+              <div class="mt-auto d-flex gap-1">
+                <button class="btn btn-warning btn-sm flex-fill" (click)="cargarCursoParaEditar(curso)">Editar</button>
+                <button class="btn btn-danger btn-sm flex-fill" (click)="eliminarCurso(curso.id!)">Eliminar</button>
+                <a [href]="curso.url" target="_blank" class="btn btn-success btn-sm flex-fill">Ver</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br><br>
   <!-- USUARIOS REGISTRADOS -->
   <h4>Usuarios Registrados</h4>
-  <div class="row g-4">
-    <div class="col-md-6 col-lg-4" *ngFor="let usuario of usuarios">
-      <div class="card h-100 shadow user-card">
-        <div class="card-body">
-          <h5 class="card-title">{{ usuario.username }}</h5>
-          <p class="card-text">
-            <strong>Email:</strong> {{ usuario.email }}<br>
-            <strong>Rol:</strong> {{ usuario.roles?.join(', ') || 'Usuario' }}
-          </p>
+    <div class="row g-4 mb-5" *ngIf="usuarios$ | async as usuarios">
+      <div class="col-md-6 col-lg-4" *ngFor="let usuario of usuarios">
+        <div class="card h-100 shadow user-card">
+          <div class="card-body">
+            <h5 class="card-title">{{ usuario.username }}</h5>
+            <p class="card-text">
+              <strong>Email:</strong> {{ usuario.email }}<br>
+              <strong>Rol:</strong> {{ usuario.rol?.nombre }}
+            </p>
+
+            <!-- BOTÓN ELIMINAR USUARIO -->
+            <button class="btn btn-danger btn-sm mt-2 w-100"
+                    (click)="eliminarUsuario(usuario.id)">
+              Eliminar Usuario
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
+  <!-- MENSAJE -->
   <div class="mt-3 text-success">{{ mensaje }}</div>
-</div>

@@ -7,9 +7,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import com.ProyectoJunio.model.Curso;
 import com.ProyectoJunio.model.Noticia;
 import com.ProyectoJunio.model.Rol;
 import com.ProyectoJunio.model.Usuario;
+import com.ProyectoJunio.repository.CursoRepository;
 import com.ProyectoJunio.repository.RolRepository;
 import com.ProyectoJunio.servicio.NoticiaService;
 import com.ProyectoJunio.servicio.UsuarioService;
@@ -25,6 +27,9 @@ public class ProyectoJunioApplication implements CommandLineRunner {
     
     @Autowired
     private RolRepository rolRepository;
+    
+    @Autowired
+    private CursoRepository cursoRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(ProyectoJunioApplication.class, args);
@@ -87,12 +92,12 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n6.setUrlExterna("https://innovatecybersecurity.com/security-threat-advisory/top-10-cybersecurity-news-jan-26-2026-apac-energy-firm-hit-by-dire-wolf-ransomware-ai-led-espionage-campaign-uses-autonomous-agents-pwn2own-automotive-2026-uncovers-76-zero-day-flaws-and-more/");
         noticiaService.save(n6);
         
-     // Noticia 7
+        // Noticia 7
         Noticia n7 = new Noticia();
         n7.setTitulo("Hackeo a proveedor cloud expone datos de miles de empresas");
         n7.setDescripcion("Un ataque a un proveedor de servicios en la nube permitió a los atacantes acceder a copias de seguridad empresariales.");
         n7.setFechaPublicacion(LocalDateTime.of(2026, 2, 7, 0, 0));
-        n7.setUrlImagen("");
+        n7.setUrlImagen("/cloud.webp");
         n7.setUrlExterna("https://example.com/hackeo-proveedor-cloud");
         noticiaService.save(n7);
 
@@ -101,7 +106,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n8.setTitulo("Brecha de seguridad en plataforma educativa filtra datos de estudiantes");
         n8.setDescripcion("Información personal y académica quedó expuesta tras un acceso no autorizado a los servidores de la plataforma.");
         n8.setFechaPublicacion(LocalDateTime.of(2026, 2, 6, 0, 0));
-        n8.setUrlImagen("");
+        n8.setUrlImagen("/descargar.webp");
         n8.setUrlExterna("https://example.com/brecha-plataforma-educativa");
         noticiaService.save(n8);
 
@@ -110,7 +115,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n9.setTitulo("Ataque a empresa de transporte compromete sistemas de reservas");
         n9.setDescripcion("Los atacantes obtuvieron acceso interno y provocaron interrupciones en los servicios de venta y gestión de billetes.");
         n9.setFechaPublicacion(LocalDateTime.of(2026, 2, 5, 0, 0));
-        n9.setUrlImagen("");
+        n9.setUrlImagen("/Email-Security-News-Round-Up-May-2022.jpg.webp");
         n9.setUrlExterna("https://example.com/hackeo-empresa-transporte");
         noticiaService.save(n9);
 
@@ -119,7 +124,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n10.setTitulo("Hackers roban credenciales de empleados mediante phishing interno");
         n10.setDescripcion("Correos fraudulentos dirigidos a trabajadores permitieron el acceso a sistemas corporativos sensibles.");
         n10.setFechaPublicacion(LocalDateTime.of(2026, 2, 4, 0, 0));
-        n10.setUrlImagen("");
+        n10.setUrlImagen("/los-ataques-de-robo-de-contrasenas.jpg");
         n10.setUrlExterna("https://example.com/phishing-interno-empresa");
         noticiaService.save(n10);
 
@@ -128,7 +133,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n11.setTitulo("Filtración de datos afecta a usuarios de una popular red social");
         n11.setDescripcion("Un fallo en una API permitió la extracción masiva de perfiles, correos electrónicos y datos de contacto.");
         n11.setFechaPublicacion(LocalDateTime.of(2026, 2, 3, 0, 0));
-        n11.setUrlImagen("");
+        n11.setUrlImagen("/OIP (2).webp");
         n11.setUrlExterna("https://example.com/filtracion-red-social");
         noticiaService.save(n11);
 
@@ -137,7 +142,7 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         n12.setTitulo("Ataque informático bloquea sistemas municipales durante horas");
         n12.setDescripcion("Varios servicios públicos quedaron inaccesibles tras un ataque que afectó a la infraestructura digital del ayuntamiento.");
         n12.setFechaPublicacion(LocalDateTime.of(2026, 2, 2, 0, 0));
-        n12.setUrlImagen("");
+        n12.setUrlImagen("/OIP (3).webp");
         n12.setUrlExterna("https://example.com/ataque-sistemas-municipales");
         noticiaService.save(n12);
         
@@ -244,6 +249,39 @@ public class ProyectoJunioApplication implements CommandLineRunner {
         u11.setActivo(true);
         u11.setRol(rolAdmin);
         usuarioService.save(u11);
+        
+        Curso c1 = new Curso();
+        c1.setTitulo("TryHackMe");
+        c1.setDescripcion("Aprende hacking ético paso a paso con laboratorios prácticos. Explora redes, seguridad web, vulnerabilidades, scripting y criptografía en entornos seguros mientras realizas retos y simulaciones reales.");
+        c1.setDuracion("15h"); 
+        c1.setImagenUrl("/HA-TryHackMe.jpg");
+        c1.setUrl("https://tryhackme.com/");
+        cursoRepository.save(c1);
+
+        Curso c2 = new Curso();
+        c2.setTitulo("RoboShadow");
+        c2.setDescripcion("Aprende a crear robots virtuales y automatizaciones avanzadas usando programación en TypeScript. Domina variables, tipos, interfaces, clases y funciones mientras construyes proyectos prácticos de automatización y simulación robótica.");
+        c2.setDuracion("12h");  
+        c2.setImagenUrl("/1704983465885.jpg");
+        c2.setUrl("https://www.roboshadow.com/");
+        cursoRepository.save(c2);
+
+        Curso c3 = new Curso();
+        c3.setTitulo("Udemy");
+        c3.setDescripcion("Explora una de las plataformas de aprendizaje online más grandes del mundo, con miles de cursos en vídeo sobre tecnología, negocios, diseño y más. Aprende a tu ritmo a través de lecciones on‑demand, recursos descargables, ejercicios y evaluaciones, y obtén certificados al completar cursos.");
+        c3.setDuracion("10h");
+        c3.setImagenUrl("/udemy-2023.webp");
+        c3.setUrl("https://www.udemy.com/es/");
+        cursoRepository.save(c3);
+
+        Curso c4 = new Curso();
+        c4.setTitulo("LabEx");
+        c4.setDescripcion("LabEx es una plataforma de aprendizaje interactivo centrada en el aprendizaje práctico sin vídeos: dominarás habilidades de Linux, DevOps, ciberseguridad, programación y bases de datos a través de laboratorios interactivos en línea, proyectos reales y asistencia IA, aplicando conocimientos en entornos virtuales reales.");
+        c4.setDuracion("12h");   
+        c4.setImagenUrl("/OIP (4).webp");
+        c4.setUrl("https://labex.io/es");
+        cursoRepository.save(c4);
+    
 	}
 
 }

@@ -1,186 +1,203 @@
-import { CommonModule, DatePipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { AsyncPipe, CommonModule, DatePipe } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { Noticias } from '../noticias/noticias';
 import { NoticiaModel } from '../model/noticia.model';
+import { AdminService } from '../services/admin-service';
+import { map, Observable } from 'rxjs';
+import { NoticiasService } from '../services/noticiasService';
+import { HttpClientModule } from '@angular/common/http';
+import id from '@angular/common/locales/extra/id';
+import { CursoModel } from '../model/curso.model';
 
 @Component({
   selector: 'app-admin',
-  imports: [FormsModule,CommonModule],
+  imports: [FormsModule,CommonModule, AsyncPipe,HttpClientModule],
   templateUrl: './admin.html',
   providers: [DatePipe],
   styleUrl: './admin.css',
 })
-export class Admin {
+export class Admin implements OnInit {
 
+  noticias$!: Observable<NoticiaModel[]>;
+  ultimasNoticias$!: Observable<NoticiaModel[]>;
+  usuarios$!: Observable<any[]>;
+  cursos$!: Observable<CursoModel[]>;
 
   titulo = '';
   descripcion = '';
   urlExterna = '';
   urlImagen = '';
-
- 
-  noticiaSeleccionadaEditar: NoticiaModel | null = null;
-  editarTitulo = '';
-  editarDescripcion = '';
-  editarUrlExterna = '';
-  editarFechaPublicacion = '';
-  editarUrlImagen = '';
-
-  noticiaSeleccionadaEliminar: NoticiaModel | null = null;
-
-
-  noticias: NoticiaModel[] = [];
-  ultimasNoticias: NoticiaModel[] = [];
-  usuarios: any[] = [];
-
   mensaje = '';
 
-  constructor() {
+  cursoTitulo = '';
+  cursoDescripcion = '';
+  cursoDuracion = '';
+  cursoImagenUrl = '';
+  cursoUrl = '';
+
+  cursoEditarId: number | null = null;
+
+  constructor(
+    private noticiasService: NoticiasService,
+    private adminService: AdminService
+  ) {}
+
+  ngOnInit(): void {
     this.cargarNoticias();
     this.cargarUsuarios();
-    this.cargarUltimasNoticias();
+    this.cargarCursos();   
   }
 
-  async cargarNoticias() {
-    try {
-      const res = await fetch('http://localhost:8080/api/noticias');
-      if (!res.ok) throw new Error('Error al obtener noticias');
-      this.noticias = await res.json();
-    } catch (error) {
-      console.error(error);
-      this.mensaje = 'No se pudieron cargar las noticias.';
-    }
+  cargarNoticias() {
+    this.noticias$ = this.noticiasService.cargarNoticias();
   }
 
-  async cargarUsuarios() {
-    try {
-      const res = await fetch('http://localhost:8080/api/usuarios');
-      if (!res.ok) throw new Error('Error al obtener usuarios');
-      this.usuarios = await res.json();
-    } catch (error) {
-      console.error(error);
-      this.mensaje = 'No se pudieron cargar los usuarios.';
-    }
-  }
-
-  async cargarUltimasNoticias() {
-    try {
-      const res = await fetch('http://localhost:8080/api/noticias/ultimas');
-      if (!res.ok) throw new Error('Error al obtener últimas noticias');
-      this.ultimasNoticias = await res.json();
-    } catch (error) {
-      console.error(error);
-      this.mensaje = 'No se pudieron cargar las últimas noticias.';
-    }
+  cargarUsuarios() {
+    this.usuarios$ = this.adminService.cargarUsuarios();
+    console.log(this.usuarios$);
   }
 
   mostrarUltimasNoticias() {
-    this.cargarUltimasNoticias();
+    this.ultimasNoticias$ = this.adminService.cargarUltimasNoticias();
   }
 
-  async agregarNoticia() {
+  agregarNoticia() {
     if (!this.titulo || !this.descripcion) {
-      this.mensaje = 'Título y descripción son obligatorios';
+      this.mensaje = 'Título y descripción obligatorios';
       return;
     }
-
-    try {
-      const nuevaNoticia = {
-        titulo: this.titulo,
-        descripcion: this.descripcion,
-        urlExterna: this.urlExterna,
-        urlImagen: this.urlImagen,
-        fechaPublicacion: new Date().toISOString()
-      };
-
-      const res = await fetch('http://localhost:8080/api/noticias', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(nuevaNoticia)
-      });
-
-      if (!res.ok) throw new Error('Error al agregar noticia');
-
-      const noticiaAgregada: NoticiaModel = await res.json();
-      this.noticias.unshift(noticiaAgregada);
-
-      this.titulo = '';
-      this.descripcion = '';
-      this.urlExterna = '';
-      this.urlImagen = '';
-      this.mensaje = 'Noticia agregada con éxito!';
-    } catch (error) {
-      console.error(error);
-      this.mensaje = 'No se pudo agregar la noticia.';
-    }
+    const noticia = {
+      titulo: this.titulo,
+      descripcion: this.descripcion,
+      urlExterna: this.urlExterna,
+      urlImagen: this.urlImagen,
+      fechaPublicacion: new Date().toISOString()
+    };
+    this.adminService.agregarNoticia(noticia).subscribe({
+      next: () => {
+        this.mensaje = 'Noticia agregada';
+        this.cargarNoticias();
+        this.titulo = '';
+        this.descripcion = '';
+        this.urlExterna = '';
+        this.urlImagen = '';
+      },
+      error: () => this.mensaje = 'Error al agregar noticia'
+    });
   }
 
- seleccionarParaEditar(noticia: NoticiaModel | null) {
-  if (!noticia) return;
-
-  this.noticiaSeleccionadaEditar = noticia;
-  this.editarTitulo = noticia.titulo;
-  this.editarDescripcion = noticia.descripcion;
-  this.editarUrlExterna = noticia.urlExterna;
-  this.editarFechaPublicacion = noticia.fechaPublicacion?.split('T')[0] || '';
-  this.editarUrlImagen = noticia.urlImagen || '';
-}
-
-  async editarNoticia() {
-    if (!this.noticiaSeleccionadaEditar) return;
-
-      try {
-        const noticiaActualizada = {
-          ...this.noticiaSeleccionadaEditar,
-          titulo: this.editarTitulo,
-          descripcion: this.editarDescripcion,
-          urlExterna: this.editarUrlExterna,
-          urlImagen: this.editarUrlImagen,
-          fechaPublicacion: this.editarFechaPublicacion
-        };
-
-        const res = await fetch(`http://localhost:8080/api/noticias/${noticiaActualizada.id}`, {
-          method: 'PATCH',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(noticiaActualizada)
-        });
-
-        if (!res.ok) throw new Error('Error al editar noticia');
-
-        const noticiaFromServer: NoticiaModel = await res.json();
-        const index = this.noticias.findIndex(n => n.id === noticiaFromServer.id);
-        if (index >= 0) this.noticias[index] = noticiaFromServer;
-
-        this.noticiaSeleccionadaEditar = noticiaFromServer;
-
-        this.mensaje = 'Noticia editada con éxito!';
-      } catch (error) {
-        console.error(error);
-        this.mensaje = 'No se pudo editar la noticia.';
+  eliminarNoticia(id: number) {
+    if (!confirm('¿Estás seguro de que quieres eliminar esta noticia?')) {
+      return;
+    }
+    this.adminService.eliminarNoticia(id).subscribe({
+      next: () => {
+        this.mensaje = 'Noticia eliminada correctamente';
+        this.cargarNoticias();
+      },
+      error: () => {
+        this.mensaje = 'Error al eliminar la noticia';
       }
+    });
   }
 
-  async eliminarNoticia() {
-    if (!this.noticiaSeleccionadaEliminar) {
-      this.mensaje = 'Selecciona una noticia para eliminar';
-      return;
-    }
-
-    try {
-      const res = await fetch(`http://localhost:8080/api/noticias/${this.noticiaSeleccionadaEliminar.id}`, {
-        method: 'DELETE'
+  eliminarUsuario(id: number) {
+      if (!confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+        return;
+      }
+      this.adminService.eliminarUsuario(id).subscribe({
+        next: () => {
+          this.mensaje = 'Usuario eliminado correctamente';
+          this.cargarUsuarios(); 
+        },
+        error: () => {
+          this.mensaje = 'Error al eliminar el usuario';
+        }
       });
-
-      if (!res.ok) throw new Error('Error al eliminar noticia');
-
-      this.noticias = this.noticias.filter(n => n.id !== this.noticiaSeleccionadaEliminar!.id);
-      this.noticiaSeleccionadaEliminar = null;
-      this.mensaje = 'Noticia eliminada con éxito!';
-    } catch (error) {
-      console.error(error);
-      this.mensaje = 'No se pudo eliminar la noticia.';
     }
-  }
+
+    cargarCursos() {
+  this.cursos$ = this.adminService.cargarCursos();
 }
+
+// Crear curso
+agregarCurso() {
+  if (!this.cursoTitulo || !this.cursoDescripcion || !this.cursoDuracion || !this.cursoUrl) {
+    this.mensaje = 'Todos los campos obligatorios';
+    return;
+  }
+  const curso: CursoModel = {
+    titulo: this.cursoTitulo,
+    descripcion: this.cursoDescripcion,
+    duracion: this.cursoDuracion,
+    imagenUrl: this.cursoImagenUrl,
+    url: this.cursoUrl
+  };
+  this.adminService.agregarCurso(curso).subscribe({
+    next: () => {
+      this.mensaje = 'Curso agregado';
+      this.limpiarFormularioCurso();
+      this.cargarCursos();
+    },
+    error: () => this.mensaje = 'Error al agregar curso'
+  });
+}
+
+// Editar curso
+cargarCursoParaEditar(curso: CursoModel) {
+  this.cursoEditarId = curso.id!;
+  this.cursoTitulo = curso.titulo;
+  this.cursoDescripcion = curso.descripcion;
+  this.cursoDuracion = curso.duracion;
+  this.cursoImagenUrl = curso.imagenUrl!;
+  this.cursoUrl = curso.url;
+}
+
+editarCurso() {
+  if (!this.cursoEditarId) return;
+
+  const curso: CursoModel = {
+    titulo: this.cursoTitulo,
+    descripcion: this.cursoDescripcion,
+    duracion: this.cursoDuracion,
+    imagenUrl: this.cursoImagenUrl,
+    url: this.cursoUrl
+  };
+
+  this.adminService.editarCurso(this.cursoEditarId, curso).subscribe({
+    next: () => {
+      this.mensaje = 'Curso actualizado';
+      this.limpiarFormularioCurso();
+      this.cursoEditarId = null;
+      this.cargarCursos();
+    },
+    error: () => this.mensaje = 'Error al actualizar curso'
+  });
+}
+
+// Eliminar curso
+eliminarCurso(id: number) {
+  if (!confirm('¿Eliminar curso?')) return;
+
+  this.adminService.eliminarCurso(id).subscribe({
+    next: () => {
+      this.mensaje = 'Curso eliminado';
+      this.cargarCursos();
+    },
+    error: () => this.mensaje = 'Error al eliminar curso'
+  });
+}
+
+// Limpiar formulario
+limpiarFormularioCurso() {
+  this.cursoTitulo = '';
+  this.cursoDescripcion = '';
+  this.cursoDuracion = '';
+  this.cursoImagenUrl = '';
+  this.cursoUrl = '';
+  this.cursoEditarId = null;
+}
+}
+

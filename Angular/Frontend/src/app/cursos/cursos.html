@@ -1,0 +1,24 @@
+<div class="album py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-12 col-md-6" *ngFor="let curso of cursos | async">
+        <div class="card course-card shadow-sm">
+          <img [src]="curso.imagenUrl" class="card-img-top" alt="{{curso.titulo}}" />
+          <div class="card-body">
+            <h5 class="card-title">{{ curso.titulo }}</h5>
+            <p class="card-text">{{ curso.descripcion }}</p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+        
+                <a [href]="curso.url" target="_blank" class="btn btn-sm btn-course">Ver</a>
+              </div>
+              <small class="text-body-secondary">{{ curso.duracion }}</small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div> 
+</div>

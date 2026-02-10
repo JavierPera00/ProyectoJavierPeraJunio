@@ -1,6 +1,8 @@
 import { Component, NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
+import { UsuarioModel } from '../model/usuario.model';
+import { RegistroService } from '../services/registroService';
 
 @Component({
   selector: 'app-registro',
@@ -15,13 +17,13 @@ export class Registro {
     password: '',
     confirmPassword: ''
   };
+
   mensaje = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private registroService: RegistroService) {}
 
-  async registrar(event: Event) {
-    event.preventDefault(); 
-
+  registrar(event: Event) {
+    event.preventDefault();
     // Validaciones básicas
     if (!this.datosUsuario.username || !this.datosUsuario.email || !this.datosUsuario.password || !this.datosUsuario.confirmPassword) {
       this.mensaje = 'Todos los campos son obligatorios';
@@ -31,35 +33,29 @@ export class Registro {
       this.mensaje = 'Las contraseñas no coinciden';
       return;
     }
-    const nuevoUsuario = {
+
+    const nuevoUsuario: UsuarioModel = {
       username: this.datosUsuario.username,
       email: this.datosUsuario.email,
       password: this.datosUsuario.password
     };
 
-    try {
-      const response = await fetch('http://localhost:8080/api/usuarios', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(nuevoUsuario)
-      });
-
-      if (response.ok) {
+    this.registroService.registrar(nuevoUsuario).subscribe({
+      next: () => {
         this.mensaje = '¡Usuario registrado con éxito!';
         this.resetForm();
 
-        // Redirigir al login 1sm dps
         setTimeout(() => {
           this.router.navigate(['/login']);
         }, 1000);
-      } else {
-        this.mensaje = 'Error en el registro. Revisa los datos.';
+      },
+      error: (err) => {
+        console.error(err);
+        this.mensaje = 'Error al registrar usuario. Revisa los datos.';
       }
-    } catch (error) {
-      console.error(error);
-      this.mensaje = 'No se pudo conectar con la Base deDatos.';
-    }
+    });
   }
+
   resetForm() {
     this.datosUsuario = { username: '', email: '', password: '', confirmPassword: '' };
   }

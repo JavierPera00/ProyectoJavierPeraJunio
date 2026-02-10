@@ -20,9 +20,6 @@ public class Rol {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "rol")
-    private List<Usuario> usuarios;
-
     // Constantes de rol
     public static final String ADMIN = "ADMIN";
     public static final String USER = "USER";
@@ -44,17 +41,9 @@ public class Rol {
 		this.nombre = nombre;
 	}
 
-	public List<Usuario> getUsuarios() {
-		return usuarios;
-	}
-
-	public void setUsuarios(List<Usuario> usuarios) {
-		this.usuarios = usuarios;
-	}
-
     // toString
 	@Override
 	public String toString() {
-		return "Rol [id=" + id + ", nombre=" + nombre + ", descripcion=" + "]";
+		return "Rol [id=" + id + ", nombre=" + nombre +  "]";
 	}
 }

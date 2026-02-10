@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { PerfilService } from '../services/perfilService';
+import { UsuarioModel } from '../model/usuario.model';
 
 @Component({
   selector: 'app-perfil',
@@ -9,53 +11,52 @@ import { Router, RouterLink } from '@angular/router';
   styleUrl: './perfil.css',
 })
 export class Perfil {
-
-  usuario: any = {
-      username: '',
-      email: '',
-      password: ''
-  };
-
+  usuario!: UsuarioModel;
   mensaje = '';
 
-  constructor(private router: Router) {}
+  constructor(private router: Router, private perfilService: PerfilService) {}
 
   ngOnInit(): void {
     const usuarioGuardado = localStorage.getItem('usuarioLogueado');
     if (usuarioGuardado) {
-      this.usuario = JSON.parse(usuarioGuardado);
+      this.usuario = JSON.parse(usuarioGuardado) as UsuarioModel;
+
+      // Verificar que tenga ID
+      if (!this.usuario.id) {
+        console.error('El usuario logueado no tiene ID. No se puede actualizar.');
+        this.mensaje = 'Error: usuario inválido';
+        this.router.navigate(['/login']);
+        return;
+      }
     } else {
-      // Si no hay usuario logueado, redirige al login
       this.router.navigate(['/login']);
+      return;
     }
   }
 
-  async guardarCambios() {
-    if (!this.usuario.username || !this.usuario.email || !this.usuario.password) {
-      this.mensaje = 'Todos los campos son obligatorios';
+  guardarCambios() {
+    // Validación básica
+    if (!this.usuario.username || !this.usuario.email) {
+      this.mensaje = 'Username y Email son obligatorios';
       return;
     }
 
-    try {
-      const response = await fetch(`http://localhost:8080/api/usuarios/${this.usuario.id}`, {
-        method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.usuario)
-      });
-
-      if (!response.ok) {
-        this.mensaje = 'Error al guardar los cambios';
-        return;
-      }
-
-      const actualizado = await response.json();
-      localStorage.setItem('usuarioLogueado', JSON.stringify(actualizado));
-      this.mensaje = 'Datos actualizados correctamente';
-    } catch (error) {
-      console.error(error);
-      this.mensaje = 'Error al conectarse al servidor';
+    if (!this.usuario.id) {
+      this.mensaje = 'Error: No se puede actualizar sin ID';
+      return;
     }
-  }
- 
 
+    // Enviar PUT al backend usando el ID existente
+    this.perfilService.actualizarUsuario(this.usuario).subscribe({
+      next: (actualizado: UsuarioModel) => {
+        // Actualizar localStorage
+        localStorage.setItem('usuarioLogueado', JSON.stringify(actualizado));
+        this.mensaje = 'Datos actualizados correctamente';
+      },
+      error: (err) => {
+        console.error('Error al actualizar usuario:', err);
+        this.mensaje = 'Error al conectarse al servidor';
+      },
+    });
+  }
 }

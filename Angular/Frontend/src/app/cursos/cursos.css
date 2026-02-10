@@ -1,0 +1,70 @@
+/* Título sección */
+.section-title {
+  font-family: 'Gravitas One', cursive;
+  color: #fffb00;
+  text-shadow: 1px 1px 4px #333;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Tarjetas de cursos */
+.course-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 12px;
+  transition: transform 0.3s, box-shadow 0.3s;
+  overflow: hidden;
+}
+.course-card .card-body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+.course-card .d-flex {
+  margin-top: auto;
+}
+.course-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+}
+
+/* Botones */
+.btn-course {
+  background: linear-gradient(45deg, #ff6a00, #ee0979);
+  color: #fff;
+  font-weight: bold;
+  border-radius: 50px;
+  transition: all 0.3s;
+  border: none;
+}
+
+.btn-course:hover {
+  background: linear-gradient(45deg, #ee0979, #ff6a00);
+  color: #fff;
+}
+
+/* Footer tarjeta */
+.course-card .card-footer {
+  background: #f8f9fa;
+  color: #555;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+/* Imagen tarjeta */
+.course-card .card-img-top {
+  height: 225px;
+  object-fit: cover;
+}
+
+/* Texto de descripción */
+.course-card .card-text {
+  min-height: 60px; /* Para que todas las tarjetas tengan altura similar */
+}
+
+/* Ajuste de los botones dentro de la tarjeta */
+.course-card .btn-group {
+  display: flex;
+  gap: 0.5rem;
+}
