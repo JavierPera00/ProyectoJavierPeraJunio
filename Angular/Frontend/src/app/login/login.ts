@@ -23,11 +23,11 @@ export class Login {
       return;
     }
     try {
-      const res = await fetch('http://localhost:8080/api/usuarios', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(this.datosLogin)
-      });
+      const res = await fetch('http://localhost:8080/api/usuarios/login', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(this.datosLogin)
+});
       if (!res.ok) {
         const errorMsg = await res.text();
         this.mensaje = errorMsg || 'Error al iniciar sesión';
@@ -42,9 +42,10 @@ export class Login {
         appComp.actualizarUsuario(usuario.username);
       }
       this.mensaje = `¡Bienvenido ${usuario.username}!`;
-      if (usuario.username === 'admin' && this.datosLogin.password === 'admin') {
+      if (usuario.rol === 'ADMIN') {
         await this.router.navigateByUrl('/adminn');
-      } else {
+      } 
+      else {
         await this.router.navigate(['/home']);
       }
     } catch (err) {

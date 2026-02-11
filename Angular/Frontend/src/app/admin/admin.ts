@@ -122,7 +122,6 @@ export class Admin implements OnInit {
   this.cursos$ = this.adminService.cargarCursos();
 }
 
-// Crear curso
 agregarCurso() {
   if (!this.cursoTitulo || !this.cursoDescripcion || !this.cursoDuracion || !this.cursoUrl) {
     this.mensaje = 'Todos los campos obligatorios';
@@ -145,7 +144,6 @@ agregarCurso() {
   });
 }
 
-// Editar curso
 cargarCursoParaEditar(curso: CursoModel) {
   this.cursoEditarId = curso.id!;
   this.cursoTitulo = curso.titulo;
@@ -177,7 +175,6 @@ editarCurso() {
   });
 }
 
-// Eliminar curso
 eliminarCurso(id: number) {
   if (!confirm('¿Eliminar curso?')) return;
 
@@ -190,7 +187,6 @@ eliminarCurso(id: number) {
   });
 }
 
-// Limpiar formulario
 limpiarFormularioCurso() {
   this.cursoTitulo = '';
   this.cursoDescripcion = '';

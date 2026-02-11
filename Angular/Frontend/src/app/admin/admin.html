@@ -106,7 +106,6 @@
   <h4 class="mt-5">Gestión de Cursos</h4>
     <div class="row g-2 mb-5">
 
-      <!-- AGREGAR / EDITAR CURSO -->
       <div class="col-md-12">
         <div class="col-md-3"></div>
           <div class="card p-3 shadow h-100">
@@ -125,7 +124,6 @@
         </div>
       </div>
 
-      <!-- LISTA DE CURSOS -->
       <div class="row g-3">
         <div class="col-sm-6 col-lg-3" *ngFor="let curso of cursos$ | async">
           <div class="card h-100 shadow">
@@ -135,7 +133,7 @@
               <p class="card-text">{{ curso.descripcion }}</p>
               <small class="text-muted">{{ curso.duracion }}</small>
 
-              <div class="mt-auto d-flex gap-1">
+              <div class="mt-auto d-flex gap-1 d-flex justify-content-center">
                 <button class="btn btn-warning btn-sm flex-fill" (click)="cargarCursoParaEditar(curso)">Editar</button>
                 <button class="btn btn-danger btn-sm flex-fill" (click)="eliminarCurso(curso.id!)">Eliminar</button>
                 <a [href]="curso.url" target="_blank" class="btn btn-success btn-sm flex-fill">Ver</a>

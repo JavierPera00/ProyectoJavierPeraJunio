@@ -26,10 +26,18 @@
     <!-- Password -->
     <div class="mb-3">
       <label>Nueva Contraseña</label>
-      <input type="password" class="form-control" 
-             [(ngModel)]="usuario.password" 
-             name="password"
-             placeholder="Contraseña">
+      <div class="input-group">
+        <input 
+          [type]="mostrarPassword ? 'text' : 'password'" 
+          class="form-control" 
+          [(ngModel)]="nuevaPassword" 
+          name="password" 
+          placeholder="Contraseña"
+        >
+        <span class="input-group-text" (click)="toggleMostrarPassword()">
+          <i class="bi" [ngClass]="mostrarPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
+        </span>
+      </div>
     </div>
 
     <!-- Botón Guardar -->
