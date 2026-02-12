@@ -20,6 +20,7 @@ public class Rol {
 
     private String nombre;
 
+    
     // Constantes de rol
     public static final String ADMIN = "ADMIN";
     public static final String USER = "USER";

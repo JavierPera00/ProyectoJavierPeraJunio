@@ -7,6 +7,7 @@ import { Registro } from './registro/registro';
 import { Admin } from './admin/admin';
 import { Perfil } from './perfil/perfil';
 import { Cursos } from './cursos/cursos';
+import { Comentario } from './comentario/comentario';
 
 export const routes: Routes = [
   {path:"",component:Home},
@@ -18,5 +19,6 @@ export const routes: Routes = [
   {path:"adminn",component:Admin}, 
   {path:"registro",component:Registro}, 
   {path:"cursos",component:Cursos}, 
+  {path:"comentario",component:Comentario}, 
   {path:"**",component:Home}
 ];

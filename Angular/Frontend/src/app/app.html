@@ -16,6 +16,10 @@
       <a [routerLink]="['/cursos']" class="nav-link text-warning d-flex align-items-center">
         <i class="bi bi-journal-bookmark me-1"></i> Cursos
       </a>
+      <!-- BOTÓN COMENTARIOS -->
+      <button class="btn btn-warning btn-sm mx-2 my-3" (click)="toggleComentarios()">
+        <i class="bi bi-chat-dots"></i> Comentarios
+      </button>
     </nav>
     <div class="flex-grow-1"></div>
     </div>
@@ -26,7 +30,6 @@
     <!-- Navbar -->
     <nav class="navbar navbar-dark bg-dark px-3">
       <div class="container-fluid d-flex align-items-center justify-content-between">
-        <!-- Dropdown perfil -->
         <div class="d-flex align-items-center ms-auto">
           <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-warning text-decoration-none dropdown-toggle" data-bs-toggle="dropdown">
@@ -111,5 +114,10 @@
     </div>
   </footer>
 
+    <!-- PANEL FLOTANTE DE COMENTARIOS -->
+  <app-comentario
+    *ngIf="mostrarComentarios"
+    (cerrarComentarios)="toggleComentarios()">
+  </app-comentario>
 </div>
   

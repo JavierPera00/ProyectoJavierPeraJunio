@@ -1,0 +1,19 @@
+<div class="comentarios-overlay" (click)="cerrar()"></div>
+
+<div class="comentarios-panel">
+  <div class="comentarios-header">
+    <h6 class="m-0">Comentarios</h6>
+    <button class="btn-close btn-close-white" (click)="cerrar()"></button>
+  </div>
+
+  <div class="comentarios-body" style="overflow-y:auto; max-height:300px;">
+    <div *ngFor="let comentario of comentarios$ | async" class="mb-2 p-1 border rounded" style="background:#333; color:#fff;">
+      <strong>{{ comentario.usuario.username }}:</strong> {{ comentario.texto }}
+    </div>
+  </div>
+
+  <div class="comentarios-footer d-flex mt-2">
+    <input [(ngModel)]="nuevoComentario" class="form-control form-control-sm me-2" placeholder="Escribe un comentario...">
+    <button class="btn btn-sm btn-warning" (click)="enviarComentario()">Enviar</button>
+  </div>
+</div>
