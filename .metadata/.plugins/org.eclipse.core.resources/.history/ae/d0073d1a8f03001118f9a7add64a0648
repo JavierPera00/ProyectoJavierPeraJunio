@@ -1,0 +1,75 @@
+package com.ProyectoJunio;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+import com.ProyectoJunio.servicio.NoticiaService;
+
+@SpringBootApplication
+public class ProyectoJunioApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ProyectoJunioApplication.class, args);
+		
+	}
+	public void run(String... args) throws Exception {
+		
+		NoticiaService noticiaService;
+		
+		// Noticia 1
+				noticiaService.save(new Noticia() {{
+					setTitulo("Notepad++ sufrió ataque dirigido de malware");
+					setDescripcion("El popular editor de código fue comprometido mediante su cadena de actualizaciones por atacantes vinculados a un grupo estatal.");
+					setFechaPublicacion(LocalDateTime.of(2026, 2, 6, 0, 0));
+					setUrlImagen("/notepad-plus-plus.jpg");
+					setUrlExterna("https://as.com/meristation/betech/notepad-fue-hackeado-durante-meses-y-se-sospecha-del-grupo-lotus-blossom-vinculado-a-intereses-chinos-f202602-n/");
+				}});
+
+				// Noticia 2
+				noticiaService.save(new Noticia() {{
+					setTitulo("Nueva vulnerabilidad en WinRAR explotada en ataques");
+					setDescripcion("Un fallo de seguridad en WinRAR está siendo utilizado activamente para ejecutar código malicioso; se recomienda actualizar.");
+					setFechaPublicacion(LocalDateTime.of(2026, 2, 5, 0, 0));
+					setUrlImagen("/OIP.webp");
+					setUrlExterna("https://www.techradar.com/pro/security/dangerous-new-malware-exploits-winrar-flaw-heres-what-we-know");
+				}});
+
+				// Noticia 3
+				noticiaService.save(new Noticia() {{
+					setTitulo("Nuevo malware Android usa repositorios populares");
+					setDescripcion("Se ha detectado malware que otorga acceso remoto completo a dispositivos Android disfrazado de app de seguridad.");
+					setFechaPublicacion(LocalDateTime.of(2026, 2, 3, 0, 0));
+					setUrlImagen("/intro-1657051170.jpg");
+					setUrlExterna("https://www.tomsguide.com/computing/malware-adware/hugging-face-ai-platform-used-to-deliver-android-malware-via-fake-apps-dont-fall-for-this");
+				}});
+
+				// Noticia 4
+				noticiaService.save(new Noticia() {{
+					setTitulo("AI impulsa crecimiento de phishing y ataques avanzados");
+					setDescripcion("Según informes, los ataques de phishing asistidos por IA aumentaron fuertemente en 2025, creando campañas más personalizadas.");
+					setFechaPublicacion(LocalDateTime.of(2026, 2, 1, 0, 0));
+					setUrlImagen("/Phishing-concept-pic.webp");
+					setUrlExterna("https://newsletter.7secure.eu/ai-driven-phishing-cloud-misconfigurations-and-state-backed-campaigns-shape-2026-threat-landscape/");
+				}});
+
+				// Noticia 5
+				noticiaService.save(new Noticia() {{
+					setTitulo("Hacienda investiga posible hackeo que compromete datos fiscales");
+					setDescripcion("El Ministerio de Hacienda investiga una posible brecha que podría haber expuesto datos bancarios y fiscales de millones.");
+					setFechaPublicacion(LocalDateTime.of(2026, 2, 2, 0, 0));
+					setUrlImagen("/Agencia_tributaria_espanola.jpeg");
+					setUrlExterna("https://elpais.com/economia/2026-02-02/hacienda-investiga-un-posible-hackeo-que-compromete-datos-personales-bancarios-y-fiscales-de-ciudadanos.html");
+				}});
+
+				// Noticia 6
+				noticiaService.save(new Noticia() {{
+					setTitulo("Top 10 Cibersecurity News de la semana");
+					setDescripcion("Resumen semanal con ataques ransomware, brechas de datos y extensiones maliciosas detectadas recientemente.");
+					setFechaPublicacion(LocalDateTime.of(2026, 1, 26, 0, 0));
+					setUrlImagen("/2540892.jpg");
+					setUrlExterna("https://innovatecybersecurity.com/security-threat-advisory/top-10-cybersecurity-news-jan-26-2026-apac-energy-firm-hit-by-dire-wolf-ransomware-ai-led-espionage-campaign-uses-autonomous-agents-pwn2own-automotive-2026-uncovers-76-zero-day-flaws-and-more/");
+				}});
+
+	}
+
+}

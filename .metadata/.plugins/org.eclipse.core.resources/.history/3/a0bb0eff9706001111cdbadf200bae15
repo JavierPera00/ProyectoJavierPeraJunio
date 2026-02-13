@@ -1,0 +1,8 @@
+package com.ProyectoJunio.model;
+
+
+@Entity
+@Table(name = "cursos")
+public class Curso {
+
+}

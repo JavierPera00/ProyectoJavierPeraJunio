@@ -1,0 +1,22 @@
+package com.ProyectoJunio.model;
+
+@Entity
+@Table(name = "fuentes")
+public class Fuente {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String nombre;
+    private String url;
+    private int fiabilidad;
+    private String pais;
+    private boolean activa;
+
+    @OneToMany(mappedBy = "fuente")
+    private List<Noticia> noticias;
+
+    // GETTERS Y SETTERS
+    // toString
+}

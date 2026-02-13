@@ -1,0 +1,12 @@
+package com.ProyectoJunio.servicio;
+
+public class CursoService {
+
+	public List<Curso> findAll();
+
+    public Curso findById(Long id);
+
+    public Curso save(Curso curso);
+
+    public void delete(Long id);
+}

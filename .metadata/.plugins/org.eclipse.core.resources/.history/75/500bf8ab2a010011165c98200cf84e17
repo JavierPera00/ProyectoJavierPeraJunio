@@ -1,0 +1,22 @@
+package com.ProyectoJunio.servicio;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.ProyectoJunio.model.Noticia;
+import com.ProyectoJunio.repository.NoticiaRepository;
+
+
+public interface NoticiaService {
+
+	 	
+
+	    public List<Noticia> findAll();
+	    public Noticia findById(Long id);
+	    public Noticia save(Noticia noticia);
+	    public void delete(Long id);
+	    public List<Noticia> ultimasNoticias();
+	    public List<Noticia> noticiasPorCiudad(String ciudad);
+}

@@ -1,0 +1,49 @@
+package com.ProyectoJunio.controller;
+
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.ProyectoJunio.model.Noticia;
+import com.ProyectoJunio.servicio.NoticiaService;
+
+@RestController
+@RequestMapping("/api/noticias")
+@CrossOrigin(origins = "*")
+public class NoticiaController {
+
+    @Autowired
+    private NoticiaService noticiaService;
+
+    // GET todas las noticias
+    @GetMapping
+    public ResponseEntity<List<Noticia>> getAll() {
+        return ResponseEntity.ok(noticiaService.findAll());
+    }
+
+    // GET últimas 10 noticias
+    @GetMapping("/ultimas")
+    public ResponseEntity<List<Noticia>> ultimasNoticias() {
+        return ResponseEntity.ok(noticiaService.ultimasNoticias());
+    }
+
+    // GET noticias por ciudad
+    @GetMapping("/ciudad/{ciudad}")
+    public ResponseEntity<List<Noticia>> noticiasPorCiudad(@PathVariable String ciudad) {
+        return ResponseEntity.ok(noticiaService.noticiasPorCiudad(ciudad));
+    }
+
+    // GET noticia por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Noticia> getById(@PathVariable Long id) {
+        Noticia noticia = noticiaService.findById(id);
+        if (noticia != null) {
+            return ResponseEntity.ok(noticia);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+}

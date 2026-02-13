@@ -1,0 +1,29 @@
+package com.ProyectoJunio.servicio;
+
+import org.springframework.stereotype.Service;
+
+import jakarta.transaction.Transactional;
+
+@Service
+@Transactional
+public class CursoServiceImp {
+
+    @Autowired
+    private CursoRepository cursoRepository;
+
+    public List<Curso> findAll() {
+        return cursoRepository.findAll();
+    }
+
+    public Curso findById(Long id) {
+        return cursoRepository.findById(id).orElse(null);
+    }
+
+    public Curso save(Curso curso) {
+        return cursoRepository.save(curso);
+    }
+
+    public void delete(Long id) {
+        cursoRepository.deleteById(id);
+    }
+}

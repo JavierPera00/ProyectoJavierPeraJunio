@@ -1,0 +1,14 @@
+package com.ProyectoJunio.servicio;
+
+public interface ComentarioService {
+
+	public ComentarioService(ComentarioRepository comentarioRepository);
+
+    public List<Comentario> getAllComentarios() {
+        return comentarioRepository.findAll();
+    }
+
+    public Comentario guardarComentario(Comentario c) {
+        return comentarioRepository.save(c);
+    }
+}

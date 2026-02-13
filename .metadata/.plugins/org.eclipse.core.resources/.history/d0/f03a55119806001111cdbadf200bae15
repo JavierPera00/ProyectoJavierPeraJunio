@@ -1,0 +1,6 @@
+package com.ProyectoJunio.repository;
+
+@Repository
+public interface CursoRepository extends JpaRepository<Curso, Long> {
+    // JpaRepository ya tiene métodos como findAll(), findById(), save(), deleteById()
+}
