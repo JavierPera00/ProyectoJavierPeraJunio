@@ -1,39 +1,44 @@
 <div class="perfil-body container py-4">
   <div class="card p-3 shadow mb-4">
-
     <div class="mb-3 d-flex justify-content-center">
-      <img class="mb-4" src="/logo.png" alt="Logo" width="120px" height="80px">
+      <img class="mb-4" src="/logo.png" alt="Logo" width="120px" height="80px" />
     </div>
 
     <!-- Username -->
     <div class="mb-3">
       <label>Editar Usuario</label>
-      <input type="text" class="form-control" 
-             [(ngModel)]="usuario.username" 
-             name="username"
-             placeholder="Usuario">
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="usuario.username"
+        name="username"
+        placeholder="Usuario"
+      />
     </div>
 
     <!-- Email -->
     <div class="mb-3">
       <label>Editar Email</label>
-      <input type="email" class="form-control" 
-             [(ngModel)]="usuario.email" 
-             name="email"
-             placeholder="Email">
+      <input
+        type="email"
+        class="form-control"
+        [(ngModel)]="usuario.email"
+        name="email"
+        placeholder="Email"
+      />
     </div>
 
     <!-- Password -->
     <div class="mb-3">
       <label>Nueva Contraseña</label>
       <div class="input-group">
-        <input 
-          [type]="mostrarPassword ? 'text' : 'password'" 
-          class="form-control" 
-          [(ngModel)]="nuevaPassword" 
-          name="password" 
+        <input
+          [type]="mostrarPassword ? 'text' : 'password'"
+          class="form-control"
+          [(ngModel)]="nuevaPassword"
+          name="password"
           placeholder="Contraseña"
-        >
+        />
         <span class="input-group-text" (click)="toggleMostrarPassword()">
           <i class="bi" [ngClass]="mostrarPassword ? 'bi-eye-slash' : 'bi-eye'"></i>
         </span>
@@ -46,8 +51,6 @@
       <button [routerLink]="['/home']" class="btn btn-secondary">Volver</button>
     </div>
 
-    <!-- Mensaje de feedback -->
     <p class="mt-2 text-success">{{ mensaje }}</p>
-
   </div>
 </div>

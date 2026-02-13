@@ -22,41 +22,41 @@ import com.ProyectoJunio.servicio.RolService;
 @CrossOrigin(origins = "*")
 public class RolController {
 
-    @Autowired
-    private RolService rolService;
+	@Autowired
+	private RolService rolService;
 
-    @GetMapping
-    public ResponseEntity<List<Rol>> getAll() {
-        return ResponseEntity.ok(rolService.findAll());
-    }
+	@GetMapping
+	public ResponseEntity<List<Rol>> getAll() {
+		return ResponseEntity.ok(rolService.findAll());
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Rol> getById(@PathVariable Long id) {
-        Rol rol = rolService.findById(id);
-        if (rol == null) {
-        	return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(rol);
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<Rol> getById(@PathVariable Long id) {
+		Rol rol = rolService.findById(id);
+		if (rol == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(rol);
+	}
 
-    @PostMapping
-    public ResponseEntity<Rol> create(@RequestBody Rol rol) {
-        return ResponseEntity.ok(rolService.save(rol));
-    }
+	@PostMapping
+	public ResponseEntity<Rol> create(@RequestBody Rol rol) {
+		return ResponseEntity.ok(rolService.save(rol));
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Rol> update(@PathVariable Long id, @RequestBody Rol rol) {
-        Rol existing = rolService.findById(id);
-        if (existing == null) {
-        	return ResponseEntity.notFound().build();
-        }
-        existing.setNombre(rol.getNombre());
-        return ResponseEntity.ok(rolService.save(existing));
-    }
+	@PutMapping("/{id}")
+	public ResponseEntity<Rol> update(@PathVariable Long id, @RequestBody Rol rol) {
+		Rol existing = rolService.findById(id);
+		if (existing == null) {
+			return ResponseEntity.notFound().build();
+		}
+		existing.setNombre(rol.getNombre());
+		return ResponseEntity.ok(rolService.save(existing));
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        rolService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		rolService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

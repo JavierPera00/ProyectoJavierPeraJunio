@@ -1,4 +1,5 @@
 package com.ProyectoJunio.controller;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,77 +11,94 @@ import org.springframework.web.bind.annotation.*;
 import com.ProyectoJunio.model.Usuario;
 import com.ProyectoJunio.servicio.UsuarioService;
 
-
-
 @RestController
 @RequestMapping("/api/usuarios")
 @CrossOrigin(origins = "*")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService usuarioService;
+	@Autowired
+	private UsuarioService usuarioService;
 
-    @GetMapping
-    public ResponseEntity<List<Usuario>> getAll() {
-        return ResponseEntity.ok(usuarioService.findAll());
-    }
+	@GetMapping
+	public ResponseEntity<List<Usuario>> getAll() {
+		return ResponseEntity.ok(usuarioService.findAll());
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuario> getById(@PathVariable Long id) {
-        Usuario usuario = usuarioService.findById(id);
-        if (usuario == null) {
-        	return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(usuario);
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<Usuario> getById(@PathVariable Long id) {
+		Usuario usuario = usuarioService.findById(id);
+		if (usuario == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(usuario);
+	}
 
-    @PostMapping
-    public ResponseEntity<Usuario> create(@RequestBody Usuario usuario) {
-        return ResponseEntity.ok(usuarioService.save(usuario));
-    }
+	@PostMapping
+	public ResponseEntity<Usuario> create(@RequestBody Usuario usuario) {
+		return ResponseEntity.ok(usuarioService.save(usuario));
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario usuario) {
-        Usuario existing = usuarioService.findById(id);
-        if (existing == null) {
-        	return ResponseEntity.notFound().build();
-        }
+	@PutMapping("/{id}")
+	public ResponseEntity<Usuario> update(@PathVariable Long id, @RequestBody Usuario usuario) {
+		Usuario existing = usuarioService.findById(id);
+		if (existing == null) {
+			return ResponseEntity.notFound().build();
+		}
 
-        existing.setUsername(usuario.getUsername());
-        existing.setEmail(usuario.getEmail());
-        existing.setPassword(usuario.getPassword());
-        existing.setFechaRegistro(usuario.getFechaRegistro());
-        existing.setActivo(usuario.isActivo());
-        existing.setPerfil(usuario.getPerfil());
-        existing.setRol(usuario.getRol());
+		existing.setUsername(usuario.getUsername());
+		existing.setEmail(usuario.getEmail());
+		existing.setPassword(usuario.getPassword());
+		existing.setFechaRegistro(usuario.getFechaRegistro());
+		existing.setActivo(usuario.isActivo());
+		existing.setPerfil(usuario.getPerfil());
+		existing.setRol(usuario.getRol());
 
-        return ResponseEntity.ok(usuarioService.save(existing));
-    }
+		return ResponseEntity.ok(usuarioService.save(existing));
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        usuarioService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
-    @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Usuario login) {
-        Usuario usuario = usuarioService.findByUsername(login.getUsername());
-        if (usuario == null) {
-            return ResponseEntity.status(401).body("Usuario no encontrado");
-        }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		usuarioService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 
-        if (!usuario.getPassword().equals(login.getPassword())) {
-            return ResponseEntity.status(401).body("Contraseña incorrecta");
-        }
+	@PostMapping("/login")
+	public ResponseEntity<?> login(@RequestBody Usuario login) {
+		Usuario usuario = usuarioService.findByUsername(login.getUsername());
+		if (usuario == null) {
+			return ResponseEntity.status(401).body("Usuario no encontrado");
+		}
 
-        // Crear DTO simple
-        Map<String,Object> usuarioDTO = new HashMap<>();
-        usuarioDTO.put("id", usuario.getId());
-        usuarioDTO.put("username", usuario.getUsername());
-        usuarioDTO.put("email", usuario.getEmail());
-        usuarioDTO.put("activo", usuario.isActivo());
-        usuarioDTO.put("rol", usuario.getRol() != null ? usuario.getRol().getNombre() : null);
+		if (!usuario.getPassword().equals(login.getPassword())) {
+			return ResponseEntity.status(401).body("Contraseña incorrecta");
+		}
 
-        return ResponseEntity.ok(usuarioDTO);
-    }
+		Map<String, Object> usuarioDTO = new HashMap<>();
+		usuarioDTO.put("id", usuario.getId());
+		usuarioDTO.put("username", usuario.getUsername());
+		usuarioDTO.put("email", usuario.getEmail());
+		usuarioDTO.put("activo", usuario.isActivo());
+		usuarioDTO.put("rol", usuario.getRol() != null ? usuario.getRol().getNombre() : null);
+
+		return ResponseEntity.ok(usuarioDTO);
+	}
+
+	@GetMapping("/email/{email}")
+	public ResponseEntity<Usuario> buscarPorEmail(@PathVariable String email) {
+		Usuario usuario = usuarioService.findByEmail(email);
+		if (usuario == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(usuario);
+	}
+
+	@GetMapping("/username/{username}")
+	public ResponseEntity<Usuario> buscarPorUsername(@PathVariable String username) {
+		Usuario usuario = usuarioService.findByUsername(username);
+		if (usuario == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(usuario);
+	}
+
 }

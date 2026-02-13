@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-perfil',
-  imports: [FormsModule,RouterLink,CommonModule],
+  imports: [FormsModule, RouterLink, CommonModule],
   templateUrl: './perfil.html',
   styleUrl: './perfil.css',
 })
@@ -20,7 +20,10 @@ export class Perfil {
   toggleMostrarPassword() {
     this.mostrarPassword = !this.mostrarPassword;
   }
-  constructor(private router: Router, private perfilService: PerfilService) {}
+  constructor(
+    private router: Router,
+    private perfilService: PerfilService,
+  ) {}
 
   ngOnInit(): void {
     const usuarioGuardado = localStorage.getItem('usuarioLogueado');
@@ -35,7 +38,7 @@ export class Perfil {
         this.router.navigate(['/login']);
         return;
       }
-  
+
       this.nuevaPassword = this.usuario.password || '';
 
       if (!this.usuario.rol) {
@@ -48,31 +51,31 @@ export class Perfil {
   }
 
   guardarCambios() {
-  if (!this.usuario.username || !this.usuario.email) {
-    this.mensaje = 'Username y Email son obligatorios';
-    return;
-  }
+    if (!this.usuario.username || !this.usuario.email) {
+      this.mensaje = 'Username y Email son obligatorios';
+      return;
+    }
 
-  if (!this.usuario.id) {
-    this.mensaje = 'Error: No se puede actualizar sin ID';
-    return;
-  }
+    if (!this.usuario.id) {
+      this.mensaje = 'Error: No se puede actualizar sin ID';
+      return;
+    }
 
-  if (this.nuevaPassword) {
-    this.usuario.password = this.nuevaPassword;
+    if (this.nuevaPassword) {
+      this.usuario.password = this.nuevaPassword;
+    }
+
+    this.perfilService.actualizarUsuario(this.usuario).subscribe({
+      next: (actualizado: UsuarioModel) => {
+        // Guardar cambios en localStorage
+        localStorage.setItem('usuarioLogueado', JSON.stringify(actualizado));
+        this.mensaje = 'Datos actualizados correctamente';
+        this.nuevaPassword = '';
+      },
+      error: (err) => {
+        console.error('Error al actualizar usuario:', err);
+        this.mensaje = 'Error al conectarse al servidor';
+      },
+    });
   }
-  
-  this.perfilService.actualizarUsuario(this.usuario).subscribe({
-    next: (actualizado: UsuarioModel) => {
-      // Guardar cambios en localStorage
-      localStorage.setItem('usuarioLogueado', JSON.stringify(actualizado));
-      this.mensaje = 'Datos actualizados correctamente';
-      this.nuevaPassword = '';
-    },
-    error: (err) => {
-      console.error('Error al actualizar usuario:', err);
-      this.mensaje = 'Error al conectarse al servidor';
-    },
-  });
-}
 }

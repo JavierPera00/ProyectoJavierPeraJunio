@@ -7,14 +7,11 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class NoticiasService {
-  
   private apiUrl = 'http://localhost:8080/api/noticias';
-  
+
   constructor(private http: HttpClient) {}
 
   cargarNoticias(): Observable<NoticiaModel[]> {
-    return this.http.get<NoticiaModel[]>(this.apiUrl)
-      
+    return this.http.get<NoticiaModel[]>(this.apiUrl);
   }
-  
 }

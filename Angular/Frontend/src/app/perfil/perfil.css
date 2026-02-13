@@ -1,16 +1,16 @@
 .perfil-body {
-min-height: calc(100vh - 72px);
-display: flex;
-flex-direction: column;
-align-items: center;
-background-image: url("/computer.jpg");
-background-size: cover;
-background-position: 0% 50%;
-background-repeat: no-repeat;
-height: 100%;
-justify-content: center;
-align-items: center;
-flex-direction: column;
+  min-height: calc(100vh - 72px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-image: url('/computer.jpg');
+  background-size: cover;
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .card {
@@ -18,15 +18,15 @@ flex-direction: column;
   max-width: 400px;
 }
 
-h2{
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
-    font-weight: 800;
-    font-style: normal;
-    color: yellow;
+h2 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif !important;
+  font-weight: 800;
+  font-style: normal;
+  color: yellow;
 }
 
 .form-control {
-  height: 3rem;          
+  height: 3rem;
   font-size: 1rem;
 }
 .input-group-text {

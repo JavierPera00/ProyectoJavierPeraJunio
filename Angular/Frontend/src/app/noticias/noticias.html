@@ -1,59 +1,45 @@
 <div class="container py-5">
-  <h1 class="text-center mb-5 section-title">
-    Últimas Noticias de Ciberseguridad
-  </h1>
+  <h1 class="text-center mb-5 section-title">Últimas Noticias de Ciberseguridad</h1>
 
   <div class="row g-4">
-
-    <!-- Se espera que "noticias" sea un Observable -->
     <ng-container *ngIf="noticias | async as listaNoticias; else cargando">
-      
-      <!-- Iterar sobre cada noticia -->
       <div class="col-md-6 col-lg-4" *ngFor="let noticia of listaNoticias; let i = index">
-        
-        <div 
-          class="card news-card h-100 shadow-sm" 
-          [ngClass]="{'border-danger border-3': i === 0}">
-          
-          <!-- Imagen de la noticia -->
-          <img 
-            [src]="noticia.urlImagen" 
-            class="card-img-top" 
-            [alt]="noticia.titulo">
-          
+        <div
+          class="card news-card h-100 shadow-sm"
+          [ngClass]="{ 'border-danger border-3': i === 0 }"
+        >
+          <img [src]="noticia.urlImagen" class="card-img-top" [alt]="noticia.titulo" />
+
           <div class="card-body">
-            <h5 class="card-title" [ngClass]="{'text-danger': i === 0}">
+            <h5 class="card-title" [ngClass]="{ 'text-danger': i === 0 }">
               {{ noticia.titulo }}
             </h5>
-            
+
             <p class="card-text">
               {{ noticia.descripcion }}
             </p>
-            
-            <a 
-              [href]="noticia.urlExterna" 
-              target="_blank" 
-              class="btn btn-news" 
-              [ngClass]="{'btn-danger': i === 0}">
+
+            <a
+              [href]="noticia.urlExterna"
+              target="_blank"
+              class="btn btn-news"
+              [ngClass]="{ 'btn-danger': i === 0 }"
+            >
               Leer más
             </a>
           </div>
-          
-          <div class="card-footer text-center news-date">
-            {{ noticia.fechaPublicacion | date:'dd MMMM yyyy' }}
-          </div>
 
+          <div class="card-footer text-center news-date">
+            {{ noticia.fechaPublicacion | date: 'dd MMMM yyyy' }}
+          </div>
         </div>
       </div>
-
     </ng-container>
 
-    <!-- Template alternativo mientras se cargan las noticias -->
     <ng-template #cargando>
       <div class="col-12 text-center">
         <p>Cargando noticias...</p>
       </div>
     </ng-template>
-
   </div>
 </div>

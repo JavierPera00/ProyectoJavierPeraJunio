@@ -8,15 +8,16 @@
 /* Tarjetas*/
 .news-card {
   border-radius: 12px;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
   overflow: hidden;
 }
 .news-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
-/*Leer más */
 .btn-news {
   background: linear-gradient(45deg, #ff6a00, #ee0979);
   color: #fff;
@@ -29,10 +30,9 @@
   color: #fff;
 }
 
-/* Footer tarjeta */
 .news-card .card-footer {
-  background: #f8f9fa; 
-  color: #555; 
+  background: #f8f9fa;
+  color: #555;
   font-size: 0.9rem;
   font-weight: 500;
 }

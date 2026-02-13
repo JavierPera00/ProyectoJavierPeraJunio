@@ -21,5 +21,5 @@ export class Cursos implements OnInit {
    this.cursos= this.cursosService.cargarCursos();
    console.log(this.cursos);
   }
-  
+
 }

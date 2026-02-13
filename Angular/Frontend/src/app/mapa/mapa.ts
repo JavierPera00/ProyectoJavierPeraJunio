@@ -7,6 +7,4 @@ import { RouterLink } from '@angular/router';
   templateUrl: './mapa.html',
   styleUrl: './mapa.css',
 })
-export class Mapa {
-
-}
+export class Mapa {}

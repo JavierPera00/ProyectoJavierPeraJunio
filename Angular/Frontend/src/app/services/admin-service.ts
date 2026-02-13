@@ -9,7 +9,6 @@ import { CursoModel } from '../model/curso.model';
   providedIn: 'root',
 })
 export class AdminService {
-  
   private apiNoticias = 'http://localhost:8080/api/noticias';
   private apiUsuarios = 'http://localhost:8080/api/usuarios';
   private apiCursos = 'http://localhost:8080/api/cursos';
@@ -42,19 +41,31 @@ export class AdminService {
     return this.http.get<UsuarioModel[]>(this.apiUsuarios);
   }
   // Cursos
-cargarCursos(): Observable<CursoModel[]> {
-  return this.http.get<CursoModel[]>(`${this.apiCursos}`);
-}
+  cargarCursos(): Observable<CursoModel[]> {
+    return this.http.get<CursoModel[]>(`${this.apiCursos}`);
+  }
 
-agregarCurso(curso: CursoModel): Observable<CursoModel> {
-  return this.http.post<CursoModel>(`${this.apiCursos}`, curso);
-}
+  agregarCurso(curso: CursoModel): Observable<CursoModel> {
+    return this.http.post<CursoModel>(`${this.apiCursos}`, curso);
+  }
 
-editarCurso(id: number, curso: CursoModel): Observable<CursoModel> {
-  return this.http.put<CursoModel>(`${this.apiCursos}/${id}`, curso);
-}
+  editarCurso(id: number, curso: CursoModel): Observable<CursoModel> {
+    return this.http.put<CursoModel>(`${this.apiCursos}/${id}`, curso);
+  }
 
-eliminarCurso(id: number): Observable<void> {
-  return this.http.delete<void>(`${this.apiCursos}/${id}`);
-}
+  eliminarCurso(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiCursos}/${id}`);
+  }
+
+  buscarUsuarioPorEmail(email: string): Observable<UsuarioModel> {
+    return this.http.get<UsuarioModel>(`${this.apiUsuarios}/email/${email}`);
+  }
+
+  buscarUsuarioPorUsername(username: string): Observable<UsuarioModel> {
+    return this.http.get<UsuarioModel>(`${this.apiUsuarios}/username/${username}`);
+  }
+
+  buscarCursoPorTitulo(titulo: string): Observable<CursoModel[]> {
+    return this.http.get<CursoModel[]>(`${this.apiCursos}/buscar?titulo=${titulo}`);
+  }
 }

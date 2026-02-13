@@ -1,169 +1,257 @@
 <div class="admin-body container py-4">
-  <h2>Panel de Administración</h2>
+  <div class="mb-4">
+    <h2 class="fw-bold">Panel de Administración</h2>
+    <hr />
+  </div>
 
-  <div class="row g-2 mb-5">
+  <h4 class="mb-3">Gestión de Noticias</h4>
 
-    <!-- AGREGAR NOTICIA -->
-    <div class="col-md-3">
-      <div class="card p-3 shadow h-100">
-        <h4>Agregar Nueva Noticia</h4>
+  <div class="row g-4 mb-5">
+    <!-- CREAR NOTICIA -->
+    <div class="col-lg-4">
+      <div class="card shadow h-100">
+        <div class="card-header bg-primary text-white">Nueva Noticia</div>
 
-        <div class="mb-2">
-          <input type="text" [(ngModel)]="titulo"
-                 class="form-control"
-                 placeholder="Título">
+        <div class="card-body">
+          <input type="text" [(ngModel)]="titulo" class="form-control mb-2" placeholder="Título" />
+
+          <textarea
+            [(ngModel)]="descripcion"
+            class="form-control mb-2"
+            rows="2"
+            placeholder="Descripción"
+          ></textarea>
+
+          <input
+            type="text"
+            [(ngModel)]="urlExterna"
+            class="form-control mb-2"
+            placeholder="URL externa"
+          />
+
+          <input
+            type="text"
+            [(ngModel)]="urlImagen"
+            class="form-control mb-3"
+            placeholder="URL imagen"
+          />
+
+          <button class="btn btn-primary w-100" (click)="agregarNoticia()">Publicar</button>
         </div>
-
-        <div class="mb-2">
-          <textarea [(ngModel)]="descripcion"
-                    class="form-control"
-                    rows="2"
-                    placeholder="Descripción"></textarea>
-        </div>
-
-        <div class="mb-2">
-          <input type="text" [(ngModel)]="urlExterna"
-                 class="form-control"
-                 placeholder="URL externa">
-        </div>
-
-        <div class="mb-2">
-          <input type="text" [(ngModel)]="urlImagen"
-                 class="form-control"
-                 placeholder="URL imagen">
-        </div>
-
-        <button class="btn btn-primary w-100"
-                (click)="agregarNoticia()">
-          Agregar Noticia
-        </button>
       </div>
     </div>
 
     <!-- ÚLTIMAS NOTICIAS -->
-    <div class="col-md-9">
-      <div class="card p-3 shadow h-100">
-        <h4>Últimas Noticias</h4>
-
-        <button class="btn btn-secondary w-100 mb-2"
-                (click)="mostrarUltimasNoticias()">
-          Cargar
-        </button>
-
-        <ul class="list-group list-group-flush"
-            *ngIf="ultimasNoticias$ | async as ultimas">
-          <li class="list-group-item"
-              *ngFor="let noticia of ultimas">
-            <strong>{{ noticia.titulo }}</strong><br>
-            <small>{{ noticia.fechaPublicacion | date:'dd/MM/yyyy' }}</small>
-          </li>
-        </ul>
-
-        <p *ngIf="!(ultimasNoticias$ | async)?.length"
-           class="text-muted">
-          No hay noticias cargadas.
-        </p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- NOTICIAS PUBLICADAS -->
-  <h4>Noticias Publicadas</h4>
-  <div class="row g-4 mb-5">
-    <div class="col-md-6 col-lg-4"
-        *ngFor="let noticia of (noticias$ | async)">
-      <div class="card h-100 shadow">
-        <img *ngIf="noticia.urlImagen"
-            [src]="noticia.urlImagen"
-            class="card-img-top"
-            alt="Imagen noticia">
+    <div class="col-lg-8">
+      <div class="card shadow h-100">
+        <div class="card-header bg-secondary text-white">Últimas Noticias</div>
 
         <div class="card-body">
-          <h5 class="card-title">{{ noticia.titulo }}</h5>
-          <p class="card-text">{{ noticia.descripcion }}</p>
+          <button class="btn btn-outline-secondary w-100 mb-3" (click)="mostrarUltimasNoticias()">
+            Cargar
+          </button>
 
-          <a *ngIf="noticia.urlExterna"
-            [href]="noticia.urlExterna"
-            target="_blank">
-            Ver más
-          </a>
+          <ul class="list-group list-group-flush" *ngIf="ultimasNoticias$ | async as ultimas">
+            <li class="list-group-item" *ngFor="let noticia of ultimas">
+              <strong>{{ noticia.titulo }}</strong>
+              <small class="text-muted d-block">
+                {{ noticia.fechaPublicacion | date: 'dd/MM/yyyy' }}
+              </small>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
 
-          <small class="text-muted d-block mt-2">
-            Publicada: {{ noticia.fechaPublicacion | date:'dd/MM/yyyy HH:mm' }}
+  <!-- LISTADO NOTICIAS -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-4" *ngFor="let noticia of noticias$ | async">
+      <div class="card h-100 shadow-sm">
+        <img *ngIf="noticia.urlImagen" [src]="noticia.urlImagen" class="card-img-top" />
+
+        <div class="card-body d-flex flex-column">
+          <h5>{{ noticia.titulo }}</h5>
+          <p class="small">{{ noticia.descripcion }}</p>
+
+          <small class="text-muted mb-2">
+            {{ noticia.fechaPublicacion | date: 'dd/MM/yyyy HH:mm' }}
           </small>
 
-          <!-- BOTÓN ELIMINAR -->
-          <button class="btn btn-danger btn-sm mt-2 w-100"
-                  (click)="eliminarNoticia(noticia.id)">
+          <button class="btn btn-danger btn-sm mt-auto" (click)="eliminarNoticia(noticia.id)">
             Eliminar
           </button>
         </div>
       </div>
     </div>
   </div>
-  <!-- ================= CURSOS ================= -->
-  <h4 class="mt-5">Gestión de Cursos</h4>
-    <div class="row g-2 mb-5">
 
-      <div class="col-md-12">
-        <div class="col-md-3"></div>
-          <div class="card p-3 shadow h-100">
-            <h5>Agregar / Editar Curso</h5>
+  <h4 class="mb-3">Gestión de Cursos</h4>
 
-            <input type="text" [(ngModel)]="cursoTitulo" placeholder="Título" class="form-control mb-2">
-            <textarea [(ngModel)]="cursoDescripcion" placeholder="Descripción" class="form-control mb-2" rows="2"></textarea>
-            <input type="text" [(ngModel)]="cursoDuracion" placeholder="Duración" class="form-control mb-2">
-            <input type="text" [(ngModel)]="cursoImagenUrl" placeholder="URL Imagen" class="form-control mb-2">
-            <input type="text" [(ngModel)]="cursoUrl" placeholder="URL Curso" class="form-control mb-2">
-
-            <button class="btn btn-primary w-100 mb-2" (click)="agregarCurso()" *ngIf="!cursoEditarId">Agregar Curso</button>
-            <button class="btn btn-warning w-100 mb-2" (click)="editarCurso()" *ngIf="cursoEditarId">Actualizar Curso</button>
-            <button class="btn btn-secondary w-100" (click)="limpiarFormularioCurso()" *ngIf="cursoEditarId">Cancelar</button>
-          </div>
+  <!-- BUSCADOR -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-body">
+      <div class="row g-2 align-items-center">
+        <div class="col-md-9">
+          <input
+            type="text"
+            [(ngModel)]="tituloBusquedaCurso"
+            class="form-control"
+            placeholder="Buscar curso por título"
+          />
+        </div>
+        <div class="col-md-3">
+          <button class="btn btn-outline-primary w-100" (click)="buscarCursoPorTitulo()">
+            Buscar
+          </button>
         </div>
       </div>
+    </div>
+  </div>
 
-      <div class="row g-3">
-        <div class="col-sm-6 col-lg-3" *ngFor="let curso of cursos$ | async">
-          <div class="card h-100 shadow">
-            <img [src]="curso.imagenUrl" class="card-img-top" alt="{{curso.titulo}}">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">{{ curso.titulo }}</h5>
-              <p class="card-text">{{ curso.descripcion }}</p>
-              <small class="text-muted">{{ curso.duracion }}</small>
+  <!-- RESULTADO BUSQUEDA -->
+  <div *ngIf="cursosFiltrados.length > 0" class="row g-3 mb-4">
+    <div class="col-md-4" *ngFor="let curso of cursosFiltrados">
+      <div class="card shadow border-success">
+        <div class="card-body">
+          <h5 class="text-success">{{ curso.titulo }}</h5>
+          <p>{{ curso.descripcion }}</p>
+          <small class="text-muted">{{ curso.duracion }}</small>
 
-              <div class="mt-auto d-flex gap-1 d-flex justify-content-center">
-                <button class="btn btn-warning btn-sm flex-fill" (click)="cargarCursoParaEditar(curso)">Editar</button>
-                <button class="btn btn-danger btn-sm flex-fill" (click)="eliminarCurso(curso.id!)">Eliminar</button>
-                <a [href]="curso.url" target="_blank" class="btn btn-success btn-sm flex-fill">Ver</a>
-              </div>
-            </div>
-          </div>
+          <a [href]="curso.url" target="_blank" class="btn btn-success btn-sm w-100 mt-2">
+            Ver Curso
+          </a>
         </div>
       </div>
-      <br><br>
-  <!-- USUARIOS REGISTRADOS -->
-  <h4>Usuarios Registrados</h4>
-    <div class="row g-4 mb-5" *ngIf="usuarios$ | async as usuarios">
-      <div class="col-md-6 col-lg-4" *ngFor="let usuario of usuarios">
-        <div class="card h-100 shadow user-card">
-          <div class="card-body">
-            <h5 class="card-title">{{ usuario.username }}</h5>
-            <p class="card-text">
-              <strong>Email:</strong> {{ usuario.email }}<br>
-              <strong>Rol:</strong> {{ usuario.rol?.nombre }}
-            </p>
+    </div>
+  </div>
 
-            <!-- BOTÓN ELIMINAR USUARIO -->
-            <button class="btn btn-danger btn-sm mt-2 w-100"
-                    (click)="eliminarUsuario(usuario.id)">
-              Eliminar Usuario
+  <!-- FORMULARIO CURSO -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-dark text-white">Crear / Editar Curso</div>
+
+    <div class="card-body">
+      <input type="text" [(ngModel)]="cursoTitulo" class="form-control mb-2" placeholder="Título" />
+
+      <textarea
+        [(ngModel)]="cursoDescripcion"
+        class="form-control mb-2"
+        rows="2"
+        placeholder="Descripción"
+      ></textarea>
+
+      <input
+        type="text"
+        [(ngModel)]="cursoDuracion"
+        class="form-control mb-2"
+        placeholder="Duración"
+      />
+
+      <input
+        type="text"
+        [(ngModel)]="cursoImagenUrl"
+        class="form-control mb-2"
+        placeholder="URL imagen"
+      />
+
+      <input type="text" [(ngModel)]="cursoUrl" class="form-control mb-3" placeholder="URL curso" />
+
+      <button class="btn btn-primary w-100" (click)="agregarCurso()" *ngIf="!cursoEditarId">
+        Agregar Curso
+      </button>
+
+      <button class="btn btn-warning w-100" (click)="editarCurso()" *ngIf="cursoEditarId">
+        Actualizar Curso
+      </button>
+    </div>
+  </div>
+
+  <!-- LISTADO CURSOS -->
+  <div class="row g-4 mb-5">
+    <div class="col-md-6 col-lg-3" *ngFor="let curso of cursos$ | async">
+      <div class="card h-100 shadow-sm">
+        <img [src]="curso.imagenUrl" class="card-img-top" />
+
+        <div class="card-body d-flex flex-column">
+          <h6>{{ curso.titulo }}</h6>
+          <p class="small">{{ curso.descripcion }}</p>
+          <small class="text-muted">{{ curso.duracion }}</small>
+
+          <div class="mt-auto d-grid gap-1">
+            <button class="btn btn-warning btn-sm" (click)="cargarCursoParaEditar(curso)">
+              Editar
             </button>
+
+            <button class="btn btn-danger btn-sm" (click)="eliminarCurso(curso.id!)">
+              Eliminar
+            </button>
+
+            <a [href]="curso.url" target="_blank" class="btn btn-success btn-sm"> Ver </a>
           </div>
         </div>
       </div>
     </div>
+  </div>
 
-  <!-- MENSAJE -->
-  <div class="mt-3 text-success">{{ mensaje }}</div>
+  <h4 class="mb-3">Gestión de Usuarios</h4>
+
+  <div class="row g-3 mb-4">
+    <div class="col-md-6">
+      <input
+        type="text"
+        [(ngModel)]="emailBusqueda"
+        class="form-control"
+        placeholder="Buscar por email"
+      />
+      <button class="btn btn-outline-primary w-100 mt-2" (click)="buscarUsuarioPorEmail()">
+        Buscar
+      </button>
+    </div>
+
+    <div class="col-md-6">
+      <input
+        type="text"
+        [(ngModel)]="usernameBusqueda"
+        class="form-control"
+        placeholder="Buscar por username"
+      />
+      <button class="btn btn-outline-secondary w-100 mt-2" (click)="buscarUsuarioPorUsername()">
+        Buscar
+      </button>
+    </div>
+  </div>
+
+  <!-- RESULTADO USUARIO -->
+  <div *ngIf="usuarioEncontrado" class="card shadow-sm mb-4 border-danger">
+    <div class="card-body">
+      <h5>{{ usuarioEncontrado.username }}</h5>
+      <p class="mb-2">
+        {{ usuarioEncontrado.email }}<br />
+        Rol: {{ usuarioEncontrado.rol?.nombre }}
+      </p>
+      <button class="btn btn-danger w-100" (click)="eliminarUsuario(usuarioEncontrado.id!)">
+        Eliminar Usuario
+      </button>
+    </div>
+  </div>
+
+  <div class="row g-4 mb-5" *ngIf="usuarios$ | async as usuarios">
+    <div class="col-md-6 col-lg-4" *ngFor="let usuario of usuarios">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+          <h5>{{ usuario.username }}</h5>
+          <p class="small mb-2">{{ usuario.email }}</p>
+          <span class="badge bg-primary mb-3">{{ usuario.rol?.nombre }}</span>
+
+          <button class="btn btn-outline-danger btn-sm w-100" (click)="eliminarUsuario(usuario.id)">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- MENSAJE GLOBAL -->
+  <div class="alert alert-success mt-3" *ngIf="mensaje">
+    {{ mensaje }}
+  </div>
+</div>

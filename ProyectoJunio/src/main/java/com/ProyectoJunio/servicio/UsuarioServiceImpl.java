@@ -7,30 +7,33 @@ import com.ProyectoJunio.model.Usuario;
 import com.ProyectoJunio.repository.UsuarioRepository;
 
 @Service
-public class UsuarioServiceImpl implements UsuarioService{
-		
+public class UsuarioServiceImpl implements UsuarioService {
+
 	@Autowired
-    private UsuarioRepository usuarioRepository;
+	private UsuarioRepository usuarioRepository;
 
-    public List<Usuario> findAll() {
-        return usuarioRepository.findAll();
-    }
+	public List<Usuario> findAll() {
+		return usuarioRepository.findAll();
+	}
 
-    public Usuario findById(Long id) {
-        return usuarioRepository.findById(id).orElse(null);
-    }
+	public Usuario findById(Long id) {
+		return usuarioRepository.findById(id).orElse(null);
+	}
 
-    public Usuario save(Usuario usuario) {
-        return usuarioRepository.save(usuario);
-    }
+	public Usuario save(Usuario usuario) {
+		return usuarioRepository.save(usuario);
+	}
 
-    public void delete(Long id) {
-        usuarioRepository.deleteById(id);
-    }
-    
-    public Usuario findByUsername(String name) {
-        return usuarioRepository.findByUsernameIgnoreCase(name);
-    }
+	public void delete(Long id) {
+		usuarioRepository.deleteById(id);
+	}
+
+	public Usuario findByUsername(String name) {
+		return usuarioRepository.findByUsernameIgnoreCase(name);
+	}
+
+	public Usuario findByEmail(String email) {
+		return usuarioRepository.findByEmailIgnoreCase(email);
+	}
 
 }
-	

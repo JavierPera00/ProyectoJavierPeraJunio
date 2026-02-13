@@ -9,4 +9,7 @@ import com.ProyectoJunio.model.Usuario;
 public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
    
 	Usuario findByUsernameIgnoreCase(String username);
+	
+	Usuario findByEmailIgnoreCase(String email);
+
 }

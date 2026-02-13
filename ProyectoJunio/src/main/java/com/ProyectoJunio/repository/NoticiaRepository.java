@@ -10,7 +10,6 @@ import com.ProyectoJunio.model.Noticia;
 @Repository
 public interface NoticiaRepository extends JpaRepository<Noticia, Long> {
 
-	// Noticias más recientes
     List<Noticia> findTop3ByOrderByFechaPublicacionDesc();
 
  

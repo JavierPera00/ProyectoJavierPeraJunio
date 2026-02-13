@@ -7,13 +7,12 @@ import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-noticias',
-  imports: [CommonModule, AsyncPipe,HttpClientModule],
+  imports: [CommonModule, AsyncPipe, HttpClientModule],
   templateUrl: './noticias.html',
   styleUrl: './noticias.css',
-  standalone: true
+  standalone: true,
 })
 export class Noticias implements OnInit {
-
   noticias!: Observable<NoticiaModel[]>;
 
   constructor(private servicio: NoticiasService) {}
@@ -22,6 +21,4 @@ export class Noticias implements OnInit {
     this.noticias = this.servicio.cargarNoticias();
     console.log(this.noticias);
   }
-
-  
 }

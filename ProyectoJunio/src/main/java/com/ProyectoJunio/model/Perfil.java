@@ -12,18 +12,18 @@ import jakarta.persistence.Table;
 @Table(name = "perfiles")
 public class Perfil {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String correo;
-    private String contraseña;
-    private String bio;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String correo;
+	private String contraseña;
+	private String bio;
 
-    @OneToOne
-    @JoinColumn(name = "usuario_id")
-    private Usuario usuario;
+	@OneToOne
+	@JoinColumn(name = "usuario_id")
+	private Usuario usuario;
 
-    /*GET Y SET*/
+	/* GET Y SET */
 	public Long getId() {
 		return id;
 	}
@@ -64,7 +64,7 @@ public class Perfil {
 		this.usuario = usuario;
 	}
 
-	/*String*/
+	/* String */
 	@Override
 	public String toString() {
 		return "Perfil [id=" + id + ", correo=" + correo + ", contraseña=" + contraseña + ", bio=" + bio + "]";

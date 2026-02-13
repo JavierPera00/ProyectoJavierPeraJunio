@@ -1,5 +1,5 @@
 .register-body {
-  background-image: url("/computer.jpg");
+  background-image: url('/computer.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;

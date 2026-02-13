@@ -12,24 +12,29 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class CursoServiceImp implements CursoService{
+public class CursoServiceImp implements CursoService {
 
-    @Autowired
-    private CursoRepository cursoRepository;
+	@Autowired
+	private CursoRepository cursoRepository;
 
-    public List<Curso> findAll() {
-        return cursoRepository.findAll();
-    }
+	public List<Curso> findAll() {
+		return cursoRepository.findAll();
+	}
 
-    public Curso findById(Long id) {
-        return cursoRepository.findById(id).orElse(null);
-    }
+	public Curso findById(Long id) {
+		return cursoRepository.findById(id).orElse(null);
+	}
 
-    public Curso save(Curso curso) {
-        return cursoRepository.save(curso);
-    }
+	public Curso save(Curso curso) {
+		return cursoRepository.save(curso);
+	}
 
-    public void delete(Long id) {
-        cursoRepository.deleteById(id);
-    }
+	public void delete(Long id) {
+		cursoRepository.deleteById(id);
+	}
+
+	@Override
+	public List<Curso> findByTitulo(String titulo) {
+		return cursoRepository.findByTituloContainingIgnoreCase(titulo);
+	}
 }

@@ -4,12 +4,11 @@ import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink, FormsModule],
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
 export class Login {
-  
   datosLogin = { username: '', password: '' };
   mensaje = '';
 
@@ -24,10 +23,10 @@ export class Login {
     }
     try {
       const res = await fetch('http://localhost:8080/api/usuarios/login', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
-  body: JSON.stringify(this.datosLogin)
-});
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(this.datosLogin),
+      });
       if (!res.ok) {
         const errorMsg = await res.text();
         this.mensaje = errorMsg || 'Error al iniciar sesión';
@@ -44,8 +43,7 @@ export class Login {
       this.mensaje = `¡Bienvenido ${usuario.username}!`;
       if (usuario.rol === 'ADMIN') {
         await this.router.navigateByUrl('/adminn');
-      } 
-      else {
+      } else {
         await this.router.navigate(['/home']);
       }
     } catch (err) {

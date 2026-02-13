@@ -5,27 +5,23 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-
 
 @Entity
 @Table(name = "roles")
 public class Rol {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String nombre;
+	private String nombre;
 
-    
-    // Constantes de rol
-    public static final String ADMIN = "ADMIN";
-    public static final String USER = "USER";
-    
-    // GETTERS Y SETTERS
+	// Constantes de rol
+	public static final String ADMIN = "ADMIN";
+	public static final String USER = "USER";
+
+	// GETTERS Y SETTERS
 	public Long getId() {
 		return id;
 	}
@@ -42,9 +38,9 @@ public class Rol {
 		this.nombre = nombre;
 	}
 
-    // toString
+	// toString
 	@Override
 	public String toString() {
-		return "Rol [id=" + id + ", nombre=" + nombre +  "]";
+		return "Rol [id=" + id + ", nombre=" + nombre + "]";
 	}
 }

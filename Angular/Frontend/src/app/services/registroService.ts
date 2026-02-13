@@ -7,7 +7,6 @@ import { UsuarioModel } from '../model/usuario.model';
   providedIn: 'root',
 })
 export class RegistroService {
-  
   private apiUrl = 'http://localhost:8080/api/usuarios';
 
   constructor(private http: HttpClient) {}
@@ -15,7 +14,7 @@ export class RegistroService {
     const usuarioEnviar = {
       username: usuario.username,
       email: usuario.email,
-      password: usuario.password
+      password: usuario.password,
     };
     return this.http.post<UsuarioModel>(this.apiUrl, usuarioEnviar);
   }

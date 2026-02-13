@@ -12,7 +12,6 @@ import jakarta.persistence.JoinTable;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
@@ -20,33 +19,35 @@ import jakarta.persistence.Table;
 @Table(name = "usuarios")
 public class Usuario {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    private String username;
-    private String email;
-    private String password;
-    private LocalDate fechaRegistro = LocalDate.now();;
-    private boolean activo = true; 
+	private String username;
+	private String email;
+	private String password;
+	private LocalDate fechaRegistro = LocalDate.now();;
+	private boolean activo = true;
 
-    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
-    private Perfil perfil;
+	@OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL)
+	private Perfil perfil;
 
-    @ManyToOne
-    @JoinColumn(name = "rol_id")  
-    private Rol rol;
+	@ManyToOne
+	@JoinColumn(name = "rol_id")
+	private Rol rol;
 
-    public Usuario() {
-    }
-    public Usuario(Long id, String username, String password, String email, Rol rol) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.email = email;
-        this.rol = rol;
-    }
-    /*GET Y SET*/
+	public Usuario() {
+	}
+
+	public Usuario(Long id, String username, String password, String email, Rol rol) {
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.rol = rol;
+	}
+
+	/* GET Y SET */
 	public Long getId() {
 		return id;
 	}
@@ -104,18 +105,18 @@ public class Usuario {
 	}
 
 	public Rol getRol() {
-	    return rol;
+		return rol;
 	}
 
 	public void setRol(Rol rol) {
-	    this.rol = rol;
+		this.rol = rol;
 	}
-    
-    /* toString*/
+
+	/* toString */
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", username=" + username + ", email=" + email + ", password=" + password
 				+ ", fechaRegistro=" + fechaRegistro + ", activo=" + activo + "]";
 	}
-	
+
 }

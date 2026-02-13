@@ -12,24 +12,24 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class PerfilServiceImpl implements PerfilService{
+public class PerfilServiceImpl implements PerfilService {
 
 	@Autowired
-    private PerfilRepository perfilRepository;
+	private PerfilRepository perfilRepository;
 
-    public List<Perfil> findAll() {
-        return perfilRepository.findAll();
-    }
+	public List<Perfil> findAll() {
+		return perfilRepository.findAll();
+	}
 
-    public Perfil findById(Long id) {
-        return perfilRepository.findById(id).orElse(null);
-    }
+	public Perfil findById(Long id) {
+		return perfilRepository.findById(id).orElse(null);
+	}
 
-    public Perfil save(Perfil perfil) {
-        return perfilRepository.save(perfil);
-    }
+	public Perfil save(Perfil perfil) {
+		return perfilRepository.save(perfil);
+	}
 
-    public void delete(Long id) {
-        perfilRepository.deleteById(id);
-    }
+	public void delete(Long id) {
+		perfilRepository.deleteById(id);
+	}
 }

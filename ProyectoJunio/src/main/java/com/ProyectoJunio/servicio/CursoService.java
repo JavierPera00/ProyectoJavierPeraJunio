@@ -14,4 +14,6 @@ public interface CursoService {
     public Curso save(Curso curso);
 
     public void delete(Long id);
+    
+    public List<Curso> findByTitulo(String titulo);
 }

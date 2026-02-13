@@ -10,16 +10,16 @@ import { NoticiasService } from '../services/noticiasService';
 import { HttpClientModule } from '@angular/common/http';
 import id from '@angular/common/locales/extra/id';
 import { CursoModel } from '../model/curso.model';
+import { UsuarioModel } from '../model/usuario.model';
 
 @Component({
   selector: 'app-admin',
-  imports: [FormsModule,CommonModule, AsyncPipe,HttpClientModule],
+  imports: [FormsModule, CommonModule, AsyncPipe, HttpClientModule],
   templateUrl: './admin.html',
   providers: [DatePipe],
   styleUrl: './admin.css',
 })
 export class Admin implements OnInit {
-
   noticias$!: Observable<NoticiaModel[]>;
   ultimasNoticias$!: Observable<NoticiaModel[]>;
   usuarios$!: Observable<any[]>;
@@ -41,13 +41,13 @@ export class Admin implements OnInit {
 
   constructor(
     private noticiasService: NoticiasService,
-    private adminService: AdminService
+    private adminService: AdminService,
   ) {}
 
   ngOnInit(): void {
     this.cargarNoticias();
     this.cargarUsuarios();
-    this.cargarCursos();   
+    this.cargarCursos();
   }
 
   cargarNoticias() {
@@ -73,7 +73,7 @@ export class Admin implements OnInit {
       descripcion: this.descripcion,
       urlExterna: this.urlExterna,
       urlImagen: this.urlImagen,
-      fechaPublicacion: new Date().toISOString()
+      fechaPublicacion: new Date().toISOString(),
     };
     this.adminService.agregarNoticia(noticia).subscribe({
       next: () => {
@@ -84,7 +84,7 @@ export class Admin implements OnInit {
         this.urlExterna = '';
         this.urlImagen = '';
       },
-      error: () => this.mensaje = 'Error al agregar noticia'
+      error: () => (this.mensaje = 'Error al agregar noticia'),
     });
   }
 
@@ -99,101 +99,153 @@ export class Admin implements OnInit {
       },
       error: () => {
         this.mensaje = 'Error al eliminar la noticia';
-      }
+      },
     });
   }
 
   eliminarUsuario(id: number) {
-      if (!confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
-        return;
-      }
-      this.adminService.eliminarUsuario(id).subscribe({
-        next: () => {
-          this.mensaje = 'Usuario eliminado correctamente';
-          this.cargarUsuarios(); 
-        },
-        error: () => {
-          this.mensaje = 'Error al eliminar el usuario';
-        }
-      });
+    if (!confirm('¿Estás seguro de que quieres eliminar este usuario?')) {
+      return;
+    }
+    this.adminService.eliminarUsuario(id).subscribe({
+      next: () => {
+        this.mensaje = 'Usuario eliminado correctamente';
+        this.cargarUsuarios();
+      },
+      error: () => {
+        this.mensaje = 'Error al eliminar el usuario';
+      },
+    });
+  }
+
+  cargarCursos() {
+    this.cursos$ = this.adminService.cargarCursos();
+  }
+
+  agregarCurso() {
+    if (!this.cursoTitulo || !this.cursoDescripcion || !this.cursoDuracion || !this.cursoUrl) {
+      this.mensaje = 'Todos los campos obligatorios';
+      return;
+    }
+    const curso: CursoModel = {
+      titulo: this.cursoTitulo,
+      descripcion: this.cursoDescripcion,
+      duracion: this.cursoDuracion,
+      imagenUrl: this.cursoImagenUrl,
+      url: this.cursoUrl,
+    };
+    this.adminService.agregarCurso(curso).subscribe({
+      next: () => {
+        this.mensaje = 'Curso agregado';
+        this.limpiarFormularioCurso();
+        this.cargarCursos();
+      },
+      error: () => (this.mensaje = 'Error al agregar curso'),
+    });
+  }
+
+  cargarCursoParaEditar(curso: CursoModel) {
+    this.cursoEditarId = curso.id!;
+    this.cursoTitulo = curso.titulo;
+    this.cursoDescripcion = curso.descripcion;
+    this.cursoDuracion = curso.duracion;
+    this.cursoImagenUrl = curso.imagenUrl!;
+    this.cursoUrl = curso.url;
+  }
+
+  editarCurso() {
+    if (!this.cursoEditarId) return;
+
+    const curso: CursoModel = {
+      titulo: this.cursoTitulo,
+      descripcion: this.cursoDescripcion,
+      duracion: this.cursoDuracion,
+      imagenUrl: this.cursoImagenUrl,
+      url: this.cursoUrl,
+    };
+
+    this.adminService.editarCurso(this.cursoEditarId, curso).subscribe({
+      next: () => {
+        this.mensaje = 'Curso actualizado';
+        this.limpiarFormularioCurso();
+        this.cursoEditarId = null;
+        this.cargarCursos();
+      },
+      error: () => (this.mensaje = 'Error al actualizar curso'),
+    });
+  }
+
+  eliminarCurso(id: number) {
+    if (!confirm('¿Eliminar curso?')) return;
+
+    this.adminService.eliminarCurso(id).subscribe({
+      next: () => {
+        this.mensaje = 'Curso eliminado';
+        this.cargarCursos();
+      },
+      error: () => (this.mensaje = 'Error al eliminar curso'),
+    });
+  }
+
+  limpiarFormularioCurso() {
+    this.cursoTitulo = '';
+    this.cursoDescripcion = '';
+    this.cursoDuracion = '';
+    this.cursoImagenUrl = '';
+    this.cursoUrl = '';
+    this.cursoEditarId = null;
+  }
+
+  emailBusqueda = '';
+  usernameBusqueda = '';
+  usuarioEncontrado: UsuarioModel | null = null;
+
+  buscarUsuarioPorEmail() {
+    if (!this.emailBusqueda) {
+      this.mensaje = 'Ingrese un email';
+      return;
     }
 
-    cargarCursos() {
-  this.cursos$ = this.adminService.cargarCursos();
-}
-
-agregarCurso() {
-  if (!this.cursoTitulo || !this.cursoDescripcion || !this.cursoDuracion || !this.cursoUrl) {
-    this.mensaje = 'Todos los campos obligatorios';
-    return;
+    this.adminService.buscarUsuarioPorEmail(this.emailBusqueda).subscribe({
+      next: (usuario) => {
+        this.usuarioEncontrado = usuario;
+        this.mensaje = 'Usuario encontrado';
+      },
+      error: () => {
+        this.usuarioEncontrado = null;
+        this.mensaje = 'Usuario no encontrado';
+      },
+    });
   }
-  const curso: CursoModel = {
-    titulo: this.cursoTitulo,
-    descripcion: this.cursoDescripcion,
-    duracion: this.cursoDuracion,
-    imagenUrl: this.cursoImagenUrl,
-    url: this.cursoUrl
-  };
-  this.adminService.agregarCurso(curso).subscribe({
-    next: () => {
-      this.mensaje = 'Curso agregado';
-      this.limpiarFormularioCurso();
-      this.cargarCursos();
-    },
-    error: () => this.mensaje = 'Error al agregar curso'
-  });
+
+  buscarUsuarioPorUsername() {
+    if (!this.usernameBusqueda) {
+      this.mensaje = 'Ingrese un username';
+      return;
+    }
+
+    this.adminService.buscarUsuarioPorUsername(this.usernameBusqueda).subscribe({
+      next: (usuario) => {
+        this.usuarioEncontrado = usuario;
+        this.mensaje = 'Usuario encontrado';
+      },
+      error: () => {
+        this.usuarioEncontrado = null;
+        this.mensaje = 'Usuario no encontrado';
+      },
+    });
+  }
+
+  tituloBusquedaCurso = '';
+  cursosFiltrados: CursoModel[] = [];
+
+  buscarCursoPorTitulo() {
+    if (!this.tituloBusquedaCurso) {
+      return;
+    }
+
+    this.adminService.buscarCursoPorTitulo(this.tituloBusquedaCurso).subscribe((data) => {
+      this.cursosFiltrados = data;
+    });
+  }
 }
-
-cargarCursoParaEditar(curso: CursoModel) {
-  this.cursoEditarId = curso.id!;
-  this.cursoTitulo = curso.titulo;
-  this.cursoDescripcion = curso.descripcion;
-  this.cursoDuracion = curso.duracion;
-  this.cursoImagenUrl = curso.imagenUrl!;
-  this.cursoUrl = curso.url;
-}
-
-editarCurso() {
-  if (!this.cursoEditarId) return;
-
-  const curso: CursoModel = {
-    titulo: this.cursoTitulo,
-    descripcion: this.cursoDescripcion,
-    duracion: this.cursoDuracion,
-    imagenUrl: this.cursoImagenUrl,
-    url: this.cursoUrl
-  };
-
-  this.adminService.editarCurso(this.cursoEditarId, curso).subscribe({
-    next: () => {
-      this.mensaje = 'Curso actualizado';
-      this.limpiarFormularioCurso();
-      this.cursoEditarId = null;
-      this.cargarCursos();
-    },
-    error: () => this.mensaje = 'Error al actualizar curso'
-  });
-}
-
-eliminarCurso(id: number) {
-  if (!confirm('¿Eliminar curso?')) return;
-
-  this.adminService.eliminarCurso(id).subscribe({
-    next: () => {
-      this.mensaje = 'Curso eliminado';
-      this.cargarCursos();
-    },
-    error: () => this.mensaje = 'Error al eliminar curso'
-  });
-}
-
-limpiarFormularioCurso() {
-  this.cursoTitulo = '';
-  this.cursoDescripcion = '';
-  this.cursoDuracion = '';
-  this.cursoImagenUrl = '';
-  this.cursoUrl = '';
-  this.cursoEditarId = null;
-}
-}
-

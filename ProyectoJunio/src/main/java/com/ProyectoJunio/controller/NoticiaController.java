@@ -28,7 +28,7 @@ public class NoticiaController {
 	        if (noticia == null) {
 	        	return ResponseEntity.notFound().build();
 	        }
-	        return ResponseEntity.ok(noticia);
+			return ResponseEntity.ok(noticia);
 	    }
 
 	    @PostMapping

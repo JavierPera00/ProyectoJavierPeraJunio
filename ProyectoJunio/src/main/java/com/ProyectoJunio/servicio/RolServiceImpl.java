@@ -12,24 +12,24 @@ import jakarta.transaction.Transactional;
 
 @Service
 @Transactional
-public class RolServiceImpl implements RolService{
+public class RolServiceImpl implements RolService {
 
 	@Autowired
-    private RolRepository rolRepository;
+	private RolRepository rolRepository;
 
-    public List<Rol> findAll() {
-        return rolRepository.findAll();
-    }
+	public List<Rol> findAll() {
+		return rolRepository.findAll();
+	}
 
-    public Rol findById(Long id) {
-        return rolRepository.findById(id).orElse(null);
-    }
+	public Rol findById(Long id) {
+		return rolRepository.findById(id).orElse(null);
+	}
 
-    public Rol save(Rol rol) {
-        return rolRepository.save(rol);
-    }
+	public Rol save(Rol rol) {
+		return rolRepository.save(rol);
+	}
 
-    public void delete(Long id) {
-        rolRepository.deleteById(id);
-    }
+	public void delete(Long id) {
+		rolRepository.deleteById(id);
+	}
 }

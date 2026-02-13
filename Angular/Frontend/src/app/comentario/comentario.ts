@@ -2,13 +2,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ComentarioService } from '../services/comentario-service';
 import { Observable } from 'rxjs/internal/Observable';
-import { ComentarioModel } from '../model/comentarioModel';
 import { CommonModule } from '@angular/common';
+import { ComentarioModel } from '../model/comentarioModel';
 
 @Component({
   selector: 'app-comentario',
   imports: [FormsModule,CommonModule],
   templateUrl: './comentario.html',
+  standalone: true,
   styleUrl: './comentario.css',
 })
 export class Comentario implements OnInit{

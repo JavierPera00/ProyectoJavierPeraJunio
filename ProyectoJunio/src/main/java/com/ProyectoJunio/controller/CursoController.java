@@ -12,61 +12,65 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ProyectoJunio.model.Curso;
 import com.ProyectoJunio.servicio.CursoService;
 
-
-
 @RestController
 @RequestMapping("/api/cursos")
 @CrossOrigin(origins = "*")
 public class CursoController {
-	
+
 	@Autowired
-    private CursoService cursoService;
+	private CursoService cursoService;
 
-    @GetMapping
-    public ResponseEntity<List<Curso>> getAll() {
-        return ResponseEntity.ok(cursoService.findAll());
-    }
+	@GetMapping
+	public ResponseEntity<List<Curso>> getAll() {
+		return ResponseEntity.ok(cursoService.findAll());
+	}
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Curso> getById(@PathVariable Long id) {
-        Curso curso = cursoService.findById(id);
-        if (curso == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(curso);
-    }
+	@GetMapping("/{id}")
+	public ResponseEntity<Curso> getById(@PathVariable Long id) {
+		Curso curso = cursoService.findById(id);
+		if (curso == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(curso);
+	}
 
-    @PostMapping
-    public ResponseEntity<Curso> create(@RequestBody Curso curso) {
-        return ResponseEntity.ok(cursoService.save(curso));
-    }
+	@PostMapping
+	public ResponseEntity<Curso> create(@RequestBody Curso curso) {
+		return ResponseEntity.ok(cursoService.save(curso));
+	}
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Curso> update(@PathVariable Long id, @RequestBody Curso curso) {
-        Curso existing = cursoService.findById(id);
-        if (existing == null) {
-            return ResponseEntity.notFound().build();
-        }
-        existing.setTitulo(curso.getTitulo());
-        existing.setDescripcion(curso.getDescripcion());
-        existing.setDuracion(curso.getDuracion());
-        existing.setImagenUrl(curso.getImagenUrl());
-        existing.setUrl(curso.getUrl());
-        return ResponseEntity.ok(cursoService.save(existing));
-    }
+	@PutMapping("/{id}")
+	public ResponseEntity<Curso> update(@PathVariable Long id, @RequestBody Curso curso) {
+		Curso existing = cursoService.findById(id);
+		if (existing == null) {
+			return ResponseEntity.notFound().build();
+		}
+		existing.setTitulo(curso.getTitulo());
+		existing.setDescripcion(curso.getDescripcion());
+		existing.setDuracion(curso.getDuracion());
+		existing.setImagenUrl(curso.getImagenUrl());
+		existing.setUrl(curso.getUrl());
+		return ResponseEntity.ok(cursoService.save(existing));
+	}
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        Curso existing = cursoService.findById(id);
-        if (existing == null) {
-            return ResponseEntity.notFound().build(); 
-        }
-        cursoService.delete(id); 
-        return ResponseEntity.noContent().build(); 
-    }
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		Curso existing = cursoService.findById(id);
+		if (existing == null) {
+			return ResponseEntity.notFound().build();
+		}
+		cursoService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
+
+	@GetMapping("/buscar")
+	public ResponseEntity<List<Curso>> buscarPorTitulo(@RequestParam String titulo) {
+		return ResponseEntity.ok(cursoService.findByTitulo(titulo));
+	}
 }

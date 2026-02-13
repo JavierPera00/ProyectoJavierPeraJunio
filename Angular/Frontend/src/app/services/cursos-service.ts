@@ -9,7 +9,7 @@ import { CursoModel } from '../model/curso.model';
 export class CursosService {
   private apiCursos = 'http://localhost:8080/api/cursos';
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   cargarCursos(): Observable<CursoModel[]> {
     return this.http.get<CursoModel[]>(this.apiCursos);

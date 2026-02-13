@@ -22,52 +22,52 @@ import com.ProyectoJunio.servicio.PerfilService;
 @CrossOrigin(origins = "*")
 public class PerfilController {
 
-    @Autowired
-    private PerfilService perfilService;
+	@Autowired
+	private PerfilService perfilService;
 
- // GET 
-    @GetMapping
-    public ResponseEntity<List<Perfil>> getAll() {
-        return ResponseEntity.ok(perfilService.findAll());
-    }
+	// GET
+	@GetMapping
+	public ResponseEntity<List<Perfil>> getAll() {
+		return ResponseEntity.ok(perfilService.findAll());
+	}
 
-    // GET 
-    @GetMapping("/{id}")
-    public ResponseEntity<Perfil> getById(@PathVariable Long id) {
-        Perfil perfil = perfilService.findById(id);
-        if (perfil == null) {
-        	return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(perfil);
-    }
+	// GET
+	@GetMapping("/{id}")
+	public ResponseEntity<Perfil> getById(@PathVariable Long id) {
+		Perfil perfil = perfilService.findById(id);
+		if (perfil == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok(perfil);
+	}
 
-    // POST 
-    @PostMapping
-    public ResponseEntity<Perfil> create(@RequestBody Perfil perfil) {
-        return ResponseEntity.ok(perfilService.save(perfil));
-    }
+	// POST
+	@PostMapping
+	public ResponseEntity<Perfil> create(@RequestBody Perfil perfil) {
+		return ResponseEntity.ok(perfilService.save(perfil));
+	}
 
-    // PUT 
-    @PutMapping("/{id}")
-    public ResponseEntity<Perfil> update(@PathVariable Long id, @RequestBody Perfil perfil) {
-        Perfil existing = perfilService.findById(id);
-        if (existing == null) {
-        	return ResponseEntity.notFound().build();
-        }
+	// PUT
+	@PutMapping("/{id}")
+	public ResponseEntity<Perfil> update(@PathVariable Long id, @RequestBody Perfil perfil) {
+		Perfil existing = perfilService.findById(id);
+		if (existing == null) {
+			return ResponseEntity.notFound().build();
+		}
 
-        // Actualizamos los campos según tu modelo actual
-        existing.setCorreo(perfil.getCorreo());
-        existing.setContraseña(perfil.getContraseña());
-        existing.setBio(perfil.getBio());
-        existing.setUsuario(perfil.getUsuario());
+		// Actualizamos los campos según tu modelo actual
+		existing.setCorreo(perfil.getCorreo());
+		existing.setContraseña(perfil.getContraseña());
+		existing.setBio(perfil.getBio());
+		existing.setUsuario(perfil.getUsuario());
 
-        return ResponseEntity.ok(perfilService.save(existing));
-    }
+		return ResponseEntity.ok(perfilService.save(existing));
+	}
 
-    // DELETE 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Long id) {
-        perfilService.delete(id);
-        return ResponseEntity.noContent().build();
-    }
+	// DELETE
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
+		perfilService.delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

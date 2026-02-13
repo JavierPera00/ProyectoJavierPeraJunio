@@ -6,7 +6,7 @@ import { RegistroService } from '../services/registroService';
 
 @Component({
   selector: 'app-registro',
-  imports: [RouterLink,FormsModule],
+  imports: [RouterLink, FormsModule],
   templateUrl: './registro.html',
   styleUrl: './registro.css',
 })
@@ -15,17 +15,25 @@ export class Registro {
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   };
 
   mensaje = '';
 
-  constructor(private router: Router, private registroService: RegistroService) {}
+  constructor(
+    private router: Router,
+    private registroService: RegistroService,
+  ) {}
 
   registrar(event: Event) {
     event.preventDefault();
-    // Validaciones básicas
-    if (!this.datosUsuario.username || !this.datosUsuario.email || !this.datosUsuario.password || !this.datosUsuario.confirmPassword) {
+
+    if (
+      !this.datosUsuario.username ||
+      !this.datosUsuario.email ||
+      !this.datosUsuario.password ||
+      !this.datosUsuario.confirmPassword
+    ) {
       this.mensaje = 'Todos los campos son obligatorios';
       return;
     }
@@ -37,7 +45,7 @@ export class Registro {
     const nuevoUsuario: UsuarioModel = {
       username: this.datosUsuario.username,
       email: this.datosUsuario.email,
-      password: this.datosUsuario.password
+      password: this.datosUsuario.password,
     };
 
     this.registroService.registrar(nuevoUsuario).subscribe({
@@ -52,7 +60,7 @@ export class Registro {
       error: (err) => {
         console.error(err);
         this.mensaje = 'Error al registrar usuario. Revisa los datos.';
-      }
+      },
     });
   }
 
