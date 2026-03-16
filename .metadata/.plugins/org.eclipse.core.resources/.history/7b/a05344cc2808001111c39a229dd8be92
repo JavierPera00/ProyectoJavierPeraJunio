@@ -1,7 +1,0 @@
-package com.ProyectoJunio.model;
-
-@Entity
-@Table(name = "comentarios")
-public class Comentario {
-
-}

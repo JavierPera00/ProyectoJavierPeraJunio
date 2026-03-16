@@ -8,7 +8,7 @@
           class="card news-card h-100 shadow-sm"
           [ngClass]="{ 'border-danger border-3': i === 0 }"
         >
-          <img [src]="noticia.urlImagen" class="card-img-top" [alt]="noticia.titulo" />
+          <img [src]="noticia.urlImagen" class="card-img-top" [alt]="noticia.titulo" alt="noticiaImg"/>
 
           <div class="card-body">
             <h5 class="card-title" [ngClass]="{ 'text-danger': i === 0 }">

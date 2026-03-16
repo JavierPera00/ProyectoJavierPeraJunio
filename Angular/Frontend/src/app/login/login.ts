@@ -33,7 +33,7 @@ export class Login {
         return;
       }
       const usuario = await res.json();
-      // Guardar usuario
+
       localStorage.setItem('usuarioLogueado', JSON.stringify(usuario));
 
       const appComp = (window as any).appRoot as any;

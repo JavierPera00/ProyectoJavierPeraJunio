@@ -20,10 +20,7 @@ export class Perfil {
   toggleMostrarPassword() {
     this.mostrarPassword = !this.mostrarPassword;
   }
-  constructor(
-    private router: Router,
-    private perfilService: PerfilService,
-  ) {}
+  constructor(private router: Router,private perfilService: PerfilService) {}
 
   ngOnInit(): void {
     const usuarioGuardado = localStorage.getItem('usuarioLogueado');
@@ -67,7 +64,6 @@ export class Perfil {
 
     this.perfilService.actualizarUsuario(this.usuario).subscribe({
       next: (actualizado: UsuarioModel) => {
-        // Guardar cambios en localStorage
         localStorage.setItem('usuarioLogueado', JSON.stringify(actualizado));
         this.mensaje = 'Datos actualizados correctamente';
         this.nuevaPassword = '';

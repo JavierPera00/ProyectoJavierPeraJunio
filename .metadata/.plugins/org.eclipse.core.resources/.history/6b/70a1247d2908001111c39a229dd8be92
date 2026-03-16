@@ -1,7 +1,0 @@
-package com.ProyectoJunio.servicio;
-
-public interface ComentarioService {
-
-    public List<Comentario> getAllComentarios();
-    public Comentario guardarComentario(Comentario c);
-}

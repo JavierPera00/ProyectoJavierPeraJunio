@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
   standalone: true,
 })
 export class Noticias implements OnInit {
+
   noticias!: Observable<NoticiaModel[]>;
 
   constructor(private servicio: NoticiasService) {}

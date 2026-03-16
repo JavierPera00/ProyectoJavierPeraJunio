@@ -20,10 +20,7 @@ export class Registro {
 
   mensaje = '';
 
-  constructor(
-    private router: Router,
-    private registroService: RegistroService,
-  ) {}
+  constructor(private router: Router,private registroService: RegistroService ) {}
 
   registrar(event: Event) {
     event.preventDefault();
