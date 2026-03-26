@@ -31,6 +31,7 @@
 		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
 		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
 		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\perav\Desktop\Paginas Web\ProyectoJavierPeraJunio\Backend"/>
 			<item value="C:\Users\perav\Desktop\Paginas Web\ProyectoJavierPeraJunio\ProyectoJunio"/>
 			<item value="C:\Users\perav\Desktop\DAW2\ProyectoBelen\ProyectoJunio\src"/>
 			<item value="C:\Users\perav\Desktop\DAW2\EntornoServidorJava"/>
