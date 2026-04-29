@@ -1,66 +1,179 @@
-
-.section-title {
-  font-family: 'Gravitas One', cursive;
-  color: #fffb00;
-  text-shadow: 1px 1px 4px #333;
-  text-align: center;
-  margin-bottom: 2rem;
+.cursos-page {
+  min-height: auto;
+  padding: 60px 2rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
-.course-card {
+.cursos-header {
+  margin-bottom: 3rem;
+}
+
+.page-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: #00e5ff;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.page-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #e0e6f0;
+}
+
+.page-title span {
+  color: #f5e642;
+}
+
+/* ── GRID ── */
+.cursos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* ── CARD ── */
+.curso-card {
+  background: #111820;
+  border: 1px solid rgba(0,170,255,0.15);
+  border-radius: 4px;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  height: 100%;
-  border-radius: 12px;
-  transition:
-    transform 0.3s,
-    box-shadow 0.3s;
+  transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+  position: relative;
+}
+
+.curso-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #00aaff, #00e5ff);
+}
+
+.curso-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(0,170,255,0.4);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.4);
+}
+
+/* ── IMAGEN ── */
+.curso-img-wrap {
   overflow: hidden;
 }
-.course-card .card-body {
-  flex: 1 1 auto;
+
+.curso-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s;
+}
+
+.curso-card:hover .curso-img {
+  transform: scale(1.04);
+}
+
+/* ── BODY ── */
+.curso-body {
+  padding: 1.25rem;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
-.course-card .d-flex {
-  margin-top: auto;
-}
-.course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+
+.curso-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #e0e6f0;
+  margin-bottom: 0.5rem;
+  line-height: 1.4;
 }
 
-.btn-course {
-  background: linear-gradient(45deg, #ff6a00, #ee0979);
-  color: #fff;
-  font-weight: bold;
-  border-radius: 50px;
-  transition: all 0.3s;
-  border: none;
-}
-
-.btn-course:hover {
-  background: linear-gradient(45deg, #ee0979, #ff6a00);
-  color: #fff;
-}
-
-.course-card .card-footer {
-  background: #f8f9fa;
-  color: #555;
-  font-size: 0.9rem;
-  font-weight: 500;
-}
-
-.course-card .card-img-top {
-  height: 225px;
-  object-fit: cover;
-}
-
-.course-card .card-text {
+.curso-desc {
+  font-size: 0.85rem;
+  color: #6b7f94;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex: 1;
   min-height: 60px;
 }
 
-.course-card .btn-group {
+/* ── FOOTER ── */
+.curso-footer {
   display: flex;
-  gap: 0.5rem;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid rgba(0,170,255,0.1);
+  padding-top: 0.875rem;
+  margin-top: auto;
+}
+
+.curso-btn {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 8px 18px;
+  background: #f5e642;
+  color: #080b0f;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+  display: inline-block;
+}
+
+.curso-btn:hover {
+  background: #ffd700;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(245,230,66,0.3);
+}
+
+.curso-duracion {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.68rem;
+  color: #6b7f94;
+  letter-spacing: 1px;
+}
+
+/* ── LOADING ── */
+.noticias-loading {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 4rem;
+  color: #6b7f94;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+}
+
+.loading-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #00e5ff;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%,100% { opacity: 1; box-shadow: 0 0 0 0 rgba(0,229,255,0.4); }
+  50% { opacity: 0.5; box-shadow: 0 0 0 8px rgba(0,229,255,0); }
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .cursos-grid { grid-template-columns: 1fr; }
+  .cursos-page { padding: 40px 1rem 3rem; }
 }

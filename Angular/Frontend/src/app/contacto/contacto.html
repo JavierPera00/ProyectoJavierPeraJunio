@@ -12,8 +12,8 @@
       <div class="contact-info">
         <h3>¿Tienes alguna pregunta?</h3>
         <p>Si tienes sugerencias, quieres reportar una noticia, colaborar en el
-        proyecto o simplemente quieres saber más sobre ciberseguridad, no dudes
-        en escribirnos.</p>
+          proyecto o simplemente quieres saber más sobre ciberseguridad, no dudes
+          en escribirnos.</p>
 
         <div class="contact-item">
           <div class="ci-icon">📧</div>
@@ -43,35 +43,50 @@
       <!-- DERECHA -->
       <div class="contact-right">
         <h3>Envíanos un mensaje</h3>
+
         <div class="form-card">
           <div class="contact-form">
+
+            <!-- NOMBRE -->
             <div class="form-field">
               <label>Nombre</label>
-              <input type="text" placeholder="Tu nombre completo">
+              <input type="text" name="nombre" [(ngModel)]="contacto.nombre" placeholder="Tu nombre completo">
             </div>
+
+            <!-- EMAIL -->
             <div class="form-field">
               <label>Email</label>
-              <input type="email" placeholder="tu@email.com">
+              <input type="email" name="email" [(ngModel)]="contacto.email" placeholder="tu@email.com">
             </div>
+
+            <!-- ASUNTO -->
             <div class="form-field">
               <label>Asunto</label>
-              <select>
-                <option>Sugerencia de contenido</option>
-                <option>Reportar noticia</option>
-                <option>Colaboración</option>
-                <option>Bug o error</option>
-                <option>Otro</option>
+              <select name="asunto" [(ngModel)]="contacto.asunto">
+
+                <option value="Sugerencia de contenido">Sugerencia de contenido</option>
+                <option value="Reportar noticia">Reportar noticia</option>
+                <option value="Colaboración">Colaboración</option>
+                <option value="Bug o error">Bug o error</option>
+                <option value="Otro">Otro</option>
+
               </select>
             </div>
+
+            <!-- MENSAJE -->
             <div class="form-field">
               <label>Mensaje</label>
-              <textarea placeholder="Escribe tu mensaje aquí..."></textarea>
+              <textarea name="mensaje" [(ngModel)]="contacto.mensaje" placeholder="Escribe tu mensaje aquí...">
+        </textarea>
             </div>
-            <button class="btn-primary" type="button"
-              [disabled]="messageSent"
-              (click)="submitForm()">
+
+            <!-- BOTÓN -->
+            <button class="btn-primary" type="button" [disabled]="messageSent" (click)="submitForm()">
+
               {{ messageSent ? '✓ Mensaje enviado' : 'Enviar mensaje' }}
+
             </button>
+
           </div>
         </div>
       </div>

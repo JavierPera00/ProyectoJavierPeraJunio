@@ -1,21 +1,28 @@
-<div class="album py-5">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-12 col-md-6" *ngFor="let curso of cursos | async">
-        <div class="card course-card shadow-sm">
-          <img [src]="curso.imagenUrl" class="card-img-top" alt="{{ curso.titulo }}" />
-          <div class="card-body">
-            <h5 class="card-title">{{ curso.titulo }}</h5>
-            <p class="card-text">{{ curso.descripcion }}</p>
-            <div class="d-flex justify-content-between align-items-center">
-              <div class="btn-group">
-                <a [href]="curso.url" target="_blank" class="btn btn-sm btn-course">Ver</a>
-              </div>
-              <small class="text-body-secondary">{{ curso.duracion }}</small>
-            </div>
-          </div>
+<div class="cursos-page">
+  <div class="cursos-header">
+    <span class="page-tag">// formación gratuita</span>
+    <h1 class="page-title">Cursos de <span>Ciberseguridad</span></h1>
+  </div>
+
+  <div class="cursos-grid">
+    <div class="curso-card" *ngFor="let curso of cursos | async">
+      <div class="curso-img-wrap">
+        <img [src]="curso.imagenUrl" [alt]="curso.titulo" class="curso-img" />
+      </div>
+      <div class="curso-body">
+        <h5 class="curso-title">{{ curso.titulo }}</h5>
+        <p class="curso-desc">{{ curso.descripcion }}</p>
+        <div class="curso-footer">
+          <a [href]="curso.url" target="_blank" class="curso-btn">Ver curso →</a>
+          <span class="curso-duracion">{{ curso.duracion }}</span>
         </div>
       </div>
     </div>
   </div>
+  <ng-template #cargando>
+      <div class="noticias-loading">
+        <div class="loading-dot"></div>
+        <span>Cargando cursos...</span>
+      </div>
+    </ng-template>
 </div>
