@@ -1,77 +1,59 @@
-/* -------------------------- */
-/* Body del mapa              */
-/* -------------------------- */
 body {
-    font-family: Poppins, sans-serif;
-    background-color: rgb(10, 10, 10);
-    margin: 0;
+  font-family: Poppins, sans-serif;
+  background-color: rgb(10, 10, 10);
+  margin: 0;
 }
 
-/* -------------------------- */
-/* Main del mapa              */
-/* -------------------------- */
 .mapa-main {
-    width: 100%;
-    padding-left: 0;
-    padding-right: 0;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
 }
 
-/* Fondo del mapa */
 .mapa-body {
-    background-image: url("/computer.jpg");
-    background-size: cover;
-    background-position: 0% 50%;
-    background-repeat: no-repeat;
-    height: 100%;
-    min-height: 400px;
+  background-image: url('/computer.jpg');
+  background-size: cover;
+  background-position: 0% 50%;
+  background-repeat: no-repeat;
+  height: 100%;
+  min-height: 400px;
 }
 
-/* -------------------------- */
-/* Título del mapa            */
-/* -------------------------- */
 .titulo-mapa {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-size: 2.5rem;
-    color: yellow !important;
-    text-align: center;
-    margin-bottom: 2rem;
-    font-weight: bold !important;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 2.5rem;
+  color: yellow !important;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-weight: bold !important;
 }
 
-/* -------------------------- */
-/* Iframes de mapas           */
-/* -------------------------- */
-
-/* Kaspersky embebido */
 .cybermap-iframe {
-    border: 0;
-    width: 100%;
-    height: 100%;
+  border: 0;
+  width: 100%;
+  height: 100%;
 }
 
-/* Contenedor para recortar Bitdefender */
 .iframe-container {
-    width: 80%;           /* ancho visible */
-    height: 250px;        /* altura visible */
-    overflow: hidden;     /* recorta todo lo que sobresalga */
-    margin: 0 auto;       /* centrado horizontal */
-    position: relative;   /* necesario para mantener iframe dentro */
+  width: 80%;
+  height: 250px;
+  overflow: hidden;
+  margin: 0 auto;
+  position: relative;
 }
 
-/* Iframe recortado de Bitdefender */
 .bitmap-iframe {
-    width: 100%;
-    height: 250px;        /* más alto que el contenedor para recortar */
-    border: none;
-    display: block;
-    pointer-events: none; /* evita que el usuario pueda interactuar */
+  width: 100%;
+  height: 250px;
+  border: none;
+  display: block;
+  pointer-events: none;
 }
 
-/* -------------------------- */
-/* Ratio responsivo           */
-/* -------------------------- */
 .ratio {
-    width: 80%;
-    height: auto;
-    aspect-ratio: 16/9;
+  width: 80%;
+  height: auto;
+  aspect-ratio: 16/9;
+  margin: 0 auto;
 }

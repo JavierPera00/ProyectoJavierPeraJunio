@@ -1,9 +1,12 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Estilos generales */
+html, body {
+    background: #000000;
+}
 body {
     font-family: Poppins, sans-serif;
-    background-color: rgb(10, 10, 10);
+    background: #000000;
 }
 
 /* Logo en navbar */
@@ -88,21 +91,6 @@ body {
 
 /* Estilos para la página de login */
 .login-body {
-    background-image: url("/computer.jpg");
-    background-size: cover;
-    background-position: 0% 50%;
-    background-repeat: no-repeat;
-    height: calc(100vh - 72px);
-    min-height: 400px;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    animation: panBackground 40s ease-in-out infinite;
-}
-
-
-main {
     background-image: url("/computer.jpg");
     background-size: cover;
     background-position: 0% 50%;
@@ -225,4 +213,60 @@ main:hover {
 }
 .navbar-collapse .nav-item {
     margin: 0;
+}
+
+/* Nav y footer global más legibles */
+nav {
+    background: #000000 !important;
+    border-bottom: 2px solid #ffd700 !important;
+    box-shadow: 0 12px 35px rgba(0,0,0,0.85) !important;
+    opacity: 1 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1100 !important;
+}
+nav, nav * {
+    color: #ffffff !important;
+}
+nav a, .nav-links a, .nav-status {
+    color: #ffffff !important;
+    opacity: 1 !important;
+    text-shadow: 0 0 16px rgba(255,255,255,0.65) !important;
+}
+.nav-links a {
+    font-weight: 800 !important;
+}
+.nav-links a:hover, .nav-links a.active {
+    color: #ffd700 !important;
+    text-shadow: 0 0 22px rgba(255,215,0,1) !important;
+}
+
+footer {
+    background: #000000 !important;
+    border-top: 2px solid #ffd700 !important;
+    box-shadow: 0 -12px 35px rgba(0,0,0,0.85) !important;
+    opacity: 1 !important;
+    position: relative !important;
+    z-index: 1000 !important;
+}
+footer, footer * {
+    color: #ffffff !important;
+}
+.footer-logo {
+    color: #ffd700 !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 18px rgba(255,215,0,0.95) !important;
+}
+.footer-links a {
+    color: #ffffff !important;
+    font-weight: 700 !important;
+}
+.footer-links a:hover {
+    color: #ffd700 !important;
+}
+.footer-desc, .footer-copy {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(255,255,255,0.55) !important;
 }

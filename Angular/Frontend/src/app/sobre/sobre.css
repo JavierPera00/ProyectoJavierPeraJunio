@@ -1,0 +1,211 @@
+#sobre {
+  position: relative;
+  z-index: 1;
+}
+
+.page {
+  min-height: auto;
+  padding: 100px 2rem 4rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page-header {
+  margin-bottom: 3rem;
+}
+
+.page-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  letter-spacing: 3px;
+  color: #00e5ff;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+.page-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  letter-spacing: -1px;
+  color: #e0e6f0;
+}
+
+.page-title span {
+  color: #f5e642;
+}
+
+/* ── GRID ── */
+.about-grid {
+  display: flex;
+  flex-direction: row;
+  gap: 3rem;
+  align-items: flex-start;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.derecha {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  margin-top: -13rem;
+}
+
+/* ── IZQUIERDA ── */
+.about-text p {
+  color: #6b7f94;
+  line-height: 1.8;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.tech-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.tech-tag {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 1px;
+  padding: 5px 12px;
+  background: rgba(0,170,255,0.08);
+  border: 1px solid rgba(0,170,255,0.2);
+  color: #00aaff;
+  border-radius: 2px;
+}
+
+.feature-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.feature-item {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  width: 36px;
+  height: 36px;
+  background: rgba(245,230,66,0.1);
+  border: 1px solid rgba(245,230,66,0.2);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+
+.ft-title {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #e0e6f0;
+  margin-bottom: 2px;
+}
+
+.ft-desc {
+  font-size: 0.75rem;
+  color: #6b7f94;
+  line-height: 1.5;
+}
+
+/* ── DERECHA ── */
+.team-card {
+  background: #111820;
+  border: 1px solid rgba(0,170,255,0.15);
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-align: center;
+  margin-top: 7.5rem;
+  margin-bottom: 5rem;
+}
+
+.team-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0066cc, #00e5ff);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin: 0 auto 1rem;
+  border: 2px solid rgba(0,229,255,0.3);
+}
+
+.team-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e0e6f0;
+  margin-bottom: 4px;
+}
+
+.team-role {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: #00e5ff;
+  letter-spacing: 1px;
+}
+
+.team-bio {
+  font-size: 0.82rem;
+  color: #6b7f94;
+  margin-top: 0.75rem;
+  line-height: 1.6;
+}
+
+.objetivos-card {
+  background: #111820;
+  border: 1px solid rgba(0,170,255,0.15);
+  border-radius: 4px;
+  padding: 1.5rem;
+}
+
+.objetivos-title {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: #f5e642;
+  letter-spacing: 1px;
+}
+
+.objetivo-item {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.objetivo-check {
+  color: #00ff88;
+  font-family: 'Space Mono', monospace;
+  font-size: 0.8rem;
+  flex-shrink: 0;
+}
+
+.objetivo-text {
+  font-size: 0.82rem;
+  color: #6b7f94;
+  line-height: 1.5;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .about-grid { flex-direction: column; }
+  .derecha { margin-top: 0; }
+  .feature-list { grid-template-columns: 1fr; }
+}

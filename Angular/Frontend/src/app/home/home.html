@@ -1,218 +1,136 @@
-<div id="main-content">
-  <section id="home">
-    <!-- HERO -->
-    <main class="text-center py-5">
-      <h1 class="fw-bold mb-4 hero-title">Cyber News</h1>
-
-      <!-- Botón Mapa -->
-      <a
-        [routerLink]="['/mapa']"
-        class="btn btn-warning d-inline-flex align-items-center px-4 py-2"
-      >
-        <img src="/logo.png" alt="Mapa" class="btn-icon me-2" />
-        Mapa
-      </a>
-    </main>
-
-    <!-- CARDS TIPO COVER -->
-    <div class="container py-5">
-      <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4">
-        <!-- Card 1: Seguridad -->
-        <div class="col">
-          <div
-            class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-            style="background-image: url('/security-265130_640.jpg')"
-          >
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold card-title">Seguridad</h3>
-
-              <ul class="d-flex list-unstyled mt-auto mb-3">
-                <li class="me-auto">
-                  <img
-                    src="/user.gif"
-                    alt="Seguridad"
-                    width="60"
-                    height="60"
-                    class="rounded-circle border border-white"
-                  />
-                </li>
-                <li class="d-flex align-items-center me-3">
-                  <small>Protección</small>
-                </li>
-                <li class="d-flex align-items-center">
-                  <small>24/7</small>
-                </li>
-              </ul>
-
-              <button
-                class="btn btn-warning text-dark mt-auto"
-                data-bs-toggle="modal"
-                data-bs-target="#modalSeguridad"
-              >
-                Ver más
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 2: Noticias -->
-        <div class="col">
-          <div
-            class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-            style="background-image: url('/breaking news GIF by South Park.gif')"
-          >
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold card-title">Noticias</h3>
-
-              <ul class="d-flex list-unstyled mt-auto mb-3">
-                <li class="me-auto">
-                  <img
-                    src="/search_18307472.gif"
-                    alt="Noticias"
-                    width="60"
-                    height="60"
-                    class="rounded-circle border border-white"
-                  />
-                </li>
-                <li class="d-flex align-items-center me-3">
-                  <small>Actualidad</small>
-                </li>
-                <li class="d-flex align-items-center">
-                  <small>Diario</small>
-                </li>
-              </ul>
-
-              <button
-                class="btn btn-warning text-dark mt-auto"
-                data-bs-toggle="modal"
-                data-bs-target="#modalNoticias"
-              >
-                Ver más
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Card 3: Comunidad -->
-        <div class="col">
-          <div
-            class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-            style="background-image: url('/globe GIF by Product Hunt.gif')"
-          >
-            <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-              <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold card-title">Comunidad</h3>
-
-              <ul class="d-flex list-unstyled mt-auto mb-3">
-                <li class="me-auto">
-                  <img
-                    src="/handshake.gif"
-                    alt="Comunidad"
-                    width="60"
-                    height="60"
-                    class="rounded-circle border border-white"
-                  />
-                </li>
-                <li class="d-flex align-items-center me-3">
-                  <small>Usuarios</small>
-                </li>
-                <li class="d-flex align-items-center">
-                  <small>Colaboración</small>
-                </li>
-              </ul>
-
-              <button
-                class="btn btn-warning text-dark mt-auto"
-                data-bs-toggle="modal"
-                data-bs-target="#modalComunidad"
-              >
-                Ver más
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+<section class="hero-wrap">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <span class="hero-badge">// PLATAFORMA DE CIBERSEGURIDAD</span>
+    <h1 class="hero-title">
+      <span class="line1">MANTENTE</span>
+      <span class="line2">SEGURO</span>
+    </h1>
+    <p class="hero-desc">
+      Noticias, alertas y recursos de ciberseguridad en tiempo real.
+      Protege tu información, aprende y colabora con la comunidad.
+    </p>
+    <div class="hero-actions">
+      <a routerLink="/noticias" class="btn-primary">Ver Noticias</a>
+      <a routerLink="/mapa" class="btn-outline">Mapa de Ataques</a>
     </div>
-  </section>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat-item">
+    <span class="stat-num">2.3M</span>
+    <span class="stat-label">Dispositivos comprometidos</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">98%</span>
+    <span class="stat-label">Uptime monitoreo</span>
+  </div>
+  <div class="stat-item">
+    <span class="stat-num">24/7</span>
+    <span class="stat-label">Cobertura en vivo</span>
+  </div>
 </div>
 
-<!-- MODALES -->
-<!-- Modal Seguridad -->
-<div
-  class="modal fade"
-  id="modalSeguridad"
-  tabindex="-1"
-  aria-labelledby="modalSeguridadLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-white">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalSeguridadLabel">Seguridad</h5>
-        <button
-          type="button"
-          class="btn-close btn-close-white"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+<div class="home-cards">
+  <div class="home-card" (click)="abrirModal('seguridad')">
+    <div class="hcard-bg" style="background-image: url('/security-265130_640.jpg')"></div>
+    <div class="hcard-overlay"></div>
+    <div class="hcard-body">
+      <span class="card-tag tag-red">SEGURIDAD</span>
+      <h3 class="hcard-title">Seguridad</h3>
+      <p class="hcard-desc">Información avanzada de datos e infraestructura digital.</p>
+      <div class="hcard-footer">
+        <span>Protección · 24/7</span>
+        <span class="hcard-cta">Ver más →</span>
       </div>
-      <div class="modal-body">
-        Nuestra plataforma protege la <span class="fw-bold text-warning">información</span> y la <span class="fst-italic text-info">privacidad</span> de los usuarios mediante <span class="text-success fst-italic">sistemas avanzados de seguridad digital</span>.
-        Además, ofrecemos <span class="fw-bold text-warning">cursos</span> y <span class="fst-italic text-info">recursos educativos</span> que enseñan <span class="fw-bold">buenas prácticas en ciberseguridad</span>, para que puedas aprender y mantenerte protegido mientras navegas y compartes información.
+    </div>
+  </div>
+
+  <div class="home-card" (click)="abrirModal('noticias')">
+    <div class="hcard-bg" style="background-image: url('/breaking news GIF by South Park.gif')"></div>
+    <div class="hcard-overlay"></div>
+    <div class="hcard-body">
+      <span class="card-tag tag-blue">NOTICIAS</span>
+      <h3 class="hcard-title">Noticias</h3>
+      <p class="hcard-desc">Últimas alertas y novedades del mundo de la ciberseguridad.</p>
+      <div class="hcard-footer">
+        <span>Actualidad · Diario</span>
+        <span class="hcard-cta">Ver más →</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-card" (click)="abrirModal('comunidad')">
+    <div class="hcard-bg" style="background-image: url('/globe GIF by Product Hunt.gif')"></div>
+    <div class="hcard-overlay"></div>
+    <div class="hcard-body">
+      <span class="card-tag tag-green">COMUNIDAD</span>
+      <h3 class="hcard-title">Comunidad</h3>
+      <p class="hcard-desc">Colabora, aprende y comparte con miles de usuarios.</p>
+      <div class="hcard-footer">
+        <span>Usuarios · Global</span>
+        <span class="hcard-cta">Ver más →</span>
       </div>
     </div>
   </div>
 </div>
 
-<!-- Modal Noticias -->
-<div
-  class="modal fade"
-  id="modalNoticias"
-  tabindex="-1"
-  aria-labelledby="modalNoticiasLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-white">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalNoticiasLabel">Noticias</h5>
-        <button
-          type="button"
-          class="btn-close btn-close-white"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        Mantente informado con las <span class="fw-bold text-warning">últimas noticias</span> de <span class="fst-italic text-info">ciberseguridad</span>, alertas de seguridad y novedades sobre <span class="fw-bold">protección digital</span>.
-        Aquí encontrarás información <span class="fst-italic text-info">diaria</span> y consejos para <span class="fw-bold text-warning">proteger tus datos y dispositivos</span>.
-      </div>
-    </div>
-  </div>
-</div>
+@if (modalActivo) {
+  <div class="modal-backdrop" (click)="cerrarModal()">
+    <div class="modal-box" (click)="$event.stopPropagation()">
+      <button class="modal-close" (click)="cerrarModal()">✕</button>
 
-<!-- Modal Comunidad -->
-<div
-  class="modal fade"
-  id="modalComunidad"
-  tabindex="-1"
-  aria-labelledby="modalComunidadLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content bg-dark text-white">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modalComunidadLabel">Comunidad</h5>
-        <button
-          type="button"
-          class="btn-close btn-close-white"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="modal-body">
-        Fomentamos la <span class="fw-bold text-warning">participación</span> y <span class="fw-bold text-success">colaboración</span> entre los usuarios.
-        Comparte <span class="fst-italic text-info">ideas</span>, ayuda a otros, y participa en un <span class="fw-bold">entorno seguro y responsable</span> donde todos <span class="fst-italic text-info">aprendemos y crecemos juntos</span>.
-      </div>
+      @if (modalActivo === 'seguridad') {
+        <div class="modal-icon">🛡️</div>
+        <span class="card-tag tag-red">SEGURIDAD</span>
+        <h2 class="modal-title">Seguridad</h2>
+        <p class="modal-text">
+          Ofrecemos cursos y recursos educativos que enseñan
+          <span class="hl-yellow">buenas prácticas en ciberseguridad</span>.
+        </p>
+        <div class="modal-tags">
+          <span class="mtag">Protección</span>
+          <span class="mtag">Privacidad</span>
+          <span class="mtag">24/7</span>
+        </div>
+      }
+
+      @if (modalActivo === 'noticias') {
+        <div class="modal-icon">📡</div>
+        <span class="card-tag tag-blue">NOTICIAS</span>
+        <h2 class="modal-title">Noticias</h2>
+        <p class="modal-text">
+          Mantente informado con las <strong>últimas noticias</strong> de
+          <em>ciberseguridad</em> y novedades sobre
+          <span class="hl-yellow">protección digital</span>.
+          Información <span class="hl-cyan">diaria</span> para proteger
+          tus datos y dispositivos.
+        </p>
+        <div class="modal-tags">
+          <span class="mtag">Actualidad</span>
+          <span class="mtag">Alertas</span>
+          <span class="mtag">Diario</span>
+        </div>
+      }
+
+      @if (modalActivo === 'comunidad') {
+        <div class="modal-icon">🌐</div>
+        <span class="card-tag tag-green">COMUNIDAD</span>
+        <h2 class="modal-title">Comunidad</h2>
+        <p class="modal-text">
+          Fomentamos la <strong>participación</strong> y
+          <span class="hl-green">colaboración</span> entre usuarios.
+          Comparte ideas en un
+          <span class="hl-yellow">entorno seguro y responsable</span>
+          donde todos aprendemos juntos.
+        </p>
+        <div class="modal-tags">
+          <span class="mtag">Usuarios</span>
+          <span class="mtag">Colaboración</span>
+          <span class="mtag">Global</span>
+        </div>
+      }
     </div>
   </div>
-</div>
+}

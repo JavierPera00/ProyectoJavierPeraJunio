@@ -1,0 +1,81 @@
+<section id="contacto">
+  <div class="page">
+
+    <div class="page-header">
+      <span class="page-tag">// ponte en contacto</span>
+      <h1 class="page-title">Contacta con <span>nosotros</span></h1>
+    </div>
+
+    <div class="contact-grid">
+
+      <!-- IZQUIERDA -->
+      <div class="contact-info">
+        <h3>¿Tienes alguna pregunta?</h3>
+        <p>Si tienes sugerencias, quieres reportar una noticia, colaborar en el
+        proyecto o simplemente quieres saber más sobre ciberseguridad, no dudes
+        en escribirnos.</p>
+
+        <div class="contact-item">
+          <div class="ci-icon">📧</div>
+          <div class="ci-text">
+            <div class="ci-label">Email</div>
+            <div class="ci-val">pera.vidal.javier&#64;gmail.com</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="ci-icon">🐙</div>
+          <div class="ci-text">
+            <div class="ci-label">GitHub</div>
+            <div class="ci-val">github.com/JavierPera00/cybernews</div>
+          </div>
+        </div>
+
+        <div class="response-card">
+          <div class="response-label">TIEMPO DE RESPUESTA</div>
+          <div class="response-text">
+            Respondemos en menos de 24 horas en días laborables.
+            Para urgencias de seguridad, usa GitHub Issues.
+          </div>
+        </div>
+      </div>
+
+      <!-- DERECHA -->
+      <div class="contact-right">
+        <h3>Envíanos un mensaje</h3>
+        <div class="form-card">
+          <div class="contact-form">
+            <div class="form-field">
+              <label>Nombre</label>
+              <input type="text" placeholder="Tu nombre completo">
+            </div>
+            <div class="form-field">
+              <label>Email</label>
+              <input type="email" placeholder="tu@email.com">
+            </div>
+            <div class="form-field">
+              <label>Asunto</label>
+              <select>
+                <option>Sugerencia de contenido</option>
+                <option>Reportar noticia</option>
+                <option>Colaboración</option>
+                <option>Bug o error</option>
+                <option>Otro</option>
+              </select>
+            </div>
+            <div class="form-field">
+              <label>Mensaje</label>
+              <textarea placeholder="Escribe tu mensaje aquí..."></textarea>
+            </div>
+            <button class="btn-primary" type="button"
+              [disabled]="messageSent"
+              (click)="submitForm()">
+              {{ messageSent ? '✓ Mensaje enviado' : 'Enviar mensaje' }}
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

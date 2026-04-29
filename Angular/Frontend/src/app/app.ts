@@ -1,14 +1,15 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { Home } from './home/home';
-import { RouterLink, RouterLinkWithHref, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterLinkActive, RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { Comentario } from "./comentario/comentario";
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, RouterLink, Comentario,CommonModule,FormsModule],
+  imports: [RouterOutlet, RouterLink, Comentario,CommonModule,FormsModule, RouterLinkActive, HttpClientModule],
   templateUrl: './app.html',
   styleUrls: ['./app.css'],
 })

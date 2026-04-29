@@ -1,151 +1,62 @@
-<div class="d-flex" style="min-height: 100vh; position: relative">
-  <!-- Sidebar -->
-  <div class="flex-shrink-0 bg-dark d-flex flex-column" style="width: 150px">
-    <div class="d-flex justify-content-center py-4">
-      <a [routerLink]="['/home']" class="navbar-brand d-flex justify-content-center">
-        <img src="/logo.png" alt="CyberNews" width="150" height="90" />
-      </a>
-    </div>
-    <nav class="nav flex-column text-warning px-2">
-      <a [routerLink]="['/home']" class="nav-link text-warning d-flex align-items-center">
-        Home
-      </a>
-      <a [routerLink]="['/noticias']" class="nav-link text-warning d-flex align-items-center">
-         Noticias
-      </a>
-      <a [routerLink]="['/cursos']" class="nav-link text-warning d-flex align-items-center">
-        Cursos
-      </a>
-      <!-- BOTÓN COMENTARIOS -->
-      <button class="btn btn-warning btn-sm mx-2 my-3" (click)="toggleComentarios()">
-        <i class="bi bi-chat-dots"></i> Comentarios
-      </button>
-    </nav>
-    <div class="flex-grow-1"></div>
+<nav>
+  <a class="nav-logo" routerLink="/">
+    <img src="/logo.png" alt="CyberNews Logo" />
+  </a>
+  <ul class="nav-links">
+    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
+    <li><a routerLink="/mapa"      routerLinkActive="active">Mapa</a></li>
+    <li><a routerLink="/noticias"  routerLinkActive="active">Noticias</a></li>
+    <li><a routerLink="/cursos"    routerLinkActive="active">Cursos</a></li>
+    <li><a routerLink="/sobre"     routerLinkActive="active">Sobre</a></li>
+    <li><a routerLink="/contacto"  routerLinkActive="active">Contacto</a></li>
+  </ul>
+  <div class="nav-status">
+    <div class="status-dot"></div>
+    LIVE FEED
   </div>
 
-  <div class="flex-grow-1 d-flex flex-column" style="padding-bottom: 150px">
-    <!-- Navbar -->
-    <nav class="navbar navbar-dark bg-dark px-3">
-      <div class="container-fluid d-flex align-items-center justify-content-between">
-
-        <div class="d-flex align-items-center ms-auto">
-          <div class="dropdown">
-            <a
-              href="#"
-              class="d-flex align-items-center text-warning text-decoration-none dropdown-toggle"
-              data-bs-toggle="dropdown"
-            >
-              <img src="OIP (1).webp" width="32" height="32" class="rounded-circle me-2" />
-              <strong>{{ usuarioNombre }}</strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-              <li><a class="dropdown-item" [routerLink]="['/login']">Iniciar sesión</a></li>
-              <li>
-                <a class="dropdown-item d-flex align-items-center" [routerLink]="['/perfil']">
-                  <i class="bi bi-people-circle me-2"></i> Perfil
-                </a>
-              </li>
-              <li><hr class="dropdown-divider" /></li>
-              <li>
-                <a class="dropdown-item" href="#" (click)="cerrarSesion()"> Cerrar sesión </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </nav>
-
-    <!-- Contenido -->
-    <div class="flex-grow-1 overflow-auto">
-      <router-outlet></router-outlet>
-    </div>
+</nav>
+<div class="ticker-wrap" style="position:fixed;top:64px;left:0;right:0;z-index:999;">
+  <div class="ticker-label">SEGURIDAD</div>
+  <div class="ticker-content">
+    <span class="ticker-item"><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span>
+    <span class="ticker-item"><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span>
+    <span class="ticker-item"><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span>
+    <span class="ticker-item"><span>PRIVACIDAD</span> · Evita redes WiFi públicas sin VPN</span>
+    <span class="ticker-item"><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span>
+    <span class="ticker-item"><span>CONSEJO</span> · Descarga software solo de fuentes oficiales</span>
+    <span class="ticker-item"><strong>PROTECCIÓN</strong> · Usa un gestor de contraseñas</span>
+    <span class="ticker-item"><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span>
+    <span class="ticker-item"><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span>
+    <span class="ticker-item"><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span>
+    <span class="ticker-item"><span>PRIVACIDAD</span> · Evita redes WiFi públicas sin VPN</span>
+    <span class="ticker-item"><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span>
+    <span class="ticker-item"><span>CONSEJO</span> · Revisa permisos de apps en tu móvil</span>
+    <span class="ticker-item"><strong>DEFENSA</strong> · No reutilices contraseñas en diferentes servicios</span>
   </div>
-
-  <footer
-    class="bg-dark text-white"
-    style="position: fixed; bottom: 0; left: 0; width: 100%; padding: 1rem 0"
-  >
-    <div class="container">
-      <div class="row">
-        <div class="col-6 col-md-2 mb-2">
-          <h6>CyberNews</h6>
-          <ul class="nav flex-column small">
-            <li class="nav-item">
-              <a [routerLink]="['/home']" class="nav-link p-0 text-white-50">Home</a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/noticias']" class="nav-link p-0 text-white-50">Noticias</a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/cursos']" class="nav-link p-0 text-white-50">Cursos</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-6 col-md-2 mb-2">
-          <h6>Cuenta</h6>
-          <ul class="nav flex-column small">
-            <li class="nav-item">
-              <a [routerLink]="['/perfil']" class="nav-link p-0 text-white-50">Perfil</a>
-            </li>
-            <li class="nav-item">
-              <a [routerLink]="['/login']" class="nav-link p-0 text-white-50">Login</a>
-            </li>
-          </ul>
-        </div>
-
-        <div class="col-6 col-md-2 mb-2">
-          <h6>Legal</h6>
-          <ul class="nav flex-column small">
-            <li class="nav-item"><a href="#" class="nav-link p-0 text-white-50">Privacidad</a></li>
-            <li class="nav-item"><a href="#" class="nav-link p-0 text-white-50">Términos</a></li>
-          </ul>
-        </div>
-
-        <div class="col-md-6 mb-2 d-flex flex-column align-items-md-end">
-          <div class="d-flex align-items-center mb-1">
-            <img src="/logo.png" alt="CyberNews" class="footer-logo me-2" style="height: 24px" />
-            <span class="fw-bold">CyberNews</span>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="d-flex justify-content-between align-items-center mt-2 pt-2 border-top border-secondary small"
-      >
-        <span class="text-white-50">© 2026 CyberNews. Todos los derechos reservados.</span>
-        <ul class="list-unstyled d-flex mb-0">
-          <li class="ms-2">
-            <a class="text-white-50" href="#" aria-label="Instagram"
-              ><i class="bi bi-instagram"></i
-            ></a>
-          </li>
-          <li class="ms-2">
-            <a class="text-white-50" href="#" aria-label="Facebook"
-              ><i class="bi bi-facebook"></i
-            ></a>
-          </li>
-          <li class="ms-2">
-            <a class="text-white-50" href="#" aria-label="Twitter"><i class="bi bi-twitter"></i></a>
-          </li>
-          <li class="ms-2">
-            <a class="text-white-50" href="#" aria-label="LinkedIn"
-              ><i class="bi bi-linkedin"></i
-            ></a>
-          </li>
-          <li class="ms-2">
-            <a class="text-white-50" href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
-          </li>
-          <li class="ms-2">
-            <a class="text-white-50" href="#" aria-label="TikTok"><i class="bi bi-tiktok"></i></a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-  <app-comentario
-    *ngIf="mostrarComentarios"
-    (cerrarComentarios)="toggleComentarios()">
-  </app-comentario>
 </div>
+<main class="app-content">
+  <router-outlet></router-outlet>
+</main>
+<!-- FOOTER -->
+
+<footer>
+  <div class="footer-logo">⬡ CYBERNEWS</div>
+  <p class="footer-desc">
+    Plataforma educativa de ciberseguridad. Mantente informado, mantente seguro.
+  </p>
+  <div class="footer-links">
+    <a routerLink="/">Inicio</a>
+    <a routerLink="/mapa">Mapa</a>
+    <a routerLink="/noticias">Noticias</a>
+    <a routerLink="/cursos">Cursos</a>
+    <a routerLink="/sobre">Sobre</a>
+    <a routerLink="/contacto">Contacto</a>
+  </div>
+  <div class="footer-copy">
+    © 2025 CyberNews · Proyecto de Javier Pera Vidal · Todos los derechos reservados
+  </div>
+</footer>
+
+<app-comentario *ngIf="mostrarComentarios" (cerrarComentarios)="toggleComentarios()">
+</app-comentario>

@@ -2,24 +2,13 @@
   <main class="mapa-main py-5 mapa-body">
     <div class="ratio ratio-16x9 mb-4">
       <iframe
-        src="https://cybermap.kaspersky.com/es"
-        class="cybermap-iframe"
-        title="Mapa de ciberataques de Kaspersky"
-        allowfullscreen
+        src="https://xscript.net/cyber-attack-map"
+        width="100%"
+        height="500"
+        style="border: 0"
         loading="lazy"
       >
       </iframe>
     </div>
-    <div class="iframe-container mb-4">
-      <iframe
-        src="https://threatmap.bitdefender.com/"
-        class="bitmap-iframe"
-        title="Mapa de ciberataques Bitdefender"
-        allowfullscreen
-        loading="lazy"
-      >
-      </iframe>
-    </div>
-    <button [routerLink]="['/home']" class="btn btn-warning">Volver</button>
   </main>
 </section>

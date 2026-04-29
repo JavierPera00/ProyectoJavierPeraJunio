@@ -1,12 +1,22 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkWithHref, RouterOutlet } from '@angular/router';
+import { Component, ViewEncapsulation } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule],
   templateUrl: './home.html',
-  styleUrl: './home.css',
+  styleUrls: ['./home.css'],
+  encapsulation: ViewEncapsulation.None
 })
 export class Home {
+  modalActivo: string | null = null;
 
+  abrirModal(tipo: string) {
+    this.modalActivo = tipo;
+  }
+
+  cerrarModal() {
+    this.modalActivo = null;
+  }
 }

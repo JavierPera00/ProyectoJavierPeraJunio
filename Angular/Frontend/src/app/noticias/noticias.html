@@ -1,44 +1,46 @@
-<div class="container py-5">
-  <h1 class="text-center mb-5 section-title">Últimas Noticias de Ciberseguridad</h1>
+<div class="noticias-page">
+  <div class="noticias-header">
+    <span class="page-tag">// feed en vivo</span>
+    <h1 class="page-title">Últimas <span>Noticias</span></h1>
+  </div>
 
-  <div class="row g-4">
+  <div class="noticias-grid">
     <ng-container *ngIf="noticias | async as listaNoticias; else cargando">
-      <div class="col-md-6 col-lg-4" *ngFor="let noticia of listaNoticias; let i = index">
-        <div
-          class="card news-card h-100 shadow-sm"
-          [ngClass]="{ 'border-danger border-3': i === 0 }"
-        >
-          <img [src]="noticia.urlImagen" class="card-img-top" [alt]="noticia.titulo" alt="noticiaImg"/>
+      <div
+        class="noticia-card"
+        *ngFor="let noticia of listaNoticias; let i = index"
+        [class.noticia-featured]="i === 0"
+      >
+        <div class="noticia-img-wrap">
+          <img [src]="noticia.urlImagen" [alt]="noticia.titulo" class="noticia-img"/>
+          <span class="noticia-badge" *ngIf="i === 0">BREAKING</span>
+        </div>
 
-          <div class="card-body">
-            <h5 class="card-title" [ngClass]="{ 'text-danger': i === 0 }">
-              {{ noticia.titulo }}
-            </h5>
+        <div class="noticia-body">
+          <h5 class="noticia-title" [class.title-featured]="i === 0">
+            {{ noticia.titulo }}
+          </h5>
+          <p class="noticia-desc">{{ noticia.descripcion }}</p>
 
-            <p class="card-text">
-              {{ noticia.descripcion }}
-            </p>
+            [href]="noticia.urlExterna"
+            target="_blank"
+            class="noticia-btn"
+            [class.btn-featured]="i === 0"
+          > <a>
+            Leer más →
+          </a>
+        </div>
 
-            <a
-              [href]="noticia.urlExterna"
-              target="_blank"
-              class="btn btn-news"
-              [ngClass]="{ 'btn-danger': i === 0 }"
-            >
-              Leer más
-            </a>
-          </div>
-
-          <div class="card-footer text-center news-date">
-            {{ noticia.fechaPublicacion | date: 'dd MMMM yyyy' }}
-          </div>
+        <div class="noticia-footer">
+          {{ noticia.fechaPublicacion | date: 'dd MMMM yyyy' }}
         </div>
       </div>
     </ng-container>
 
     <ng-template #cargando>
-      <div class="col-12 text-center">
-        <p>Cargando noticias...</p>
+      <div class="noticias-loading">
+        <div class="loading-dot"></div>
+        <span>Cargando noticias...</span>
       </div>
     </ng-template>
   </div>
