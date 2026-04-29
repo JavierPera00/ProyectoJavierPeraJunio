@@ -19,8 +19,8 @@
 
 <div class="stats-bar">
   <div class="stat-item">
-    <span class="stat-num">2.3M</span>
-    <span class="stat-label">Dispositivos comprometidos</span>
+    <span class="stat-num">+500 M</span>
+    <span class="stat-label">Dispositivos afectados</span>
   </div>
   <div class="stat-item">
     <span class="stat-num">98%</span>
@@ -48,7 +48,7 @@
   </div>
 
   <div class="home-card" (click)="abrirModal('noticias')">
-    <div class="hcard-bg" style="background-image: url('/breaking news GIF by South Park.gif')"></div>
+    <div class="hcard-bg" style="background-image: url('/korean-hackers.jpg')"></div>
     <div class="hcard-overlay"></div>
     <div class="hcard-body">
       <span class="card-tag tag-blue">NOTICIAS</span>
@@ -62,7 +62,7 @@
   </div>
 
   <div class="home-card" (click)="abrirModal('comunidad')">
-    <div class="hcard-bg" style="background-image: url('/globe GIF by Product Hunt.gif')"></div>
+    <div class="hcard-bg" style="background-image: url('/iran-hackers.jpg')"></div>
     <div class="hcard-overlay"></div>
     <div class="hcard-body">
       <span class="card-tag tag-green">COMUNIDAD</span>
@@ -82,7 +82,7 @@
       <button class="modal-close" (click)="cerrarModal()">✕</button>
 
       @if (modalActivo === 'seguridad') {
-        <div class="modal-icon">🛡️</div>
+        <div class="modal-icon"><i class="bi bi-fingerprint" style="font-size: 2rem;color: white;"></i></div>
         <span class="card-tag tag-red">SEGURIDAD</span>
         <h2 class="modal-title">Seguridad</h2>
         <p class="modal-text">
@@ -97,7 +97,7 @@
       }
 
       @if (modalActivo === 'noticias') {
-        <div class="modal-icon">📡</div>
+        <div class="modal-icon"><i class="bi bi-newspaper" style="font-size: 2rem;color: white;"></i></div>
         <span class="card-tag tag-blue">NOTICIAS</span>
         <h2 class="modal-title">Noticias</h2>
         <p class="modal-text">
@@ -115,7 +115,7 @@
       }
 
       @if (modalActivo === 'comunidad') {
-        <div class="modal-icon">🌐</div>
+        <div class="modal-icon"><i class="bi bi-globe-europe-africa" style="font-size: 2rem;color: white;"></i></div>
         <span class="card-tag tag-green">COMUNIDAD</span>
         <h2 class="modal-title">Comunidad</h2>
         <p class="modal-text">

@@ -7,6 +7,7 @@ import { Perfil } from './perfil/perfil';
 import { Cursos } from './cursos/cursos';
 import { Sobre } from './sobre/sobre';
 import { Contacto } from './contacto/contacto';
+import { Test } from './test/test';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -18,5 +19,6 @@ export const routes: Routes = [
   { path: 'cursos', component: Cursos },
   { path: 'sobre', component: Sobre },
   { path: 'contacto', component: Contacto },
+  { path: 'test', component: Test },
   { path: '**', component: Home },
 ];

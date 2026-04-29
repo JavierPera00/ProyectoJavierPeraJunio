@@ -12,7 +12,7 @@
         [class.noticia-featured]="i === 0"
       >
         <div class="noticia-img-wrap">
-          <img [src]="noticia.urlImagen" [alt]="noticia.titulo" class="noticia-img"/>
+          <img [src]="noticia.urlImagen" [alt]="noticia.titulo" class="noticia-img" />
           <span class="noticia-badge" *ngIf="i === 0">BREAKING</span>
         </div>
 
@@ -20,13 +20,15 @@
           <h5 class="noticia-title" [class.title-featured]="i === 0">
             {{ noticia.titulo }}
           </h5>
+
           <p class="noticia-desc">{{ noticia.descripcion }}</p>
 
+          <a
             [href]="noticia.urlExterna"
             target="_blank"
             class="noticia-btn"
             [class.btn-featured]="i === 0"
-          > <a>
+          >
             Leer más →
           </a>
         </div>

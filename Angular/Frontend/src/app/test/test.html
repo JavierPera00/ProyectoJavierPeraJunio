@@ -1,0 +1,134 @@
+<div class="test-page">
+
+  <!-- SELECTOR DE TEST -->
+  @if (!testActivo) {
+    <div class="test-header">
+      <span class="page-tag">// pon a prueba tus conocimientos</span>
+      <h1 class="page-title">Tests de <span>Conocimiento</span></h1>
+      <p class="test-intro">Selecciona una categoría y responde 70 preguntas tipo test.</p>
+    </div>
+
+    <div class="test-grid">
+      <div class="test-card" (click)="iniciarTest('java')">
+        <div class="test-card-icon">☕</div>
+        <div class="test-card-name">Java</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('php')">
+        <div class="test-card-icon">🐘</div>
+        <div class="test-card-name">PHP</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('python')">
+        <div class="test-card-icon">🐍</div>
+        <div class="test-card-name">Python</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('javascript')">
+        <div class="test-card-icon">⚡</div>
+        <div class="test-card-name">JavaScript</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('sql')">
+        <div class="test-card-icon">🗄️</div>
+        <div class="test-card-name">SQL</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('ciberseguridad')">
+        <div class="test-card-icon">🛡️</div>
+        <div class="test-card-name">Ciberseguridad</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('kali')">
+        <div class="test-card-icon">💀</div>
+        <div class="test-card-name">Kali Linux</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('html')">
+        <div class="test-card-icon">🌐</div>
+        <div class="test-card-name">HTML</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+      <div class="test-card" (click)="iniciarTest('css')">
+        <div class="test-card-icon">🎨</div>
+        <div class="test-card-name">CSS</div>
+        <div class="test-card-count">70 preguntas</div>
+      </div>
+    </div>
+  }
+
+  <!-- TEST ACTIVO -->
+  @if (testActivo && !testTerminado) {
+    <div class="test-activo">
+
+      <div class="test-topbar">
+        <button class="btn-volver" (click)="volverAlMenu()">← Volver</button>
+        <div class="test-categoria">
+          <span class="page-tag">{{ testActivo.toUpperCase() }}</span>
+        </div>
+        <div class="test-progreso-txt">
+          {{ preguntaActual + 1 }} / {{ preguntas.length }}
+        </div>
+      </div>
+
+      <div class="test-progreso-bar">
+        <div class="test-progreso-fill"
+          [style.width.%]="((preguntaActual + 1) / preguntas.length) * 100">
+        </div>
+      </div>
+
+      <div class="pregunta-wrap">
+        <div class="pregunta-num">Pregunta {{ preguntaActual + 1 }}</div>
+        <h2 class="pregunta-text">{{ preguntas[preguntaActual].pregunta }}</h2>
+
+        <div class="opciones">
+          <button
+            class="opcion-btn"
+            *ngFor="let opcion of preguntas[preguntaActual].opciones; let i = index"
+            [class.opcion-correcta]="respondida && i === preguntas[preguntaActual].correcta"
+            [class.opcion-incorrecta]="respondida && respuestaSeleccionada === i && i !== preguntas[preguntaActual].correcta"
+            [class.opcion-seleccionada]="respuestaSeleccionada === i"
+            [disabled]="respondida"
+            (click)="responder(i)"
+          >
+            <span class="opcion-letra">{{ letras[i] }}</span>
+            <span class="opcion-texto">{{ opcion }}</span>
+          </button>
+        </div>
+
+        @if (respondida) {
+          <div class="feedback" [class.feedback-ok]="respuestaCorrecta" [class.feedback-ko]="!respuestaCorrecta">
+            {{ respuestaCorrecta ? '✓ Correcto' : '✗ Incorrecto — ' + preguntas[preguntaActual].explicacion }}
+          </div>
+          <button class="btn-siguiente" (click)="siguiente()">
+            {{ preguntaActual + 1 < preguntas.length ? 'Siguiente →' : 'Ver resultados' }}
+          </button>
+        }
+      </div>
+
+    </div>
+  }
+
+  <!-- RESULTADOS -->
+  @if (testTerminado) {
+    <div class="resultados-wrap">
+      <div class="resultados-card">
+        <div class="res-icon">{{ puntuacion >= 50 ? '🏆' : '📚' }}</div>
+        <h2 class="res-titulo">Test completado</h2>
+        <div class="res-score">
+          <span class="res-num">{{ puntuacion }}</span>
+          <span class="res-total">/ {{ preguntas.length }}</span>
+        </div>
+        <div class="res-porcentaje">{{ porcentaje }}% de aciertos</div>
+        <div class="res-nivel" [class.nivel-bien]="porcentaje >= 70" [class.nivel-mal]="porcentaje < 70">
+          {{ porcentaje >= 70 ? '✓ Aprobado' : '✗ Suspendido' }}
+        </div>
+        <div class="res-acciones">
+          <button class="btn-reintentar" (click)="reiniciarTest()">Reintentar</button>
+          <button class="btn-menu" (click)="volverAlMenu()">Cambiar test</button>
+        </div>
+      </div>
+    </div>
+  }
+
+</div>
