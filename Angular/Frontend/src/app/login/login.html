@@ -1,0 +1,59 @@
+<div class="login-page">
+  <div class="login-box">
+    <div class="login-header">
+      <div class="login-logo">⬡</div>
+      <span class="page-tag">// acceso restringido</span>
+      <h1 class="login-title">Área de <span>Clientes</span></h1>
+      <p class="login-desc">Introduce tus credenciales para acceder al panel.</p>
+    </div>
+
+    @if (error) {
+      <div class="login-error">✗ {{ error }}</div>
+    }
+
+    <div class="login-form">
+      <div class="form-field">
+        <label>Usuario</label>
+        <input
+          type="text"
+          [(ngModel)]="username"
+          placeholder="Tu usuario"
+          (keyup.enter)="login()"
+        />
+      </div>
+      <div class="form-field">
+        <label>Contraseña</label>
+        <div class="input-pass-wrap">
+          <input
+            [type]="mostrarPass ? 'text' : 'password'"
+            [(ngModel)]="password"
+            placeholder="Tu contraseña"
+            (keyup.enter)="login()"
+          />
+          <button title="Toggle password visibility" class="toggle-pass" (click)="mostrarPass = !mostrarPass">
+            <i class="bi" style="font-size: 1.25rem; color:white" [ngClass]="mostrarPass ? 'bi-eye-fill' : 'bi-eye-slash-fill'"></i>
+          </button>
+        </div>
+      </div>
+
+      <button class="btn-login" (click)="login()" [disabled]="cargando">
+        {{ cargando ? 'Accediendo...' : 'Acceder →' }}
+      </button>
+    </div>
+
+    <div class="login-footer">
+      <a routerLink="/" class="login-back">← Volver al inicio</a>
+    </div>
+  </div>
+</div>
+<!-- BOTÓN ÁREA DE CLIENTES -->
+<div class="area-clientes-wrap">
+  <a routerLink="/login" class="btn-area-clientes">
+    <span class="bac-icon">🔐</span>
+    <div class="bac-text">
+      <span class="bac-label">// acceso restringido</span>
+      <span class="bac-title">Área de Clientes</span>
+    </div>
+    <span class="bac-arrow">→</span>
+  </a>
+</div>

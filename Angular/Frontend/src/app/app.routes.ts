@@ -8,6 +8,7 @@ import { Cursos } from './cursos/cursos';
 import { Sobre } from './sobre/sobre';
 import { Contacto } from './contacto/contacto';
 import { Test } from './test/test';
+import { Login } from './login/login';
 
 export const routes: Routes = [
   { path: '', component: Home },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'cursos', component: Cursos },
   { path: 'sobre', component: Sobre },
   { path: 'contacto', component: Contacto },
+  { path: 'login', component: Login },
   { path: 'test', component: Test },
   { path: '**', component: Home },
 ];

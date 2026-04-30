@@ -126,6 +126,12 @@ nav {
   white-space: nowrap;
   padding-left: 120px;
 }
+.ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: scroll-ticker 40s linear infinite;
+  width: max-content;
+}
 
 .ticker-item {
   font-family: 'Space Mono', monospace;
@@ -137,6 +143,9 @@ nav {
 .ticker-item strong { color: #ff3b3b; }
 .ticker-item span   { color: #00e5ff; }
 
+.ticker-track {
+  animation: scroll-ticker 60s linear infinite;
+}
 @keyframes scroll-ticker {
   from { transform: translateX(0); }
   to   { transform: translateX(-50%); }

@@ -3,36 +3,199 @@
     <img src="/logo.png" alt="CyberNews Logo" />
   </a>
   <ul class="nav-links">
-    <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Inicio</a></li>
-    <li><a routerLink="/noticias"  routerLinkActive="active">Noticias</a></li>
-    <li><a routerLink="/cursos"    routerLinkActive="active">Cursos</a></li>
-    <li><a routerLink="/test"  routerLinkActive="active">Tests</a></li>
-    <li><a routerLink="/sobre"     routerLinkActive="active">Sobre</a></li>
-    <li><a routerLink="/contacto"  routerLinkActive="active">Contacto</a></li>
+    <li>
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }"
+        >Inicio</a
+      >
+    </li>
+    <li><a routerLink="/noticias" routerLinkActive="active">Noticias</a></li>
+    <li><a routerLink="/cursos" routerLinkActive="active">Cursos</a></li>
+    <li><a routerLink="/test" routerLinkActive="active">Tests</a></li>
+    <li><a routerLink="/sobre" routerLinkActive="active">Sobre</a></li>
+    <li><a routerLink="/contacto" routerLinkActive="active">Contacto</a></li>
   </ul>
   <div class="nav-status">
     <div class="status-dot"></div>
     LIVE FEED
   </div>
-
 </nav>
-<div class="ticker-wrap" style="position:fixed;top:64px;left:0;right:0;z-index:999;">
+<div class="ticker-wrap" style="position: fixed; top: 64px; left: 0; right: 0; z-index: 999">
   <div class="ticker-label">SEGURIDAD</div>
   <div class="ticker-content">
-    <span class="ticker-item"><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span>
-    <span class="ticker-item"><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span>
-    <span class="ticker-item"><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span>
+    <span class="ticker-item"
+      ><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span
+    >
+    <span class="ticker-item"
+      ><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span
+    >
     <span class="ticker-item"><span>PRIVACIDAD</span> · Evita redes WiFi públicas sin VPN</span>
-    <span class="ticker-item"><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span>
-    <span class="ticker-item"><span>CONSEJO</span> · Descarga software solo de fuentes oficiales</span>
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span
+    >
+    <span class="ticker-item"
+      ><span>CONSEJO</span> · Descarga software solo de fuentes oficiales</span
+    >
     <span class="ticker-item"><strong>PROTECCIÓN</strong> · Usa un gestor de contraseñas</span>
-    <span class="ticker-item"><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span>
-    <span class="ticker-item"><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span>
-    <span class="ticker-item"><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span>
+    <span class="ticker-item"
+      ><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span
+    >
+    <span class="ticker-item"
+      ><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span
+    >
     <span class="ticker-item"><span>PRIVACIDAD</span> · Evita redes WiFi públicas sin VPN</span>
-    <span class="ticker-item"><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span>
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span
+    >
     <span class="ticker-item"><span>CONSEJO</span> · Revisa permisos de apps en tu móvil</span>
-    <span class="ticker-item"><strong>DEFENSA</strong> · No reutilices contraseñas en diferentes servicios</span>
+    <span class="ticker-item"
+      ><strong>DEFENSA</strong> · No reutilices contraseñas en diferentes servicios</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · No descargues archivos adjuntos de remitentes desconocidos</span
+    >
+    <span class="ticker-item"
+      ><span>PROTECCIÓN</span> · Usa autenticación biométrica cuando sea posible</span
+    >
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Bloquea tu dispositivo con PIN o contraseña</span
+    >
+    <span class="ticker-item"
+      ><span>PRIVACIDAD</span> · Revisa la configuración de privacidad en redes sociales</span
+    >
+    <span class="ticker-item"><strong>TIP</strong> · Cambia tus contraseñas periódicamente</span>
+    <span class="ticker-item"
+      ><span>DEFENSA</span> · Desactiva Bluetooth y WiFi cuando no los uses</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · Evita introducir datos personales en webs no seguras (http)</span
+    >
+    <span class="ticker-item"
+      ><span>SEGURIDAD</span> · Utiliza antivirus actualizado en tus dispositivos</span
+    >
+    <span class="ticker-item"
+      ><strong>PROTECCIÓN</strong> · Activa copias de seguridad automáticas</span
+    >
+    <span class="ticker-item"><span>TIP</span> · Usa navegadores actualizados y seguros</span>
+    <span class="ticker-item"
+      ><strong>PRIVACIDAD</strong> · No compartas información sensible por redes sociales</span
+    >
+    <span class="ticker-item"><span>DEFENSA</span> · Cierra sesión en dispositivos públicos</span>
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · Comprueba siempre la URL antes de iniciar sesión</span
+    >
+    <span class="ticker-item"
+      ><span>SEGURIDAD</span> · Evita usar USBs desconocidos en tu ordenador</span
+    >
+    <span class="ticker-item"
+      ><strong>PROTECCIÓN</strong> · Usa redes VPN en conexiones públicas</span
+    >
+    <span class="ticker-item"><span>TIP</span> · Elimina cuentas que ya no utilices</span>
+    <span class="ticker-item"
+      ><strong>DEFENSA</strong> · Configura alertas de inicio de sesión en tus cuentas</span
+    >
+    <span class="ticker-item"
+      ><span>PRIVACIDAD</span> · No guardes contraseñas en navegadores públicos</span
+    >
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Mantén actualizado tu sistema operativo</span
+    >
+    <span class="ticker-item"
+      ><span>ALERTA</span> · Desconfía de ofertas demasiado buenas en internet</span
+    >
+
+
+    <span class="ticker-item"
+      ><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span
+    >
+    <span class="ticker-item"
+      ><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span
+    >
+    <span class="ticker-item"><span>PRIVACIDAD</span> · Evita redes WiFi públicas sin VPN</span>
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span
+    >
+    <span class="ticker-item"
+      ><span>CONSEJO</span> · Descarga software solo de fuentes oficiales</span
+    >
+    <span class="ticker-item"><strong>PROTECCIÓN</strong> · Usa un gestor de contraseñas</span>
+    <span class="ticker-item"
+      ><strong>TIP</strong> · Usa contraseñas largas y únicas en cada cuenta</span
+    >
+    <span class="ticker-item"
+      ><span>PROTECCIÓN</span> · Activa la verificación en dos pasos (2FA)</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · No abras enlaces sospechosos en correos o SMS</span
+    >
+    <span class="ticker-item"><span>PRIVACIDAD</span> · Evita redes WiFi públicas sin VPN</span>
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Mantén tu sistema y apps siempre actualizados</span
+    >
+    <span class="ticker-item"><span>CONSEJO</span> · Revisa permisos de apps en tu móvil</span>
+    <span class="ticker-item"
+      ><strong>DEFENSA</strong> · No reutilices contraseñas en diferentes servicios</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · No descargues archivos adjuntos de remitentes desconocidos</span
+    >
+    <span class="ticker-item"
+      ><span>PROTECCIÓN</span> · Usa autenticación biométrica cuando sea posible</span
+    >
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Bloquea tu dispositivo con PIN o contraseña</span
+    >
+    <span class="ticker-item"
+      ><span>PRIVACIDAD</span> · Revisa la configuración de privacidad en redes sociales</span
+    >
+    <span class="ticker-item"><strong>TIP</strong> · Cambia tus contraseñas periódicamente</span>
+    <span class="ticker-item"
+      ><span>DEFENSA</span> · Desactiva Bluetooth y WiFi cuando no los uses</span
+    >
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · Evita introducir datos personales en webs no seguras (http)</span
+    >
+    <span class="ticker-item"
+      ><span>SEGURIDAD</span> · Utiliza antivirus actualizado en tus dispositivos</span
+    >
+    <span class="ticker-item"
+      ><strong>PROTECCIÓN</strong> · Activa copias de seguridad automáticas</span
+    >
+    <span class="ticker-item"><span>TIP</span> · Usa navegadores actualizados y seguros</span>
+    <span class="ticker-item"
+      ><strong>PRIVACIDAD</strong> · No compartas información sensible por redes sociales</span
+    >
+    <span class="ticker-item"><span>DEFENSA</span> · Cierra sesión en dispositivos públicos</span>
+    <span class="ticker-item"
+      ><strong>ALERTA</strong> · Comprueba siempre la URL antes de iniciar sesión</span
+    >
+    <span class="ticker-item"
+      ><span>SEGURIDAD</span> · Evita usar USBs desconocidos en tu ordenador</span
+    >
+    <span class="ticker-item"
+      ><strong>PROTECCIÓN</strong> · Usa redes VPN en conexiones públicas</span
+    >
+    <span class="ticker-item"><span>TIP</span> · Elimina cuentas que ya no utilices</span>
+    <span class="ticker-item"
+      ><strong>DEFENSA</strong> · Configura alertas de inicio de sesión en tus cuentas</span
+    >
+    <span class="ticker-item"
+      ><span>PRIVACIDAD</span> · No guardes contraseñas en navegadores públicos</span
+    >
+    <span class="ticker-item"
+      ><strong>SEGURIDAD</strong> · Mantén actualizado tu sistema operativo</span
+    >
+    <span class="ticker-item"
+      ><span>ALERTA</span> · Desconfía de ofertas demasiado buenas en internet</span
+    >
   </div>
 </div>
 <main class="app-content">
@@ -52,6 +215,7 @@
     <a routerLink="/cursos">Cursos</a>
     <a routerLink="/sobre">Sobre</a>
     <a routerLink="/contacto">Contacto</a>
+    <a routerLink="/login">Perfil</a>
   </div>
   <div class="footer-copy">
     © 2025 CyberNews · Proyecto de Javier Pera Vidal · Todos los derechos reservados

@@ -1,257 +1,219 @@
-<div class="admin-body container py-4">
-  <div class="mb-4">
-    <h2 class="fw-bold">Panel de Administración</h2>
-    <hr />
+<div class="admin-page">
+
+  <!-- TOPBAR -->
+  <div class="admin-topbar">
+    <div class="admin-topbar-left">
+      <span class="page-tag">// panel de control</span>
+      <h1 class="admin-title">Dashboard <span>Admin</span></h1>
+    </div>
+    <div class="admin-live">
+      <div class="status-dot"></div>
+      SISTEMA ACTIVO
+    </div>
   </div>
 
-  <h4 class="mb-3">Gestión de Noticias</h4>
+  <!-- MENSAJE GLOBAL -->
+  @if (mensaje) {
+    <div class="admin-mensaje" [class.admin-mensaje-error]="mensaje.includes('Error')">
+      {{ mensaje }}
+    </div>
+  }
 
-  <div class="row g-4 mb-5">
-    <!-- CREAR NOTICIA -->
-    <div class="col-lg-4">
-      <div class="card shadow h-100">
-        <div class="card-header bg-primary text-white">Nueva Noticia</div>
-
-        <div class="card-body">
-          <input type="text" [(ngModel)]="titulo" class="form-control mb-2" placeholder="Título" />
-
-          <textarea
-            [(ngModel)]="descripcion"
-            class="form-control mb-2"
-            rows="2"
-            placeholder="Descripción"
-          ></textarea>
-
-          <input
-            type="text"
-            [(ngModel)]="urlExterna"
-            class="form-control mb-2"
-            placeholder="URL externa"
-          />
-
-          <input
-            type="text"
-            [(ngModel)]="urlImagen"
-            class="form-control mb-3"
-            placeholder="URL imagen"
-          />
-
-          <button class="btn btn-primary w-100" (click)="agregarNoticia()">Publicar</button>
-        </div>
-      </div>
+  <!-- ══════════════════════════════════════
+       SECCIÓN NOTICIAS
+  ══════════════════════════════════════ -->
+  <div class="admin-section">
+    <div class="section-header">
+      <span class="section-tag tag-red">NOTICIAS</span>
+      <h2 class="section-title">Gestión de Noticias</h2>
     </div>
 
-    <!-- ÚLTIMAS NOTICIAS -->
-    <div class="col-lg-8">
-      <div class="card shadow h-100">
-        <div class="card-header bg-secondary text-white">Últimas Noticias</div>
+    <div class="admin-grid-2">
 
-        <div class="card-body">
-          <button class="btn btn-outline-secondary w-100 mb-3" (click)="mostrarUltimasNoticias()">
-            Cargar
+      <!-- CREAR NOTICIA -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <span class="card-header-icon">📰</span>
+          Nueva Noticia
+        </div>
+        <div class="admin-card-body">
+          <div class="form-field">
+            <label>Título</label>
+            <input type="text" [(ngModel)]="titulo" placeholder="Título de la noticia">
+          </div>
+          <div class="form-field">
+            <label>Descripción</label>
+            <textarea [(ngModel)]="descripcion" rows="3" placeholder="Descripción..."></textarea>
+          </div>
+          <div class="form-field">
+            <label>URL Externa</label>
+            <input type="text" [(ngModel)]="urlExterna" placeholder="https://...">
+          </div>
+          <div class="form-field">
+            <label>URL Imagen</label>
+            <input type="text" [(ngModel)]="urlImagen" placeholder="https://imagen.jpg">
+          </div>
+          <button class="btn-admin-primary" (click)="agregarNoticia()">
+            + Publicar Noticia
           </button>
+        </div>
+      </div>
 
-          <ul class="list-group list-group-flush" *ngIf="ultimasNoticias$ | async as ultimas">
-            <li class="list-group-item" *ngFor="let noticia of ultimas">
-              <strong>{{ noticia.titulo }}</strong>
-              <small class="text-muted d-block">
-                {{ noticia.fechaPublicacion | date: 'dd/MM/yyyy' }}
-              </small>
+      <!-- ÚLTIMAS NOTICIAS -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <span class="card-header-icon">⚡</span>
+          Últimas Noticias
+        </div>
+        <div class="admin-card-body">
+          <button class="btn-admin-outline mb-1rem" (click)="mostrarUltimasNoticias()">
+            Cargar últimas
+          </button>
+          <ul class="admin-list" *ngIf="ultimasNoticias$ | async as ultimas">
+            <li class="admin-list-item" *ngFor="let noticia of ultimas">
+              <div class="ali-title">{{ noticia.titulo }}</div>
+              <div class="ali-meta">{{ noticia.fechaPublicacion | date: 'dd/MM/yyyy' }}</div>
             </li>
           </ul>
         </div>
       </div>
+
     </div>
-  </div>
 
-  <!-- LISTADO NOTICIAS -->
-  <div class="row g-4 mb-5">
-    <div class="col-md-6 col-lg-4" *ngFor="let noticia of noticias$ | async">
-      <div class="card h-100 shadow-sm">
-        <img *ngIf="noticia.urlImagen" [src]="noticia.urlImagen" class="card-img-top" alt="noticias"/>
-
-        <div class="card-body d-flex flex-column">
-          <h5>{{ noticia.titulo }}</h5>
-          <p class="small">{{ noticia.descripcion }}</p>
-
-          <small class="text-muted mb-2">
-            {{ noticia.fechaPublicacion | date: 'dd/MM/yyyy HH:mm' }}
-          </small>
-
-          <button class="btn btn-danger btn-sm mt-auto" (click)="eliminarNoticia(noticia.id)">
-            Eliminar
-          </button>
+    <!-- LISTADO NOTICIAS -->
+    <div class="admin-cards-grid">
+      <div class="news-admin-card" *ngFor="let noticia of noticias$ | async">
+        <div class="nac-img-wrap">
+          <img *ngIf="noticia.urlImagen" [src]="noticia.urlImagen" [alt]="noticia.titulo" class="nac-img"/>
+          <div *ngIf="!noticia.urlImagen" class="nac-img-placeholder">📰</div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <h4 class="mb-3">Gestión de Cursos</h4>
-
-  <!-- BUSCADOR -->
-  <div class="card shadow-sm mb-4">
-    <div class="card-body">
-      <div class="row g-2 align-items-center">
-        <div class="col-md-9">
-          <input
-            type="text"
-            [(ngModel)]="tituloBusquedaCurso"
-            class="form-control"
-            placeholder="Buscar curso por título"
-          />
-        </div>
-        <div class="col-md-3">
-          <button class="btn btn-outline-primary w-100" (click)="buscarCursoPorTitulo()">
-            Buscar
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- RESULTADO BUSQUEDA -->
-  <div *ngIf="cursosFiltrados.length > 0" class="row g-3 mb-4">
-    <div class="col-md-4" *ngFor="let curso of cursosFiltrados">
-      <div class="card shadow border-success">
-        <div class="card-body">
-          <h5 class="text-success">{{ curso.titulo }}</h5>
-          <p>{{ curso.descripcion }}</p>
-          <small class="text-muted">{{ curso.duracion }}</small>
-
-          <a [href]="curso.url" target="_blank" class="btn btn-success btn-sm w-100 mt-2">
-            Ver Curso
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- FORMULARIO CURSO -->
-  <div class="card shadow-sm mb-4">
-    <div class="card-header bg-dark text-white">Crear / Editar Curso</div>
-
-    <div class="card-body">
-      <input type="text" [(ngModel)]="cursoTitulo" class="form-control mb-2" placeholder="Título" />
-
-      <textarea
-        [(ngModel)]="cursoDescripcion"
-        class="form-control mb-2"
-        rows="2"
-        placeholder="Descripción"
-      ></textarea>
-
-      <input
-        type="text"
-        [(ngModel)]="cursoDuracion"
-        class="form-control mb-2"
-        placeholder="Duración"
-      />
-
-      <input
-        type="text"
-        [(ngModel)]="cursoImagenUrl"
-        class="form-control mb-2"
-        placeholder="URL imagen"
-      />
-
-      <input type="text" [(ngModel)]="cursoUrl" class="form-control mb-3" placeholder="URL curso" />
-
-      <button class="btn btn-primary w-100" (click)="agregarCurso()" *ngIf="!cursoEditarId">
-        Agregar Curso
-      </button>
-
-      <button class="btn btn-warning w-100" (click)="editarCurso()" *ngIf="cursoEditarId">
-        Actualizar Curso
-      </button>
-    </div>
-  </div>
-
-  <!-- LISTADO CURSOS -->
-  <div class="row g-4 mb-5">
-    <div class="col-md-6 col-lg-3" *ngFor="let curso of cursos$ | async">
-      <div class="card h-100 shadow-sm">
-        <img [src]="curso.imagenUrl" class="card-img-top" alt="cursos"/>
-
-        <div class="card-body d-flex flex-column">
-          <h6>{{ curso.titulo }}</h6>
-          <p class="small">{{ curso.descripcion }}</p>
-          <small class="text-muted">{{ curso.duracion }}</small>
-
-          <div class="mt-auto d-grid gap-1">
-            <button class="btn btn-warning btn-sm" (click)="cargarCursoParaEditar(curso)">
-              Editar
-            </button>
-
-            <button class="btn btn-danger btn-sm" (click)="eliminarCurso(curso.id!)">
-              Eliminar
-            </button>
-
-            <a [href]="curso.url" target="_blank" class="btn btn-success btn-sm"> Ver </a>
+        <div class="nac-body">
+          <div class="nac-title">{{ noticia.titulo }}</div>
+          <div class="nac-desc">{{ noticia.descripcion }}</div>
+          <div class="nac-footer">
+            <span class="nac-date">{{ noticia.fechaPublicacion | date: 'dd/MM/yyyy' }}</span>
+            <button class="btn-delete" (click)="eliminarNoticia(noticia.id)">Eliminar</button>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <h4 class="mb-3">Gestión de Usuarios</h4>
+  <!-- ══════════════════════════════════════
+       SECCIÓN CURSOS
+  ══════════════════════════════════════ -->
+  <div class="admin-section">
+    <div class="section-header">
+      <span class="section-tag tag-blue">CURSOS</span>
+      <h2 class="section-title">Gestión de Cursos</h2>
+    </div>
 
-  <div class="row g-3 mb-4">
-    <div class="col-md-6">
+    <!-- BUSCADOR -->
+    <div class="admin-search-bar">
       <input
         type="text"
-        [(ngModel)]="emailBusqueda"
-        class="form-control"
-        placeholder="Buscar por email"
+        [(ngModel)]="tituloBusquedaCurso"
+        placeholder="Buscar curso por título..."
+        class="search-input"
       />
-      <button class="btn btn-outline-primary w-100 mt-2" (click)="buscarUsuarioPorEmail()">
-        Buscar
-      </button>
+      <button class="btn-admin-outline" (click)="buscarCursoPorTitulo()">Buscar</button>
     </div>
 
-    <div class="col-md-6">
-      <input
-        type="text"
-        [(ngModel)]="usernameBusqueda"
-        class="form-control"
-        placeholder="Buscar por username"
-      />
-      <button class="btn btn-outline-secondary w-100 mt-2" (click)="buscarUsuarioPorUsername()">
-        Buscar
-      </button>
+    <!-- RESULTADO BÚSQUEDA -->
+    @if (cursosFiltrados.length > 0) {
+      <div class="admin-cards-grid mb-2rem">
+        <div class="result-card" *ngFor="let curso of cursosFiltrados">
+          <div class="result-tag">ENCONTRADO</div>
+          <div class="result-title">{{ curso.titulo }}</div>
+          <div class="result-desc">{{ curso.descripcion }}</div>
+          <div class="result-meta">{{ curso.duracion }}</div>
+          <a [href]="curso.url" target="_blank" class="btn-admin-outline mt-auto">Ver curso →</a>
+        </div>
+      </div>
+    }
+
+    <div class="admin-grid-2">
+
+      <!-- FORMULARIO CURSO -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <span class="card-header-icon">{{ cursoEditarId ? '✏️' : '🎓' }}</span>
+          {{ cursoEditarId ? 'Editar Curso' : 'Nuevo Curso' }}
+        </div>
+        <div class="admin-card-body">
+          <div class="form-field">
+            <label>Título</label>
+            <input type="text" [(ngModel)]="cursoTitulo" placeholder="Título del curso">
+          </div>
+          <div class="form-field">
+            <label>Descripción</label>
+            <textarea [(ngModel)]="cursoDescripcion" rows="3" placeholder="Descripción..."></textarea>
+          </div>
+          <div class="form-field">
+            <label>Duración</label>
+            <input type="text" [(ngModel)]="cursoDuracion" placeholder="Ej: 8 horas">
+          </div>
+          <div class="form-field">
+            <label>URL Imagen</label>
+            <input type="text" [(ngModel)]="cursoImagenUrl" placeholder="https://imagen.jpg">
+          </div>
+          <div class="form-field">
+            <label>URL Curso</label>
+            <input type="text" [(ngModel)]="cursoUrl" placeholder="https://...">
+          </div>
+          @if (!cursoEditarId) {
+            <button class="btn-admin-primary" (click)="agregarCurso()">+ Agregar Curso</button>
+          } @else {
+            <div class="btn-row">
+              <button class="btn-admin-warning" (click)="editarCurso()">✓ Actualizar</button>
+              <button class="btn-admin-outline" (click)="limpiarFormularioCurso()">Cancelar</button>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- STATS CURSOS -->
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <span class="card-header-icon">📊</span>
+          Resumen
+        </div>
+        <div class="admin-card-body">
+          <div class="stat-big">
+            <ng-container *ngIf="cursos$ | async as cursos">
+              <div class="stat-big-num">{{ cursos.length }}</div>
+              <div class="stat-big-label">Cursos publicados</div>
+            </ng-container>
+          </div>
+          <div class="stat-big mt-1rem">
+            <ng-container *ngIf="noticias$ | async as noticias">
+              <div class="stat-big-num">{{ noticias.length }}</div>
+              <div class="stat-big-label">Noticias publicadas</div>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
     </div>
-  </div>
 
-  <!-- RESULTADO USUARIO -->
-  <div *ngIf="usuarioEncontrado" class="card shadow-sm mb-4 border-danger">
-    <div class="card-body">
-      <h5>{{ usuarioEncontrado.username }}</h5>
-      <p class="mb-2">
-        {{ usuarioEncontrado.email }}<br />
-        Rol: {{ usuarioEncontrado.rol?.nombre }}
-      </p>
-      <button class="btn btn-danger w-100" (click)="eliminarUsuario(usuarioEncontrado.id!)">
-        Eliminar Usuario
-      </button>
-    </div>
-  </div>
-
-  <div class="row g-4 mb-5" *ngIf="usuarios$ | async as usuarios">
-    <div class="col-md-6 col-lg-4" *ngFor="let usuario of usuarios">
-      <div class="card shadow-sm h-100">
-        <div class="card-body">
-          <h5>{{ usuario.username }}</h5>
-          <p class="small mb-2">{{ usuario.email }}</p>
-          <span class="badge bg-primary mb-3">{{ usuario.rol?.nombre }}</span>
-
-          <button class="btn btn-outline-danger btn-sm w-100" (click)="eliminarUsuario(usuario.id)">
-            Eliminar
-          </button>
+    <!-- LISTADO CURSOS -->
+    <div class="admin-cards-grid">
+      <div class="curso-admin-card" *ngFor="let curso of cursos$ | async">
+        <div class="cac-img-wrap">
+          <img [src]="curso.imagenUrl" [alt]="curso.titulo" class="cac-img"/>
+        </div>
+        <div class="cac-body">
+          <div class="cac-title">{{ curso.titulo }}</div>
+          <div class="cac-desc">{{ curso.descripcion }}</div>
+          <div class="cac-meta">⏱ {{ curso.duracion }}</div>
+          <div class="cac-actions">
+            <button class="btn-edit" (click)="cargarCursoParaEditar(curso)">Editar</button>
+            <button class="btn-delete" (click)="eliminarCurso(curso.id!)">Eliminar</button>
+            <a [href]="curso.url" target="_blank" class="btn-view">Ver</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <!-- MENSAJE GLOBAL -->
-  <div class="alert alert-success mt-3" *ngIf="mensaje">
-    {{ mensaje }}
-  </div>
+
 </div>
