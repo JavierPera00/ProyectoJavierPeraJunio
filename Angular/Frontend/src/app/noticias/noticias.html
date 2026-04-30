@@ -4,46 +4,69 @@
     <h1 class="page-title">Últimas <span>Noticias</span></h1>
   </div>
 
+  <!-- FILTROS -->
+  <div class="filtros-bar">
+    <div class="filtro-search">
+      <span class="filtro-icon"><i class="bi bi-search" style="font-size: 0.9rem; color: white"></i></span>
+      <input
+        type="text"
+        [(ngModel)]="filtroBusqueda"
+        (ngModelChange)="filtrar()"
+        placeholder="Buscar por nombre..."
+        class="filtro-input"
+      />
+    </div>
+
+    <div class="filtro-select-wrap">
+      <span class="filtro-icon"><i class="bi bi-calendar" style="font-size: 0.9rem; color: rgb(255, 255, 255)"></i></span>
+      <select [(ngModel)]="filtroMes" (ngModelChange)="filtrar()" class="filtro-select">
+        <option value="">Todos los meses</option>
+        <option *ngFor="let mes of meses" [value]="mes.valor">{{ mes.nombre }}</option>
+      </select>
+    </div>
+
+    @if (filtroBusqueda || filtroMes) {
+      <button class="btn-limpiar" (click)="limpiarFiltros()">✕ Limpiar</button>
+    }
+
+    <div class="filtro-resultado">
+      <span class="filtro-count">{{ noticiasFiltradas.length }}</span>
+      <span class="filtro-label">resultado{{ noticiasFiltradas.length !== 1 ? 's' : '' }}</span>
+    </div>
+  </div>
+
+  <!-- GRID -->
   <div class="noticias-grid">
-    <ng-container *ngIf="noticias | async as listaNoticias; else cargando">
+    @if (noticiasFiltradas.length > 0) {
       <div
         class="noticia-card"
-        *ngFor="let noticia of listaNoticias; let i = index"
-        [class.noticia-featured]="i === 0"
+        *ngFor="let noticia of noticiasFiltradas; let i = index"
+        [class.noticia-featured]="i === 0 && !filtroBusqueda && !filtroMes"
       >
         <div class="noticia-img-wrap">
-          <img [src]="noticia.urlImagen" [alt]="noticia.titulo" class="noticia-img" />
-          <span class="noticia-badge" *ngIf="i === 0">BREAKING</span>
+          <img [src]="noticia.urlImagen" [alt]="noticia.titulo" class="noticia-img"/>
+          <span class="noticia-badge" *ngIf="i === 0 && !filtroBusqueda && !filtroMes">BREAKING</span>
         </div>
-
         <div class="noticia-body">
-          <h5 class="noticia-title" [class.title-featured]="i === 0">
+          <h5 class="noticia-title" [class.title-featured]="i === 0 && !filtroBusqueda && !filtroMes">
             {{ noticia.titulo }}
           </h5>
-
           <p class="noticia-desc">{{ noticia.descripcion }}</p>
-
-          <a
-            [href]="noticia.urlExterna"
-            target="_blank"
-            class="noticia-btn"
-            [class.btn-featured]="i === 0"
-          >
+          <a [href]="noticia.urlExterna" target="_blank" class="noticia-btn"
+            [class.btn-featured]="i === 0 && !filtroBusqueda && !filtroMes">
             Leer más →
           </a>
         </div>
-
         <div class="noticia-footer">
           {{ noticia.fechaPublicacion | date: 'dd MMMM yyyy' }}
         </div>
       </div>
-    </ng-container>
-
-    <ng-template #cargando>
-      <div class="noticias-loading">
-        <div class="loading-dot"></div>
-        <span>Cargando noticias...</span>
+    } @else {
+      <div class="sin-resultados">
+        <span class="sr-icon">🔍</span>
+        <span class="sr-text">No se encontraron noticias</span>
+        <button class="btn-limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
       </div>
-    </ng-template>
+    }
   </div>
 </div>

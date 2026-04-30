@@ -209,8 +209,34 @@ footer {
   padding-top: 104px;
   min-height: calc(100vh - 64px);
 }
+@media (max-width: 1024px) {
+  .nav-links {
+    gap: 10px;
+  }
+}
 
 @media (max-width: 768px) {
-  nav { padding: 0 1rem; }
-  .nav-links { display: none; }
+  .nav-links a {
+    font-size: 12px;
+  }
+
+  .nav-status {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .nav-links {
+    gap: 6px;
+  }
+
+  .nav-links a {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-links {
+    display: none; /* aquí ya sí lo ocultas */
+  }
 }

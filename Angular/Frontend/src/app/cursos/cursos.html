@@ -4,25 +4,59 @@
     <h1 class="page-title">Cursos de <span>Ciberseguridad</span></h1>
   </div>
 
-  <div class="cursos-grid">
-    <div class="curso-card" *ngFor="let curso of cursos | async">
-      <div class="curso-img-wrap">
-        <img [src]="curso.imagenUrl" [alt]="curso.titulo" class="curso-img" />
-      </div>
-      <div class="curso-body">
-        <h5 class="curso-title">{{ curso.titulo }}</h5>
-        <p class="curso-desc">{{ curso.descripcion }}</p>
-        <div class="curso-footer">
-          <a [href]="curso.url" target="_blank" class="curso-btn">Ver curso →</a>
-          <span class="curso-duracion">{{ curso.duracion }}</span>
-        </div>
-      </div>
+  <!-- FILTROS -->
+  <div class="filtros-bar">
+    <div class="filtro-search">
+      <span class="filtro-icon"><i class="bi bi-calendar" style="font-size: 0.9rem; color: rgb(255, 255, 255)"></i></span>
+      <input
+        type="text"
+        [(ngModel)]="filtroBusqueda"
+        (ngModelChange)="filtrar()"
+        placeholder="Buscar por nombre..."
+        class="filtro-input"
+      />
+    </div>
+
+    <div class="filtro-select-wrap">
+      <span class="filtro-icon">⏱</span>
+      <select [(ngModel)]="filtroHoras" (ngModelChange)="filtrar()" class="filtro-select">
+        <option value="">Todas las duraciones</option>
+        <option *ngFor="let h of horasOpciones" [value]="h">{{ h }}</option>
+      </select>
+    </div>
+
+    @if (filtroBusqueda || filtroHoras) {
+      <button class="btn-limpiar" (click)="limpiarFiltros()">✕ Limpiar</button>
+    }
+
+    <div class="filtro-resultado">
+      <span class="filtro-count">{{ cursosFiltrados.length }}</span>
+      <span class="filtro-label">curso{{ cursosFiltrados.length !== 1 ? 's' : '' }}</span>
     </div>
   </div>
-  <ng-template #cargando>
-      <div class="noticias-loading">
-        <div class="loading-dot"></div>
-        <span>Cargando cursos...</span>
+
+  <!-- GRID -->
+  <div class="cursos-grid">
+    @if (cursosFiltrados.length > 0) {
+      <div class="curso-card" *ngFor="let curso of cursosFiltrados">
+        <div class="curso-img-wrap">
+          <img [src]="curso.imagenUrl" [alt]="curso.titulo" class="curso-img"/>
+        </div>
+        <div class="curso-body">
+          <h5 class="curso-title">{{ curso.titulo }}</h5>
+          <p class="curso-desc">{{ curso.descripcion }}</p>
+          <div class="curso-footer">
+            <a [href]="curso.url" target="_blank" class="curso-btn">Ver curso →</a>
+            <span class="curso-duracion">{{ curso.duracion }}</span>
+          </div>
+        </div>
       </div>
-    </ng-template>
+    } @else {
+      <div class="sin-resultados">
+        <span class="sr-icon">🎓</span>
+        <span class="sr-text">No se encontraron cursos</span>
+        <button class="btn-limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
+      </div>
+    }
+  </div>
 </div>
