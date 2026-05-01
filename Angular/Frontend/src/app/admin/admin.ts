@@ -15,7 +15,7 @@ import { UsuarioModel } from '../model/usuario.model';
   templateUrl: './admin.html',
   providers: [DatePipe],
   styleUrl: './admin.css',
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
 })
 export class Admin implements OnInit {
   noticias$!: Observable<NoticiaModel[]>;
@@ -41,6 +41,17 @@ export class Admin implements OnInit {
   tituloBusquedaCurso = '';
   cursosFiltrados: CursoModel[] = [];
 
+  // FILTROS NOTICIAS
+  filtroNoticiaNombre = '';
+  filtroNoticiaDia = '';
+  noticiasFiltradas: NoticiaModel[] = [];
+  todasNoticias: NoticiaModel[] = [];
+
+  // FILTROS CURSOS LISTADO
+  filtroCursoNombre = '';
+  cursosFiltradosLista: CursoModel[] = [];
+  todosCursos: CursoModel[] = [];
+
   constructor(
     private noticiasService: NoticiasService,
     private adminService: AdminService,
@@ -53,6 +64,55 @@ export class Admin implements OnInit {
 
   cargarNoticias() {
     this.noticias$ = this.noticiasService.cargarNoticias();
+    this.noticiasService.cargarNoticias().subscribe((data) => {
+      this.todasNoticias = data.sort(
+        (a, b) => new Date(b.fechaPublicacion).getTime() - new Date(a.fechaPublicacion).getTime(),
+      );
+      this.noticiasFiltradas = [...this.todasNoticias];
+    });
+  }
+
+  cargarCursos() {
+    this.cursos$ = this.adminService.cargarCursos();
+    this.adminService.cargarCursos().subscribe((data) => {
+      this.todosCursos = data;
+      this.cursosFiltradosLista = [...data];
+    });
+  }
+
+  filtrarNoticias() {
+    let r = [...this.todasNoticias];
+    if (this.filtroNoticiaNombre.trim()) {
+      const t = this.filtroNoticiaNombre.toLowerCase();
+      r = r.filter((n) => n.titulo.toLowerCase().includes(t));
+    }
+    if (this.filtroNoticiaDia) {
+      r = r.filter((n) => {
+        const fecha = new Date(n.fechaPublicacion).toISOString().split('T')[0];
+        return fecha === this.filtroNoticiaDia;
+      });
+    }
+    this.noticiasFiltradas = r;
+  }
+
+  limpiarFiltrosNoticias() {
+    this.filtroNoticiaNombre = '';
+    this.filtroNoticiaDia = '';
+    this.noticiasFiltradas = [...this.todasNoticias];
+  }
+
+  filtrarCursosLista() {
+    let r = [...this.todosCursos];
+    if (this.filtroCursoNombre.trim()) {
+      const t = this.filtroCursoNombre.toLowerCase();
+      r = r.filter((c) => c.titulo.toLowerCase().includes(t));
+    }
+    this.cursosFiltradosLista = r;
+  }
+
+  limpiarFiltrosCursos() {
+    this.filtroCursoNombre = '';
+    this.cursosFiltradosLista = [...this.todosCursos];
   }
 
   mostrarUltimasNoticias() {
@@ -87,13 +147,12 @@ export class Admin implements OnInit {
   eliminarNoticia(id: number) {
     if (!confirm('¿Eliminar esta noticia?')) return;
     this.adminService.eliminarNoticia(id).subscribe({
-      next: () => { this.mensaje = 'Noticia eliminada'; this.cargarNoticias(); },
+      next: () => {
+        this.mensaje = 'Noticia eliminada';
+        this.cargarNoticias();
+      },
       error: () => (this.mensaje = 'Error al eliminar la noticia'),
     });
-  }
-
-  cargarCursos() {
-    this.cursos$ = this.adminService.cargarCursos();
   }
 
   agregarCurso() {
@@ -109,7 +168,11 @@ export class Admin implements OnInit {
       url: this.cursoUrl,
     };
     this.adminService.agregarCurso(curso).subscribe({
-      next: () => { this.mensaje = 'Curso agregado correctamente'; this.limpiarFormularioCurso(); this.cargarCursos(); },
+      next: () => {
+        this.mensaje = 'Curso agregado correctamente';
+        this.limpiarFormularioCurso();
+        this.cargarCursos();
+      },
       error: () => (this.mensaje = 'Error al agregar el curso'),
     });
   }
@@ -133,7 +196,11 @@ export class Admin implements OnInit {
       url: this.cursoUrl,
     };
     this.adminService.editarCurso(this.cursoEditarId, curso).subscribe({
-      next: () => { this.mensaje = 'Curso actualizado'; this.limpiarFormularioCurso(); this.cargarCursos(); },
+      next: () => {
+        this.mensaje = 'Curso actualizado';
+        this.limpiarFormularioCurso();
+        this.cargarCursos();
+      },
       error: () => (this.mensaje = 'Error al actualizar el curso'),
     });
   }
@@ -141,7 +208,10 @@ export class Admin implements OnInit {
   eliminarCurso(id: number) {
     if (!confirm('¿Eliminar este curso?')) return;
     this.adminService.eliminarCurso(id).subscribe({
-      next: () => { this.mensaje = 'Curso eliminado'; this.cargarCursos(); },
+      next: () => {
+        this.mensaje = 'Curso eliminado';
+        this.cargarCursos();
+      },
       error: () => (this.mensaje = 'Error al eliminar el curso'),
     });
   }
@@ -157,8 +227,8 @@ export class Admin implements OnInit {
 
   buscarCursoPorTitulo() {
     if (!this.tituloBusquedaCurso) return;
-    this.adminService.buscarCursoPorTitulo(this.tituloBusquedaCurso).subscribe(
-      data => this.cursosFiltrados = data
-    );
+    this.adminService
+      .buscarCursoPorTitulo(this.tituloBusquedaCurso)
+      .subscribe((data) => (this.cursosFiltrados = data));
   }
 }

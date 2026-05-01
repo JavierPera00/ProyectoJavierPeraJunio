@@ -80,6 +80,12 @@ export class Test {
           explicacion: 'El método main() es el punto de entrada de cualquier aplicación Java.',
         },
         {
+          pregunta: '¿Qué palabra clave se utiliza para definir una clase en Java?',
+          opciones: ['define', 'class', 'struct', 'object'],
+          correcta: 1,
+          explicacion: 'La palabra clave class se utiliza para declarar una clase en Java.',
+        },
+        {
           pregunta: '¿Qué palabra clave se usa para heredar en Java?',
           opciones: ['implements', 'extends', 'inherits', 'super'],
           correcta: 1,
@@ -2250,6 +2256,53 @@ export class Test {
           explicacion: 'SELECT * FROM retorna todas las columnas de la tabla.',
         },
         {
+          pregunta: '¿Qué hace WHERE en una consulta SQL?',
+          opciones: [
+            'Ordena los resultados',
+            'Filtra los registros según una condición',
+            'Agrupa datos',
+            'Elimina columnas',
+          ],
+          correcta: 1,
+          explicacion:
+            'WHERE se utiliza para filtrar los registros que cumplen una condición específica.',
+        },
+        {
+          pregunta: '¿Qué hace ORDER BY en una consulta SQL?',
+          opciones: [
+            'Agrupa registros',
+            'Filtra datos',
+            'Ordena los resultados',
+            'Elimina filas duplicadas',
+          ],
+          correcta: 2,
+          explicacion:
+            'ORDER BY permite ordenar los resultados de una consulta de forma ascendente o descendente.',
+        },
+        {
+          pregunta: '¿Qué hace INSERT INTO en SQL?',
+          opciones: [
+            'Modifica registros existentes',
+            'Inserta nuevos registros en una tabla',
+            'Elimina datos',
+            'Crea una base de datos',
+          ],
+          correcta: 1,
+          explicacion: 'INSERT INTO se utiliza para añadir nuevos registros a una tabla.',
+        },
+        {
+          pregunta: '¿Qué hace DELETE FROM en SQL?',
+          opciones: [
+            'Elimina registros de una tabla',
+            'Crea una tabla',
+            'Selecciona datos',
+            'Actualiza registros',
+          ],
+          correcta: 0,
+          explicacion:
+            'DELETE FROM elimina uno o varios registros de una tabla según una condición.',
+        },
+        {
           pregunta: '¿Qué hace WHERE en SQL?',
           opciones: [
             'Ordena resultados',
@@ -2959,22 +3012,60 @@ export class Test {
           correcta: 1,
           explicacion: 'El phishing engaña al usuario para que revele información confidencial.',
         },
+
+        {
+          pregunta: '¿Qué es un ataque Man-in-the-Middle (MitM)?',
+          opciones: [
+            'Un ataque que bloquea servidores',
+            'Un ataque donde el atacante intercepta la comunicación entre dos partes',
+            'Un virus que se propaga por email',
+            'Un ataque de fuerza bruta',
+          ],
+          correcta: 1,
+          explicacion:
+            'En un ataque MitM, el atacante se sitúa entre dos partes para interceptar o modificar la comunicación.',
+        },
+        {
+          pregunta: '¿Qué es un ataque de inyección SQL?',
+          opciones: [
+            'Un ataque que elimina servidores',
+            'Un ataque que inserta código malicioso en consultas SQL',
+            'Un tipo de malware',
+            'Un ataque de red distribuido',
+          ],
+          correcta: 1,
+          explicacion:
+            'La inyección SQL permite manipular bases de datos introduciendo código malicioso en las consultas.',
+        },
+        {
+          pregunta: '¿Qué es un ataque Zero-Day?',
+          opciones: [
+            'Un ataque sin conexión a internet',
+            'Un ataque que ocurre el primer día del sistema',
+            'Un ataque que explota vulnerabilidades desconocidas o no parcheadas',
+            'Un ataque físico al hardware',
+          ],
+          correcta: 2,
+          explicacion:
+            'Un Zero-Day aprovecha fallos de seguridad que aún no han sido corregidos por los desarrolladores.',
+        },
+        {
+          pregunta: '¿Qué es un ataque de fuerza bruta?',
+          opciones: [
+            'Un ataque que intercepta datos',
+            'Un ataque que prueba múltiples combinaciones de contraseñas hasta acertar',
+            'Un virus que borra archivos',
+            'Un ataque de red interna',
+          ],
+          correcta: 1,
+          explicacion:
+            'La fuerza bruta consiste en probar muchas combinaciones hasta encontrar la contraseña correcta.',
+        },
         {
           pregunta: '¿Qué es un firewall?',
           opciones: ['Antivirus', 'Sistema que controla tráfico de red', 'VPN', 'Proxy'],
           correcta: 1,
           explicacion: 'Un firewall filtra el tráfico de red según reglas de seguridad.',
-        },
-        {
-          pregunta: '¿Qué es el cifrado simétrico?',
-          opciones: [
-            'Usa clave pública y privada',
-            'Usa la misma clave para cifrar y descifrar',
-            'No usa clave',
-            'Usa múltiples claves',
-          ],
-          correcta: 1,
-          explicacion: 'El cifrado simétrico usa la misma clave para cifrar y descifrar.',
         },
         {
           pregunta: '¿Qué es un ataque DDoS?',
@@ -3727,6 +3818,18 @@ export class Test {
           correcta: 1,
           explicacion:
             'Kali Linux es una distribución basada en Debian especializada en seguridad informática y pruebas de penetración.',
+        },
+        {
+          pregunta: '¿Qué es Metasploit?',
+          opciones: [
+            'Un sistema operativo',
+            'Una herramienta para explotar vulnerabilidades',
+            'Un antivirus',
+            'Un gestor de bases de datos',
+          ],
+          correcta: 1,
+          explicacion:
+            'Metasploit es un framework utilizado en ciberseguridad para encontrar y explotar vulnerabilidades en sistemas.',
         },
         {
           pregunta: '¿Qué herramienta se usa para escaneo de puertos en Kali?',
@@ -5796,6 +5899,18 @@ export class Test {
           opciones: ['var nombre', 'let nombre', '$nombre', 'dim nombre'],
           correcta: 2,
           explicacion: 'En PHP las variables empiezan con el símbolo $.',
+        },
+        {
+          pregunta: '¿Qué es una webshell en PHP?',
+          opciones: [
+            'Una librería para diseñar páginas web',
+            'Un script que permite ejecutar comandos en un servidor de forma remota',
+            'Un sistema de autenticación seguro',
+            'Un tipo de base de datos',
+          ],
+          correcta: 1,
+          explicacion:
+            'Una webshell es un script PHP malicioso que permite a un atacante controlar un servidor de forma remota ejecutando comandos.',
         },
         {
           pregunta: '¿Cómo se inicia un bloque PHP?',

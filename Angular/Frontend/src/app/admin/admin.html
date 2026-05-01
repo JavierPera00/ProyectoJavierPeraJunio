@@ -1,5 +1,4 @@
 <div class="admin-page">
-
   <!-- TOPBAR -->
   <div class="admin-topbar">
     <div class="admin-topbar-left">
@@ -29,7 +28,6 @@
     </div>
 
     <div class="admin-grid-2">
-
       <!-- CREAR NOTICIA -->
       <div class="admin-card">
         <div class="admin-card-header">
@@ -39,7 +37,7 @@
         <div class="admin-card-body">
           <div class="form-field">
             <label>Título</label>
-            <input type="text" [(ngModel)]="titulo" placeholder="Título de la noticia">
+            <input type="text" [(ngModel)]="titulo" placeholder="Título de la noticia" />
           </div>
           <div class="form-field">
             <label>Descripción</label>
@@ -47,15 +45,13 @@
           </div>
           <div class="form-field">
             <label>URL Externa</label>
-            <input type="text" [(ngModel)]="urlExterna" placeholder="https://...">
+            <input type="text" [(ngModel)]="urlExterna" placeholder="https://..." />
           </div>
           <div class="form-field">
             <label>URL Imagen</label>
-            <input type="text" [(ngModel)]="urlImagen" placeholder="https://imagen.jpg">
+            <input type="text" [(ngModel)]="urlImagen" placeholder="https://imagen.jpg" />
           </div>
-          <button class="btn-admin-primary" (click)="agregarNoticia()">
-            + Publicar Noticia
-          </button>
+          <button class="btn-admin-primary" (click)="agregarNoticia()">+ Publicar Noticia</button>
         </div>
       </div>
 
@@ -77,25 +73,66 @@
           </ul>
         </div>
       </div>
+    </div>
 
+    <!-- FILTROS NOTICIAS -->
+    <div class="admin-filtros-bar">
+      <div class="admin-filtro-search">
+        <span>🔍</span>
+        <input
+          type="text"
+          [(ngModel)]="filtroNoticiaNombre"
+          (ngModelChange)="filtrarNoticias()"
+          placeholder="Filtrar por nombre..."
+          class="admin-filtro-input"
+        />
+      </div>
+      <div class="admin-filtro-search">
+        <span>📅</span>
+        <input
+          type="date"
+          [(ngModel)]="filtroNoticiaDia"
+          (ngModelChange)="filtrarNoticias()"
+          class="admin-filtro-input"
+        />
+      </div>
+      @if (filtroNoticiaNombre || filtroNoticiaDia) {
+        <button class="btn-admin-limpiar" (click)="limpiarFiltrosNoticias()">✕ Limpiar</button>
+      }
+      <div class="admin-filtro-count">
+        <span class="afc-num">{{ noticiasFiltradas.length }}</span>
+        <span class="afc-label">/ {{ todasNoticias.length }}</span>
+      </div>
     </div>
 
     <!-- LISTADO NOTICIAS -->
     <div class="admin-cards-grid">
-      <div class="news-admin-card" *ngFor="let noticia of noticias$ | async">
-        <div class="nac-img-wrap">
-          <img *ngIf="noticia.urlImagen" [src]="noticia.urlImagen" [alt]="noticia.titulo" class="nac-img"/>
-          <div *ngIf="!noticia.urlImagen" class="nac-img-placeholder">📰</div>
-        </div>
-        <div class="nac-body">
-          <div class="nac-title">{{ noticia.titulo }}</div>
-          <div class="nac-desc">{{ noticia.descripcion }}</div>
-          <div class="nac-footer">
-            <span class="nac-date">{{ noticia.fechaPublicacion | date: 'dd/MM/yyyy' }}</span>
-            <button class="btn-delete" (click)="eliminarNoticia(noticia.id)">Eliminar</button>
+      @if (noticiasFiltradas.length > 0) {
+        <div class="news-admin-card" *ngFor="let noticia of noticiasFiltradas">
+          <div class="nac-img-wrap">
+            <img
+              *ngIf="noticia.urlImagen"
+              [src]="noticia.urlImagen"
+              [alt]="noticia.titulo"
+              class="nac-img"
+            />
+            <div *ngIf="!noticia.urlImagen" class="nac-img-placeholder">📰</div>
+          </div>
+          <div class="nac-body">
+            <div class="nac-title">{{ noticia.titulo }}</div>
+            <div class="nac-desc">{{ noticia.descripcion }}</div>
+            <div class="nac-footer">
+              <span class="nac-date">{{ noticia.fechaPublicacion | date: 'dd/MM/yyyy' }}</span>
+              <button class="btn-delete" (click)="eliminarNoticia(noticia.id)">Eliminar</button>
+            </div>
           </div>
         </div>
-      </div>
+      } @else {
+        <div class="admin-sin-resultados">
+          <span>🔍</span>
+          <span>No se encontraron noticias</span>
+        </div>
+      }
     </div>
   </div>
 
@@ -133,7 +170,6 @@
     }
 
     <div class="admin-grid-2">
-
       <!-- FORMULARIO CURSO -->
       <div class="admin-card">
         <div class="admin-card-header">
@@ -143,23 +179,27 @@
         <div class="admin-card-body">
           <div class="form-field">
             <label>Título</label>
-            <input type="text" [(ngModel)]="cursoTitulo" placeholder="Título del curso">
+            <input type="text" [(ngModel)]="cursoTitulo" placeholder="Título del curso" />
           </div>
           <div class="form-field">
             <label>Descripción</label>
-            <textarea [(ngModel)]="cursoDescripcion" rows="3" placeholder="Descripción..."></textarea>
+            <textarea
+              [(ngModel)]="cursoDescripcion"
+              rows="3"
+              placeholder="Descripción..."
+            ></textarea>
           </div>
           <div class="form-field">
             <label>Duración</label>
-            <input type="text" [(ngModel)]="cursoDuracion" placeholder="Ej: 8 horas">
+            <input type="text" [(ngModel)]="cursoDuracion" placeholder="Ej: 8 horas" />
           </div>
           <div class="form-field">
             <label>URL Imagen</label>
-            <input type="text" [(ngModel)]="cursoImagenUrl" placeholder="https://imagen.jpg">
+            <input type="text" [(ngModel)]="cursoImagenUrl" placeholder="https://imagen.jpg" />
           </div>
           <div class="form-field">
             <label>URL Curso</label>
-            <input type="text" [(ngModel)]="cursoUrl" placeholder="https://...">
+            <input type="text" [(ngModel)]="cursoUrl" placeholder="https://..." />
           </div>
           @if (!cursoEditarId) {
             <button class="btn-admin-primary" (click)="agregarCurso()">+ Agregar Curso</button>
@@ -193,27 +233,53 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <!-- FILTROS CURSOS -->
+    <div class="admin-filtros-bar">
+      <div class="admin-filtro-search">
+        <span>🔍</span>
+        <input
+          type="text"
+          [(ngModel)]="filtroCursoNombre"
+          (ngModelChange)="filtrarCursosLista()"
+          placeholder="Filtrar por nombre..."
+          class="admin-filtro-input"
+        />
+      </div>
+      @if (filtroCursoNombre) {
+        <button class="btn-admin-limpiar" (click)="limpiarFiltrosCursos()">✕ Limpiar</button>
+      }
+      <div class="admin-filtro-count">
+        <span class="afc-num">{{ cursosFiltradosLista.length }}</span>
+        <span class="afc-label">/ {{ todosCursos.length }}</span>
+      </div>
     </div>
 
     <!-- LISTADO CURSOS -->
     <div class="admin-cards-grid">
-      <div class="curso-admin-card" *ngFor="let curso of cursos$ | async">
-        <div class="cac-img-wrap">
-          <img [src]="curso.imagenUrl" [alt]="curso.titulo" class="cac-img"/>
-        </div>
-        <div class="cac-body">
-          <div class="cac-title">{{ curso.titulo }}</div>
-          <div class="cac-desc">{{ curso.descripcion }}</div>
-          <div class="cac-meta">⏱ {{ curso.duracion }}</div>
-          <div class="cac-actions">
-            <button class="btn-edit" (click)="cargarCursoParaEditar(curso)">Editar</button>
-            <button class="btn-delete" (click)="eliminarCurso(curso.id!)">Eliminar</button>
-            <a [href]="curso.url" target="_blank" class="btn-view">Ver</a>
+      @if (cursosFiltradosLista.length > 0) {
+        <div class="curso-admin-card" *ngFor="let curso of cursosFiltradosLista">
+          <div class="cac-img-wrap">
+            <img [src]="curso.imagenUrl" [alt]="curso.titulo" class="cac-img" />
+          </div>
+          <div class="cac-body">
+            <div class="cac-title">{{ curso.titulo }}</div>
+            <div class="cac-desc">{{ curso.descripcion }}</div>
+            <div class="cac-meta">⏱ {{ curso.duracion }}</div>
+            <div class="cac-actions">
+              <button class="btn-edit" (click)="cargarCursoParaEditar(curso)">Editar</button>
+              <button class="btn-delete" (click)="eliminarCurso(curso.id!)">Eliminar</button>
+              <a [href]="curso.url" target="_blank" class="btn-view">Ver</a>
+            </div>
           </div>
         </div>
-      </div>
+      } @else {
+        <div class="admin-sin-resultados">
+          <span>🔍</span>
+          <span>No se encontraron cursos</span>
+        </div>
+      }
     </div>
   </div>
-
 </div>

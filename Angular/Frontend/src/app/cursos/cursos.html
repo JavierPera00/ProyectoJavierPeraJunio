@@ -2,12 +2,13 @@
   <div class="cursos-header">
     <span class="page-tag">// formación gratuita</span>
     <h1 class="page-title">Cursos de <span>Ciberseguridad</span></h1>
+    <a href="/test" target="_blank" class="curso-btn">Test Online</a>
   </div>
 
   <!-- FILTROS -->
   <div class="filtros-bar">
     <div class="filtro-search">
-      <span class="filtro-icon"><i class="bi bi-calendar" style="font-size: 0.9rem; color: rgb(255, 255, 255)"></i></span>
+      <span class="filtro-icon"><i class="bi bi-search" style="font-size: 0.9rem; color: rgb(255, 255, 255)"  ></i></span>
       <input
         type="text"
         [(ngModel)]="filtroBusqueda"
@@ -18,7 +19,7 @@
     </div>
 
     <div class="filtro-select-wrap">
-      <span class="filtro-icon">⏱</span>
+      <span class="filtro-icon"><i class="bi bi-calendar" style="font-size: 0.9rem; color: rgb(255, 255, 255)"  ></i></span>
       <select [(ngModel)]="filtroHoras" (ngModelChange)="filtrar()" class="filtro-select">
         <option value="">Todas las duraciones</option>
         <option *ngFor="let h of horasOpciones" [value]="h">{{ h }}</option>
@@ -53,7 +54,7 @@
       </div>
     } @else {
       <div class="sin-resultados">
-        <span class="sr-icon">🎓</span>
+        <span class="sr-icon"><i class="bi bi-mortarboard" style="font-size: 2rem; color: #007bff"></i></span>
         <span class="sr-text">No se encontraron cursos</span>
         <button class="btn-limpiar" (click)="limpiarFiltros()">Limpiar filtros</button>
       </div>
