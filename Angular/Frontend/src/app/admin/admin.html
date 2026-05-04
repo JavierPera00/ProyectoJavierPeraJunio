@@ -282,4 +282,104 @@
       }
     </div>
   </div>
+  <!-- ══════════════════════════════════════
+     SECCIÓN MENSAJES
+══════════════════════════════════════ -->
+  <div class="admin-section">
+    <div class="section-header">
+      <span class="section-tag tag-yellow">MENSAJES</span>
+      <h2 class="section-title">Mensajes de Contacto</h2>
+    </div>
+
+    <!-- FILTROS -->
+    <div class="admin-filtros-bar">
+      <div class="admin-filtro-search">
+        <span>🔍</span>
+        <input
+          type="text"
+          [(ngModel)]="filtroMensajeNombre"
+          (ngModelChange)="filtrarMensajes()"
+          placeholder="Filtrar por nombre, email o asunto..."
+          class="admin-filtro-input"
+        />
+      </div>
+      @if (filtroMensajeNombre) {
+        <button class="btn-admin-limpiar" (click)="limpiarFiltrosMensajes()">✕ Limpiar</button>
+      }
+      <div class="admin-filtro-count">
+        <span class="afc-num">{{ mensajesFiltrados.length }}</span>
+        <span class="afc-label">/ {{ mensajes.length }}</span>
+      </div>
+    </div>
+
+    <!-- LISTADO MENSAJES -->
+    <div class="mensajes-grid">
+      @if (mensajesFiltrados.length > 0) {
+        <div class="mensaje-card" *ngFor="let m of mensajesFiltrados" (click)="abrirMensaje(m)">
+          <div class="mc-header">
+            <span class="mc-asunto">{{ m.asunto }}</span>
+            <span class="mc-fecha">{{ m.fecha | date: 'dd/MM/yyyy' }}</span>
+          </div>
+          <div class="mc-nombre">{{ m.nombre }}</div>
+          <div class="mc-email">{{ m.email }}</div>
+          <div class="mc-preview">{{ m.mensaje }}</div>
+          <div class="mc-footer">
+            <span class="mc-leer">Ver mensaje →</span>
+            <button class="btn-delete" (click)="$event.stopPropagation(); eliminarMensaje(m.id!)">
+              Eliminar
+            </button>
+          </div>
+        </div>
+      } @else {
+        <div class="admin-sin-resultados">
+          <span>📭</span>
+          <span>No hay mensajes</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- MODAL MENSAJE -->
+  @if (mensajeAbierto) {
+    <div class="modal-backdrop" (click)="cerrarMensaje()">
+      <div class="modal-mensaje-box" (click)="$event.stopPropagation()">
+        <button class="modal-close" (click)="cerrarMensaje()">✕</button>
+
+        <div class="mm-tag">MENSAJE</div>
+        <h2 class="mm-asunto">{{ mensajeAbierto.asunto }}</h2>
+
+        <div class="mm-meta">
+          <div class="mm-meta-item">
+            <span class="mm-meta-label">De</span>
+            <span class="mm-meta-val">{{ mensajeAbierto.nombre }}</span>
+          </div>
+          <div class="mm-meta-item">
+            <span class="mm-meta-label">Email</span>
+            <span class="mm-meta-val">{{ mensajeAbierto.email }}</span>
+          </div>
+          @if (mensajeAbierto.fecha) {
+            <div class="mm-meta-item">
+              <span class="mm-meta-label">Fecha</span>
+              <span class="mm-meta-val">{{ mensajeAbierto.fecha | date: 'dd/MM/yyyy HH:mm' }}</span>
+            </div>
+          }
+        </div>
+
+        <div class="mm-cuerpo">{{ mensajeAbierto.mensaje }}</div>
+
+        <div class="mm-acciones">
+          <a
+            [href]="'mailto:' + mensajeAbierto.email"
+            class="btn-admin-primary"
+            style="text-decoration: none; text-align: center"
+          >
+            Responder por email →
+          </a>
+          <button class="btn-delete" (click)="eliminarMensaje(mensajeAbierto.id!); cerrarMensaje()">
+            Eliminar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
 </div>

@@ -8,6 +8,7 @@ import { NoticiasService } from '../services/noticiasService';
 import { HttpClientModule } from '@angular/common/http';
 import { CursoModel } from '../model/curso.model';
 import { UsuarioModel } from '../model/usuario.model';
+import { ContactoService, Contacto } from '../services/contacto-service';
 
 @Component({
   selector: 'app-admin',
@@ -41,53 +42,73 @@ export class Admin implements OnInit {
   tituloBusquedaCurso = '';
   cursosFiltrados: CursoModel[] = [];
 
-  // FILTROS NOTICIAS
   filtroNoticiaNombre = '';
   filtroNoticiaDia = '';
   noticiasFiltradas: NoticiaModel[] = [];
   todasNoticias: NoticiaModel[] = [];
 
-  // FILTROS CURSOS LISTADO
   filtroCursoNombre = '';
   cursosFiltradosLista: CursoModel[] = [];
   todosCursos: CursoModel[] = [];
 
+  mensajes: Contacto[] = [];
+  mensajesFiltrados: Contacto[] = [];
+  filtroMensajeNombre = '';
+  mensajeAbierto: Contacto | null = null;
+
+  private readonly contactoSvc: ContactoService;
+
   constructor(
     private noticiasService: NoticiasService,
     private adminService: AdminService,
-  ) {}
+    contactoService: ContactoService,
+  ) {
+    this.contactoSvc = contactoService;
+  }
 
   ngOnInit(): void {
     this.cargarNoticias();
     this.cargarCursos();
+    this.cargarMensajes();
   }
 
-  cargarNoticias() {
+  cargarNoticias(): void {
     this.noticias$ = this.noticiasService.cargarNoticias();
-    this.noticiasService.cargarNoticias().subscribe((data) => {
+    this.noticiasService.cargarNoticias().subscribe((data: NoticiaModel[]) => {
       this.todasNoticias = data.sort(
-        (a, b) => new Date(b.fechaPublicacion).getTime() - new Date(a.fechaPublicacion).getTime(),
+        (a: NoticiaModel, b: NoticiaModel) =>
+          new Date(b.fechaPublicacion).getTime() - new Date(a.fechaPublicacion).getTime(),
       );
       this.noticiasFiltradas = [...this.todasNoticias];
     });
   }
 
-  cargarCursos() {
+  cargarCursos(): void {
     this.cursos$ = this.adminService.cargarCursos();
-    this.adminService.cargarCursos().subscribe((data) => {
+    this.adminService.cargarCursos().subscribe((data: CursoModel[]) => {
       this.todosCursos = data;
       this.cursosFiltradosLista = [...data];
     });
   }
 
-  filtrarNoticias() {
+  cargarMensajes(): void {
+    this.contactoSvc.cargarMensajes().subscribe((data: Contacto[]) => {
+      this.mensajes = data.sort((a: Contacto, b: Contacto) => {
+        if (!a.fecha || !b.fecha) return 0;
+        return new Date(b.fecha).getTime() - new Date(a.fecha).getTime();
+      });
+      this.mensajesFiltrados = [...this.mensajes];
+    });
+  }
+
+  filtrarNoticias(): void {
     let r = [...this.todasNoticias];
     if (this.filtroNoticiaNombre.trim()) {
       const t = this.filtroNoticiaNombre.toLowerCase();
-      r = r.filter((n) => n.titulo.toLowerCase().includes(t));
+      r = r.filter((n: NoticiaModel) => n.titulo.toLowerCase().includes(t));
     }
     if (this.filtroNoticiaDia) {
-      r = r.filter((n) => {
+      r = r.filter((n: NoticiaModel) => {
         const fecha = new Date(n.fechaPublicacion).toISOString().split('T')[0];
         return fecha === this.filtroNoticiaDia;
       });
@@ -95,31 +116,61 @@ export class Admin implements OnInit {
     this.noticiasFiltradas = r;
   }
 
-  limpiarFiltrosNoticias() {
+  limpiarFiltrosNoticias(): void {
     this.filtroNoticiaNombre = '';
     this.filtroNoticiaDia = '';
     this.noticiasFiltradas = [...this.todasNoticias];
   }
 
-  filtrarCursosLista() {
+  filtrarCursosLista(): void {
     let r = [...this.todosCursos];
     if (this.filtroCursoNombre.trim()) {
       const t = this.filtroCursoNombre.toLowerCase();
-      r = r.filter((c) => c.titulo.toLowerCase().includes(t));
+      r = r.filter((c: CursoModel) => c.titulo.toLowerCase().includes(t));
     }
     this.cursosFiltradosLista = r;
   }
 
-  limpiarFiltrosCursos() {
+  limpiarFiltrosCursos(): void {
     this.filtroCursoNombre = '';
     this.cursosFiltradosLista = [...this.todosCursos];
   }
 
-  mostrarUltimasNoticias() {
+  filtrarMensajes(): void {
+    const t = this.filtroMensajeNombre.toLowerCase();
+    this.mensajesFiltrados = this.mensajes.filter((m: Contacto) =>
+      m.nombre.toLowerCase().includes(t) ||
+      m.email.toLowerCase().includes(t) ||
+      m.asunto.toLowerCase().includes(t)
+    );
+  }
+
+  limpiarFiltrosMensajes(): void {
+    this.filtroMensajeNombre = '';
+    this.mensajesFiltrados = [...this.mensajes];
+  }
+
+  abrirMensaje(m: Contacto): void {
+    this.mensajeAbierto = m;
+  }
+
+  cerrarMensaje(): void {
+    this.mensajeAbierto = null;
+  }
+
+  eliminarMensaje(id: number): void {
+    if (!confirm('¿Eliminar este mensaje?')) return;
+    this.contactoSvc.eliminarMensaje(id).subscribe({
+      next: () => { this.mensaje = 'Mensaje eliminado'; this.cargarMensajes(); },
+      error: () => (this.mensaje = 'Error al eliminar el mensaje'),
+    });
+  }
+
+  mostrarUltimasNoticias(): void {
     this.ultimasNoticias$ = this.adminService.cargarUltimasNoticias();
   }
 
-  agregarNoticia() {
+  agregarNoticia(): void {
     if (!this.titulo || !this.descripcion) {
       this.mensaje = 'Error — Título y descripción obligatorios';
       return;
@@ -144,18 +195,15 @@ export class Admin implements OnInit {
     });
   }
 
-  eliminarNoticia(id: number) {
+  eliminarNoticia(id: number): void {
     if (!confirm('¿Eliminar esta noticia?')) return;
     this.adminService.eliminarNoticia(id).subscribe({
-      next: () => {
-        this.mensaje = 'Noticia eliminada';
-        this.cargarNoticias();
-      },
+      next: () => { this.mensaje = 'Noticia eliminada'; this.cargarNoticias(); },
       error: () => (this.mensaje = 'Error al eliminar la noticia'),
     });
   }
 
-  agregarCurso() {
+  agregarCurso(): void {
     if (!this.cursoTitulo || !this.cursoDescripcion || !this.cursoDuracion || !this.cursoUrl) {
       this.mensaje = 'Error — Todos los campos son obligatorios';
       return;
@@ -168,16 +216,12 @@ export class Admin implements OnInit {
       url: this.cursoUrl,
     };
     this.adminService.agregarCurso(curso).subscribe({
-      next: () => {
-        this.mensaje = 'Curso agregado correctamente';
-        this.limpiarFormularioCurso();
-        this.cargarCursos();
-      },
+      next: () => { this.mensaje = 'Curso agregado correctamente'; this.limpiarFormularioCurso(); this.cargarCursos(); },
       error: () => (this.mensaje = 'Error al agregar el curso'),
     });
   }
 
-  cargarCursoParaEditar(curso: CursoModel) {
+  cargarCursoParaEditar(curso: CursoModel): void {
     this.cursoEditarId = curso.id!;
     this.cursoTitulo = curso.titulo;
     this.cursoDescripcion = curso.descripcion;
@@ -186,7 +230,7 @@ export class Admin implements OnInit {
     this.cursoUrl = curso.url;
   }
 
-  editarCurso() {
+  editarCurso(): void {
     if (!this.cursoEditarId) return;
     const curso: CursoModel = {
       titulo: this.cursoTitulo,
@@ -196,27 +240,20 @@ export class Admin implements OnInit {
       url: this.cursoUrl,
     };
     this.adminService.editarCurso(this.cursoEditarId, curso).subscribe({
-      next: () => {
-        this.mensaje = 'Curso actualizado';
-        this.limpiarFormularioCurso();
-        this.cargarCursos();
-      },
+      next: () => { this.mensaje = 'Curso actualizado'; this.limpiarFormularioCurso(); this.cargarCursos(); },
       error: () => (this.mensaje = 'Error al actualizar el curso'),
     });
   }
 
-  eliminarCurso(id: number) {
+  eliminarCurso(id: number): void {
     if (!confirm('¿Eliminar este curso?')) return;
     this.adminService.eliminarCurso(id).subscribe({
-      next: () => {
-        this.mensaje = 'Curso eliminado';
-        this.cargarCursos();
-      },
+      next: () => { this.mensaje = 'Curso eliminado'; this.cargarCursos(); },
       error: () => (this.mensaje = 'Error al eliminar el curso'),
     });
   }
 
-  limpiarFormularioCurso() {
+  limpiarFormularioCurso(): void {
     this.cursoTitulo = '';
     this.cursoDescripcion = '';
     this.cursoDuracion = '';
@@ -225,10 +262,10 @@ export class Admin implements OnInit {
     this.cursoEditarId = null;
   }
 
-  buscarCursoPorTitulo() {
+  buscarCursoPorTitulo(): void {
     if (!this.tituloBusquedaCurso) return;
     this.adminService
       .buscarCursoPorTitulo(this.tituloBusquedaCurso)
-      .subscribe((data) => (this.cursosFiltrados = data));
+      .subscribe((data: CursoModel[]) => (this.cursosFiltrados = data));
   }
 }
