@@ -30,14 +30,12 @@
   color: #f5e642;
 }
 
-/* ── GRID ── */
 .cursos-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
 }
 
-/* ── CARD ── */
 .curso-card {
   background: #111820;
   border: 1px solid rgba(0,170,255,0.15);
@@ -63,7 +61,6 @@
   box-shadow: 0 16px 40px rgba(0,0,0,0.4);
 }
 
-/* ── IMAGEN ── */
 .curso-img-wrap {
   overflow: hidden;
 }
@@ -80,7 +77,6 @@
   transform: scale(1.04);
 }
 
-/* ── BODY ── */
 .curso-body {
   padding: 1.25rem;
   flex: 1;
@@ -145,7 +141,7 @@
   letter-spacing: 1px;
 }
 
-/* ── LOADING ── */
+
 .noticias-loading {
   grid-column: 1 / -1;
   display: flex;
@@ -172,13 +168,12 @@
   50% { opacity: 0.5; box-shadow: 0 0 0 8px rgba(0,229,255,0); }
 }
 
-/* ── RESPONSIVE ── */
+
 @media (max-width: 768px) {
   .cursos-grid { grid-template-columns: 1fr; }
   .cursos-page { padding: 40px 1rem 3rem; }
 }
 
-/* ── FILTROS ── */
 .filtros-bar {
   display: flex;
   align-items: center;
@@ -292,7 +287,7 @@
   letter-spacing: 1px;
 }
 
-/* ── SIN RESULTADOS ── */
+
 .sin-resultados {
   grid-column: 1 / -1;
   display: flex;

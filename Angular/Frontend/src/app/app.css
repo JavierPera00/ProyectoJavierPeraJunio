@@ -80,20 +80,19 @@ nav {
   font-family: 'Space Mono', monospace;
   font-size: 0.68rem;
   letter-spacing: 2px;
-  color: #00ff88; /* Verde por defecto */
+  color: #00ff88;
   transition: color 0.3s ease;
 }
 
 .status-dot {
   width: 8px; height: 8px;
   border-radius: 50%;
-  background: #00ff88; /* Verde por defecto */
+  background: #00ff88; 
   box-shadow: 0 0 8px #00ff88;
   animation: pulse-green 2s infinite;
   transition: all 0.3s ease;
 }
 
-/* ESTADO DE ALERTA (Rojo) */
 .nav-status.red-status {
   color: #ff3333;
 }
@@ -168,7 +167,6 @@ nav {
   to   { transform: translateX(-50%); }
 }
 
-/* ── FOOTER ── */
 footer {
   background: #0d1117;
   border-top: 1px solid rgba(245,230,66,0.2);

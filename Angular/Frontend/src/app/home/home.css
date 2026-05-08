@@ -1,4 +1,4 @@
-/* ===== HERO ===== */
+
 .hero-wrap {
   position: relative;
   min-height: 100vh;
@@ -120,7 +120,6 @@
   box-shadow: 0 0 20px rgba(245,230,66,0.3);
 }
 
-/* ===== STATS ===== */
 .stats-bar {
   display: flex;
   justify-content: center;
@@ -149,7 +148,6 @@
   text-transform: uppercase;
 }
 
-/* ===== CARDS ===== */
 .home-cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -243,7 +241,6 @@
   letter-spacing: 1px;
 }
 
-/* ===== TAGS ===== */
 .card-tag {
   font-family: 'Space Mono', monospace;
   font-size: 0.65rem;
@@ -258,7 +255,6 @@
 .tag-blue  { background: rgba(0,170,255,0.12);  color: #00aaff; }
 .tag-green { background: rgba(0,255,136,0.12);  color: #00ff88; }
 
-/* ===== MODAL ===== */
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -366,7 +362,6 @@
   border-radius: 2px;
 }
 
-/* RESPONSIVE */
 @media (max-width: 768px) {
   .home-cards { grid-template-columns: 1fr; padding: 2rem 1rem; }
   .stats-bar  { gap: 2rem; }

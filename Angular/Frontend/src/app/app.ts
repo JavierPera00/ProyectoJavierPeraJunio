@@ -19,8 +19,6 @@ export class App implements OnInit {
 
   usuarioNombre: string = 'anónimo';
   mostrarComentarios = false;
-
-  // Bandera general de novedades
   tieneNovedades: boolean = false;
 
   private router = inject(Router);
@@ -28,11 +26,7 @@ export class App implements OnInit {
 
   constructor() {
     (window as any).appRoot = this;
-
-    // 1. Leer el estado inicial al cargar la página
     this.verificarNovedades();
-
-    // 2. Escuchar cambios de ruta para quitar la alerta si entramos a noticias o cursos
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
@@ -44,7 +38,6 @@ export class App implements OnInit {
       }
     });
 
-    // 3. Escuchar cambios en el localStorage desde otra pestaña (por ejemplo, desde /admin)
     window.addEventListener('storage', (event) => {
       if (event.key === 'nuevasNoticiasOCursos') {
         this.ngZone.run(() => {
@@ -71,8 +64,6 @@ export class App implements OnInit {
     this.tieneNovedades = estado === 'true';
   }
 
-  // MÉTODO A LLAMAR AL CREAR UN CURSO O NOTICIA
-  // Debes llamar a este método cuando crees una noticia o curso desde el administrador
   marcarComoNovedad(): void {
     localStorage.setItem('nuevasNoticiasOCursos', 'true');
     this.verificarNovedades();

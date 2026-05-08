@@ -1,6 +1,4 @@
 <div class="test-page">
-
-  <!-- SELECTOR DE TEST -->
   @if (!testActivo) {
     <div class="test-header">
       <span class="page-tag">// pon a prueba tus conocimientos</span>
@@ -57,7 +55,6 @@
     </div>
   }
 
-  <!-- TEST ACTIVO -->
   @if (testActivo && !testTerminado) {
     <div class="test-activo">
 
@@ -109,7 +106,6 @@
     </div>
   }
 
-  <!-- RESULTADOS -->
   @if (testTerminado) {
     <div class="resultados-wrap">
       <div class="resultados-card">

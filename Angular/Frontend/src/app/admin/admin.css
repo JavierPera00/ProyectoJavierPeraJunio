@@ -5,7 +5,6 @@
   margin: 0 auto;
 }
 
-/* ── TOPBAR ── */
 .admin-topbar {
   display: flex;
   align-items: flex-end;
@@ -70,7 +69,6 @@
   }
 }
 
-/* ── MENSAJE ── */
 .admin-mensaje {
   background: rgba(0, 255, 136, 0.08);
   border: 1px solid rgba(0, 255, 136, 0.3);
@@ -132,7 +130,6 @@
   letter-spacing: -0.5px;
 }
 
-/* ── GRIDS ── */
 .admin-grid-2 {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -228,7 +225,6 @@
   min-height: 80px;
 }
 
-/* ── BOTONES ── */
 .btn-admin-primary {
   font-family: 'Space Mono', monospace;
   font-size: 0.72rem;
@@ -310,7 +306,6 @@
   margin-top: auto;
 }
 
-/* ── LISTA ── */
 .admin-list {
   list-style: none;
   display: flex;
@@ -345,7 +340,6 @@
   flex-shrink: 0;
 }
 
-/* ── SEARCH BAR ── */
 .admin-search-bar {
   display: flex;
   gap: 0.75rem;
@@ -374,7 +368,6 @@
   opacity: 0.6;
 }
 
-/* ── RESULT CARDS ── */
 .result-card {
   background: #111820;
   border: 1px solid rgba(0, 255, 136, 0.2);
@@ -411,7 +404,6 @@
   color: #6b7f94;
 }
 
-/* ── NEWS ADMIN CARDS ── */
 .news-admin-card {
   background: #111820;
   border: 1px solid rgba(0, 170, 255, 0.15);
@@ -484,7 +476,6 @@
   color: #6b7f94;
 }
 
-/* ── CURSO ADMIN CARDS ── */
 .curso-admin-card {
   background: #111820;
   border: 1px solid rgba(0, 170, 255, 0.15);
@@ -546,7 +537,6 @@
   padding-top: 0.75rem;
 }
 
-/* ── BOTONES DE ACCIÓN EN CARDS ── */
 .btn-delete {
   font-family: 'Space Mono', monospace;
   font-size: 0.6rem;
@@ -606,7 +596,7 @@
   border-color: #00ff88;
 }
 
-/* ── STATS ── */
+
 .stat-big {
   text-align: center;
   padding: 1.5rem;
@@ -631,7 +621,6 @@
   margin-top: 0.5rem;
 }
 
-/* ── RESPONSIVE ── */
 @media (max-width: 768px) {
   .admin-grid-2 {
     grid-template-columns: 1fr;
@@ -647,8 +636,6 @@
   }
 }
 
-/*FILTROS*/
-/* ── FILTROS ADMIN ── */
 .admin-filtros-bar {
   display: flex;
   align-items: center;

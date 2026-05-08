@@ -35,7 +35,7 @@
   color: #f5e642;
 }
 
-/* ── GRID ── */
+
 .contact-grid {
   display: flex;
   flex-direction: row;
@@ -55,7 +55,7 @@
   flex-direction: column;
 }
 
-/* ── TÍTULOS AMBOS LADOS IGUALES ── */
+
 .contact-info h3,
 .contact-right h3 {
   font-size: 1.3rem;
@@ -66,7 +66,6 @@
   padding: 0;
 }
 
-/* ── IZQUIERDA ── */
 .contact-info p {
   color: #6b7f94;
   line-height: 1.7;

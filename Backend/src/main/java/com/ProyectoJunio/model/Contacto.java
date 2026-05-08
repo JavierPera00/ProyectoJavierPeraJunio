@@ -75,7 +75,6 @@ public class Contacto {
         this.fecha = fecha;
     }
 
-    // toString
     @Override
     public String toString() {
         return "Contacto{" +
