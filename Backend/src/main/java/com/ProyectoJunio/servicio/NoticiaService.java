@@ -6,13 +6,9 @@ import com.ProyectoJunio.model.Noticia;
 public interface NoticiaService {
 
    public List<Noticia> findAll();
-    
    public Noticia findById(Long id);
-    
    public Noticia save(Noticia noticia);
-	    
    public void delete(Long id);
-	    
    public List<Noticia> ultimasNoticias();
 
 }
